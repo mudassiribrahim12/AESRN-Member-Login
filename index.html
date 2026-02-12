@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>African Emerging Scholars Research Network (AESRN) | Member  Portal Login</title>
+    <title>African Emerging Scholars Research Network (AESRN) | Member Portal</title>
     <link rel="icon" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png" type="image/png">
     <link itemprop="image" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png">
     <meta property="og:logo" content="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png">
@@ -31,7 +31,7 @@
         -webkit-font-smoothing: antialiased;
       }
       
-      /* ---------- LOGIN CONTAINER - BLUE GRADIENT BACKGROUND (ONLY LOGIN) ---------- */
+      /* ---------- LOGIN CONTAINER - BLUE GRADIENT ---------- */
       .login-container {
         flex: 1;
         display: flex;
@@ -44,192 +44,140 @@
         min-height: 100vh;
       }
       
-      /* MINIMAL LOGIN CARD - WHITE CARD ON BLUE BACKGROUND */
       .login-box {
         background: white;
         border-radius: 8px;
         padding: 40px 32px;
         width: 100%;
         max-width: 400px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        border: 0;
-        transition: none;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      }
+      .login-header { text-align: center; margin-bottom: 32px; }
+      .login-logo-circle { width: 100px; height: 100px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; }
+      .logo-circle-image { width: 100%; height: 100%; object-fit: contain; }
+      .login-title { font-size: 24px; font-weight: 600; color: #000; margin-bottom: 8px; }
+      .login-subtitle { color: #5e5e5e; font-size: 14px; }
+      .form-group { margin-bottom: 20px; }
+      .form-label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 14px; }
+      .form-input { width: 100%; padding: 12px 14px; border: 1px solid #d1d1d1; border-radius: 4px; font-size: 15px; }
+      .form-input:focus { outline: none; border-color: #1a237e; }
+      .login-button { width: 100%; padding: 14px 18px; background: #1a237e; color: white; border: none; border-radius: 4px; font-size: 15px; font-weight: 600; cursor: pointer; margin-top: 12px; }
+      .login-button:hover { background: #0f1555; }
+      .copyright-full { text-align: center; margin-top: 32px; font-size: 12px; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
+      .error-message, .attempts-warning { color: #d32f2f; font-size: 13px; margin-top: 16px; text-align: center; display: none; padding: 12px; background: #ffebee; border-radius: 4px; }
+      .attempts-warning { color: #b85a00; background: #fff1e0; }
+      
+      /* ---------- DASHBOARD – TWO OPTIONS + WHITE SESSION CARD ---------- */
+      .dashboard-container {
+        flex: 1;
+        display: none;
+        flex-direction: column;
+        background: #f5f7fc;
+        width: 100%;
+        min-height: 100vh;
+        padding: 30px 20px;
       }
       
-      .login-box:hover {
-        transform: none;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      }
-      
-      /* ---------- HEADER WITH CENTERED LOGO - ENLARGED ---------- */
-      .login-header {
-        text-align: center;
-        margin-bottom: 32px;
-      }
-      
-      .login-logo-circle {
-        width: 100px;
-        height: 100px;
-        margin: 0 auto 20px auto;
-        border-radius: 0;
-        background: transparent;
-        border: none;
-        box-shadow: none;
+      .dashboard-header {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: white;
+        padding: 16px 30px;
+        border-radius: 16px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+        margin-bottom: 40px;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .dashboard-welcome { display: flex; align-items: center; gap: 12px; font-size: 18px; font-weight: 500; color: #1a237e; }
+      .dashboard-welcome span { background: #1a237e; color: white; padding: 6px 14px; border-radius: 30px; font-size: 15px; font-weight: 600; }
+      .dashboard-logout { background: #e74c3c; color: white; border: none; border-radius: 30px; padding: 10px 24px; font-weight: 600; cursor: pointer; font-size: 14px; }
+      .dashboard-logout:hover { background: #c0392b; }
+      
+      .action-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        align-items: center;
+        max-width: 1000px;
+        margin: 20px auto;
+        width: 100%;
+      }
+      .action-card {
+        background: white;
+        border-radius: 24px;
+        padding: 40px 30px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        flex: 1 1 280px;
+        max-width: 360px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.25s ease;
+        border: 1px solid rgba(26,35,126,0.08);
+        cursor: pointer;
+      }
+      .action-card:hover { transform: translateY(-6px); box-shadow: 0 25px 45px rgba(26,35,126,0.12); border-color: rgba(26,35,126,0.2); }
+      .action-icon { font-size: 52px; margin-bottom: 20px; background: #edf0fa; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; border-radius: 50%; color: #1a237e; }
+      .action-title { font-size: 26px; font-weight: 700; color: #1a237e; margin-bottom: 12px; letter-spacing: -0.5px; }
+      .action-desc { color: #5a5a6e; font-size: 16px; line-height: 1.5; margin-bottom: 10px; }
+      .action-badge { margin-top: 15px; background: #e8eaf6; color: #1a237e; padding: 8px 18px; border-radius: 40px; font-size: 14px; font-weight: 600; }
+      
+      /* Session info card – white, centered */
+      .session-info-card {
+        background: white;
+        border-radius: 60px;
+        padding: 18px 30px;
+        margin: 50px auto 20px auto;
+        display: flex;
+        flex-wrap: wrap;
         align-items: center;
         justify-content: center;
-      }
-      
-      .logo-circle-image {
+        gap: 25px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.02);
+        border: 1px solid rgba(0,0,0,0.04);
+        max-width: 750px;
         width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
+        color: #1e1e1e;
+        font-size: 15px;
       }
-      
-      .login-title {
-        font-size: 24px;
-        font-weight: 600;
-        color: #000;
-        margin-bottom: 8px;
-        letter-spacing: -0.3px;
-        line-height: 1.2;
-        text-align: center;
+      .session-info-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        background: #fafcff;
+        padding: 5px 16px;
+        border-radius: 40px;
+        color: #2c3e50;
       }
-      
-      .login-subtitle {
+      .session-info-strong { color: #1a237e; font-weight: 700; margin-left: 4px; }
+      .ghana-time-dash {
+        font-family: monospace;
+        font-weight: 700;
+        color: #1a237e;
+        background: #edf0fa;
+        padding: 5px 12px;
+        border-radius: 40px;
+      }
+      .copyright-white {
         color: #5e5e5e;
-        font-size: 14px;
-        line-height: 1.5;
-        margin: 0;
-        max-width: 100%;
-        font-weight: 400;
-        text-align: center;
-      }
-      
-      /* ---------- FORM ELEMENTS – MINIMAL ---------- */
-      .form-group {
-        margin-bottom: 20px;
-      }
-      
-      .form-label {
-        display: block;
-        margin-bottom: 6px;
-        color: #1e1e1e;
-        font-weight: 500;
-        font-size: 14px;
-        letter-spacing: normal;
-      }
-      
-      .form-input {
-        width: 100%;
-        padding: 12px 14px;
-        border: 1px solid #d1d1d1;
-        border-radius: 4px;
-        font-size: 15px;
-        transition: border-color 0.1s ease;
-        background: #ffffff;
-        color: #1e1e1e;
-        font-weight: 400;
-        box-shadow: none;
-      }
-      
-      .form-input:focus {
-        outline: none;
-        border-color: #1a237e;
-        box-shadow: none;
-        background: white;
-      }
-      
-      .form-input::placeholder {
-        color: #a0a0a0;
-        font-weight: 300;
-        font-size: 14px;
-      }
-      
-      /* ---------- LOGIN BUTTON – FLAT, SOLID ---------- */
-      .login-button {
-        width: 100%;
-        padding: 14px 18px;
-        background: #1a237e;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        font-size: 15px;
-        font-weight: 600;
-        cursor: pointer;
-        transition: background 0.1s ease;
-        margin-top: 12px;
-        letter-spacing: 0.3px;
-        text-transform: none;
-        position: relative;
-        overflow: hidden;
-        box-shadow: none;
-      }
-      
-      .login-button:hover {
-        background: #0f1555;
-        transform: none;
-        box-shadow: none;
-      }
-      
-      .login-button:active {
-        background: #0a1040;
-        transform: none;
-      }
-      
-      .login-button::after {
-        display: none;
-      }
-      
-      /* ---------- COPYRIGHT – FULL TEXT, AUTO-UPDATING YEAR ---------- */
-      .copyright-full {
-        text-align: center;
-        margin-top: 32px;
-        font-size: 12px;
-        color: #666;
-        font-weight: 400;
-        border-top: 1px solid #eee;
-        padding-top: 20px;
-      }
-      
-      /* ---------- ERROR & WARNING – MINIMAL ---------- */
-      .error-message {
-        color: #d32f2f;
         font-size: 13px;
-        margin-top: 16px;
-        text-align: center;
-        display: none;
-        padding: 12px;
-        background: #ffebee;
-        border-radius: 4px;
-        border-left: none;
-        font-weight: 500;
+        font-weight: 400;
+        letter-spacing: 0.2px;
       }
       
-      .attempts-warning {
-        color: #b85a00;
-        font-size: 13px;
-        margin-top: 12px;
-        text-align: center;
-        display: none;
-        padding: 10px;
-        background: #fff1e0;
-        border-radius: 4px;
-        border-left: none;
-        font-weight: 500;
-      }
-      
-      /* ---------- FORM CONTAINER - DEFAULT WHITE BACKGROUND (NOT BLUE) ---------- */
+      /* ---------- FORM CONTAINER – ALWAYS ACTIVE, NEVER UNLOADED ---------- */
       .form-container {
         flex: 1;
         position: relative;
         display: none;
         width: 100%;
-        min-height: calc(100vh - 80px);
-        background: white;  /* Default white background for the form area */
+        min-height: 100vh;
+        background: white;
       }
-      
       iframe { 
         position: absolute; 
         top: 0; 
@@ -237,288 +185,245 @@
         bottom: 0; 
         left: 0; 
         border: 0; 
-        background: white;  /* Ensure iframe background is white */
+        background: white;  
       }
       
-      /* ---------- FOOTER - DARK THEME (PRESERVED) ---------- */
-      .footer {
-        background: #2c3e50;
-        padding: 15px 30px;
-        color: #ecf0f1;
-        font-size: 14px;
-        z-index: 10;
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 15px;
-        min-height: 80px;
-        border-top: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .footer-left, .footer-right {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-        flex-wrap: wrap;
-      }
-      
-      .user-name { color: #3498db; font-weight: 600; }
-      .logout-button {
-        background: #e74c3c;
-        color: white;
-        border: none;
-        border-radius: 4px;
-        padding: 8px 18px;
-        font-size: 13px;
+      /* Back button – form view */
+      .back-to-dashboard {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 2000;
+        background: white;
+        color: #1a237e;
+        border: 1px solid #1a237e;
+        padding: 12px 26px;
+        border-radius: 40px;
         font-weight: 600;
-        cursor: pointer;
-      }
-      .logout-button:hover { background: #c0392b; }
-      
-      .footer-email {
-        color: #3498db;
-        text-decoration: none;
-      }
-      
-      .ghana-time-container {
+        font-size: 16px;
         display: flex;
         align-items: center;
-        gap: 10px;
-        background: rgba(255,255,255,0.1);
-        padding: 8px 15px;
-        border-radius: 4px;
+        gap: 8px;
+        cursor: pointer;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        transition: all 0.2s;
       }
+      .back-to-dashboard:hover { background: #1a237e; color: white; }
       
-      .ghana-time-display {
-        font-family: monospace;
-        font-size: 14px;
-        font-weight: 700;
-        color: #2ecc71;
-        background: rgba(0,0,0,0.2);
-        padding: 4px 10px;
-        border-radius: 4px;
-        min-width: 85px;
-        text-align: center;
+      /* ---------- LOADING OVERLAY – FAST CONFIG ---------- */
+      .loading-overlay {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+        background: rgba(255,255,255,0.95); 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+        z-index: 100;
       }
-      
-      /* ---------- NOTIFICATIONS (UNCHANGED) ---------- */
-      .login-greeting-notification {
-        position: fixed; top: 20px; right: 20px;
-        background: #1a237e; color: white;
-        padding: 20px 30px; border-radius: 8px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        z-index: 2000; display: none; align-items: center; gap: 15px;
-        animation: slideInRight 0.5s ease;
-        max-width: 350px;
+      .loading-spinner {
+        width: 50px; 
+        height: 50px; 
+        border: 4px solid #f3f3f3; 
+        border-top: 4px solid #1a237e;
+        border-radius: 50%; 
+        animation: spin 1s linear infinite; 
+        margin-bottom: 20px;
       }
-      
-      .logout-notification {
-        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        background: #2c3e50; color: white; padding: 30px 40px; border-radius: 12px;
-        box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 3000; display: none;
-        flex-direction: column; align-items: center; gap: 20px; min-width: 300px;
-        text-align: center;
+      .loading-text {
+        font-size: 16px;
+        color: #1a237e;
+        font-weight: 500;
       }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       
-      .inactivity-warning {
-        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
-        background: #2c3e50; color: white; border-radius: 12px; padding: 30px;
-        width: 90%; max-width: 400px; z-index: 4000; text-align: center;
+      /* ---------- GLOBAL LOADER (ensures everything loads before dashboard) ---------- */
+      .app-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 0.5s ease;
       }
-      
-      .confirmation-overlay {
-        display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center;
+      .app-loader-logo {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 30px;
+        animation: pulse 1.5s infinite;
       }
-      
-      .confirmation-dialog {
-        background: white; border-radius: 12px; padding: 40px; width: 90%; max-width: 400px;
-        text-align: center;
+      .app-loader-text {
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 2px;
       }
+      @keyframes pulse { 0% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.8; transform: scale(1); } }
       
-      /* ---------- MOBILE ELEMENTS (UNCHANGED) ---------- */
-      .mobile-logout-button {
-        position: fixed; top: 15px; right: 15px;
-        background: #e74c3c; color: white; border: none; border-radius: 50px;
-        padding: 12px 20px; font-size: 13px; font-weight: 600; cursor: pointer;
-        z-index: 1000; display: none; box-shadow: 0 4px 15px rgba(231,76,60,0.3);
+      /* ---------- NOTIFICATIONS & MODALS ---------- */
+      .login-greeting-notification { 
+        position: fixed; top: 20px; right: 20px; background: #1a237e; color: white; 
+        padding: 20px 30px; border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); 
+        z-index: 2000; display: none; align-items: center; gap: 15px; 
+        animation: slideInRight 0.5s ease; max-width: 350px; 
       }
-      
-      .mobile-header-info {
-        position: fixed; top: 15px; left: 15px;
-        background: #1a237e; color: white; border-radius: 50px;
-        padding: 10px 18px; font-size: 13px; font-weight: 600; z-index: 1000; display: none;
+      .logout-notification { 
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        background: #2c3e50; color: white; padding: 30px 40px; border-radius: 12px; 
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3); z-index: 3000; display: none; 
+        flex-direction: column; align-items: center; gap: 20px; min-width: 300px; 
+        text-align: center; 
       }
-      
-      .mobile-top-button {
-        position: fixed; bottom: 20px; right: 20px;
-        background: #1a237e; color: white; border: none; border-radius: 50%;
-        width: 50px; height: 50px; font-size: 22px; cursor: pointer; z-index: 1000;
-        display: none; justify-content: center; align-items: center;
+      .inactivity-warning { 
+        display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        background: #2c3e50; color: white; border-radius: 12px; padding: 30px; 
+        width: 90%; max-width: 400px; z-index: 4000; text-align: center; 
+      }
+      .confirmation-overlay { 
+        display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; 
+        background: rgba(0,0,0,0.5); z-index: 2000; justify-content: center; align-items: center; 
+      }
+      .confirmation-dialog { 
+        background: white; border-radius: 12px; padding: 40px; width: 90%; max-width: 400px; 
+        text-align: center; 
       }
       
       @media (max-width: 768px) {
-        .login-box { padding: 32px 24px; }
-        .login-logo-circle { width: 90px; height: 90px; }
-        .mobile-logout-button, .mobile-header-info, .mobile-top-button { display: block; }
-        .footer { display: none !important; }
-        .form-container { min-height: 100vh; }
+        .dashboard-header { flex-direction: column; align-items: flex-start; }
+        .session-info-card { flex-direction: column; align-items: center; border-radius: 30px; padding: 20px; gap: 15px; }
       }
-      
-      @media (max-width: 480px) {
-        .login-box { padding: 24px 20px; }
-        .login-title { font-size: 22px; }
-        .login-logo-circle { width: 80px; height: 80px; }
-      }
-      
-      /* ---------- LOADING OVERLAY ---------- */
-      .loading-overlay {
-        position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(255,255,255,0.95); display: flex; flex-direction: column;
-        justify-content: center; align-items: center; z-index: 100;
-      }
-      
-      .loading-spinner {
-        width: 50px; height: 50px; border: 4px solid #f3f3f3; border-top: 4px solid #1a237e;
-        border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 20px;
-      }
-      
-      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-      @keyframes slideInRight { from { transform: translateX(100%) translateY(-20px); opacity: 0; } to { transform: translateX(0) translateY(0); opacity: 1; } }
     </style>
   </head>
   <body>
-      <!-- LOGIN CONTAINER – BLUE GRADIENT BACKGROUND (ONLY LOGIN INTERFACE) -->
-    <div class="login-container" id="loginContainer">
+    <!-- GLOBAL APP LOADER – ensures everything loads before dashboard appears -->
+    <div class="app-loader" id="appLoader">
+      <img src="https://raw.githubusercontent.com/aesrn30/aesrn/main/Lablogo.png" alt="AESRN Logo" class="app-loader-logo">
+      <div class="app-loader-text">Loading Portal...</div>
+    </div>
+
+    <!-- LOGIN CONTAINER -->
+    <div class="login-container" id="loginContainer" style="display: none;">
       <div class="login-box">
         <div class="login-header">
           <div class="login-logo-circle">
-            <img src="https://raw.githubusercontent.com/aesrn30/aesrn/main/Lablogo.png" 
-                 alt="AESRN Logo" 
-                 class="logo-circle-image">
+            <img src="https://raw.githubusercontent.com/aesrn30/aesrn/main/Lablogo.png" alt="AESRN Logo" class="logo-circle-image">
           </div>
-          
           <div class="login-title">Member Access Portal</div>
-          <div class="login-subtitle">
-            Enter your credentials to access the submission form.
-          </div>
+          <div class="login-subtitle">Enter your credentials to access member services.</div>
         </div>
-        
         <form id="loginForm">
           <div class="form-group">
             <label class="form-label" for="email">Email</label>
-            <input 
-              type="email" 
-              id="email" 
-              class="form-input" 
-              placeholder="Enter registered email address"
-              required
-              autocomplete="off"
-            >
+            <input type="email" id="email" class="form-input" placeholder="Enter registered email address" required autocomplete="off">
           </div>
-          
           <div class="form-group">
             <label class="form-label" for="password">Password</label>
-            <input 
-              type="password" 
-              id="password" 
-              class="form-input" 
-              placeholder="Enter access password"
-              required
-              autocomplete="off"
-            >
+            <input type="password" id="password" class="form-input" placeholder="Enter access password" required autocomplete="off">
           </div>
-          
           <button type="submit" class="login-button" id="loginButton">Log In</button>
-          
-          <!-- FULL COPYRIGHT WITH AUTO-UPDATING YEAR -->
-          <div class="copyright-full" id="copyrightFull">
-            Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.
-          </div>
-          
-          <div class="error-message" id="errorMessage">
-            Invalid email or password.
-          </div>
-          
-          <div class="attempts-warning" id="attemptsWarning">
-            Multiple failed attempts may temporarily restrict access.
-          </div>
+          <div class="copyright-full" id="copyrightFull">Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.</div>
+          <div class="error-message" id="errorMessage">Invalid email or password.</div>
+          <div class="attempts-warning" id="attemptsWarning">Multiple failed attempts may temporarily restrict access.</div>
         </form>
       </div>
     </div>
     
-    <!-- FORM CONTAINER - DEFAULT WHITE BACKGROUND (NOT BLUE) -->
+    <!-- DASHBOARD – two options + white session card -->
+    <div class="dashboard-container" id="dashboardContainer">
+      <div class="dashboard-header">
+        <div class="dashboard-welcome">
+          <span id="dashboardUserName"></span> · Member Dashboard
+        </div>
+        <button class="dashboard-logout" id="dashboardLogoutBtn">Log out</button>
+      </div>
+      
+      <div class="action-grid">
+        <div class="action-card" id="makeSubmissionCard">
+          <div class="action-icon">📄</div>
+          <div class="action-title">Make a Submission</div>
+          <div class="action-desc">Submit your research abstract, paper, or proposal.</div>
+          <div class="action-badge">Tally form · secure</div>
+        </div>
+        <div class="action-card" id="reviewMaterialsCard">
+          <div class="action-icon">📚</div>
+          <div class="action-title">Review Materials</div>
+          <div class="action-desc">Access guidelines, templates, and reviewer resources.</div>
+          <div class="action-badge">SharePoint ↗</div>
+        </div>
+      </div>
+      
+      <!-- SESSION INFO CARD – white, centered -->
+      <div class="session-info-card" id="sessionInfoCard">
+        <div class="session-info-item">
+          👤 Logged in as: <span class="session-info-strong" id="infoCardUserName">Mudasir</span>
+        </div>
+        <div class="session-info-item" id="infoCardLogoutTrigger" style="cursor: pointer; background: #ffeceb;">
+          🚪 Logout
+        </div>
+        <div class="session-info-item">
+          📧 <a href="mailto:research.aesrn@yahoo.com" style="color: #1a237e; text-decoration: none; font-weight: 500;">research.aesrn@yahoo.com</a>
+        </div>
+        <div class="session-info-item">
+          🇬🇭 <span class="ghana-time-dash" id="ghanaTimeDashboard">11:30:57</span> GMT
+        </div>
+        <div class="session-info-item copyright-white">
+          © <span id="infoCardYear">2026</span> AESRN. All rights reserved.
+        </div>
+      </div>
+    </div>
+    
+    <!-- FORM CONTAINER – PRELOADED, KEPT ALIVE, NEVER UNLOADED -->
     <div class="form-container" id="formContainer">
-      <div class="loading-overlay" id="loadingOverlay">
+      <!-- LOADING OVERLAY – shown only briefly on first open, then hidden forever -->
+      <div class="loading-overlay" id="loadingOverlay" style="display: none;">
         <div class="loading-spinner"></div>
-        <div class="loading-text">Loading form...</div>
+        <div class="loading-text">Opening submission form...</div>
       </div>
       
-      <div class="mobile-header-info" id="mobileHeaderInfo">
-        <span id="mobileUserName"></span>
-      </div>
-      <button class="mobile-logout-button" id="mobileLogoutButton">
-        <span class="mobile-user-name" id="mobileUserNameShort"></span> Logout
+      <button class="back-to-dashboard" id="backToDashboardBtn">
+        ←  Dashboard
       </button>
-      <button class="mobile-top-button" id="mobileTopButton">↑</button>
       
+      <!-- iframe PRELOADED and PERSISTENT: src is set ONCE and never cleared -->
       <iframe 
-        data-tally-src="https://tally.so/r/dWd6gA?transparentBackground=1&formEventsForwarding=1" 
+        src="https://tally.so/r/dWd6gA?transparentBackground=1&formEventsForwarding=1" 
         width="100%" 
         height="100%" 
         frameborder="0" 
         marginheight="0" 
         marginwidth="0" 
-        title="African Emerging Scholars Research Network (AESRN)"
+        title="AESRN Submission Form (persistent)"
         id="formIframe"
         style="visibility: hidden; background: white;"
-        onload="hideLoading()"
+        onload="handleIframeLoad()"
       ></iframe>
     </div>
     
-    <!-- FOOTER (unchanged) -->
-    <footer class="footer" style="display: none;" id="siteFooter">
-      <div class="footer-left">
-        <div>Logged in as: <span class="user-name" id="userNameDisplay"></span></div>
-        <button class="logout-button" id="logoutButton">Logout</button>
-      </div>
-      <div class="footer-right">
-        <div><a href="mailto:research.aesrn@yahoo.com" class="footer-email">research.aesrn@yahoo.com</a></div>
-        <div class="ghana-time-container">
-          <span class="ghana-flag">🇬🇭</span>
-          <span class="ghana-time-display" id="ghanaTimeDisplay">--:--:--</span>
-          <span class="ghana-timezone">GMT</span>
-        </div>
-      </div>
-      <div class="footer-copyright">
-        Copyright © <span id="copyrightYear"></span> AESRN. All rights reserved.
-      </div>
-    </footer>
-    
-    <!-- NOTIFICATIONS / MODALS (all unchanged) -->
+    <!-- NOTIFICATIONS / MODALS -->
     <div class="login-greeting-notification" id="loginGreeting">
       <div class="greeting-icon" id="greetingIcon">👋</div>
-      <div class="greeting-content">
-        <h4 id="greetingText">Welcome</h4>
-        <p id="userGreeting"></p>
-      </div>
+      <div class="greeting-content"><h4 id="greetingText">Welcome</h4><p id="userGreeting"></p></div>
     </div>
-    
     <div class="logout-notification" id="logoutNotification">
       <div class="logout-spinner"></div>
       <div class="logout-message">Logged out successfully!</div>
       <div class="logout-countdown">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
     </div>
-    
     <div class="inactivity-warning" id="inactivityWarning">
       <h3>Session Timeout</h3>
       <div class="inactivity-timer" id="inactivityTimer">2:00</div>
       <p class="inactivity-message">You've been inactive. Click to stay logged in.</p>
       <button class="keep-active-button" id="keepActiveButton">Keep Me Logged In</button>
     </div>
-    
     <div class="confirmation-overlay" id="confirmationDialog">
       <div class="confirmation-dialog">
         <div class="confirmation-icon">⚠️</div>
@@ -532,45 +437,27 @@
     </div>
 
     <script>
-      // ---------- AUTO-UPDATE COPYRIGHT YEAR FUNCTION ----------
+      // ---------- AUTO COPYRIGHT ----------
       function updateAllCopyrightYears() {
         const currentYear = new Date().getFullYear();
-        
-        // Update the dynamic year in the login card copyright
-        const dynamicYearElement = document.getElementById('dynamicYear');
-        if (dynamicYearElement) {
-          dynamicYearElement.textContent = currentYear;
-        }
-        
-        // Update the footer copyright year
-        const copyrightYearElement = document.getElementById('copyrightYear');
-        if (copyrightYearElement) {
-          copyrightYearElement.textContent = currentYear;
-        }
+        document.getElementById('dynamicYear') && (document.getElementById('dynamicYear').textContent = currentYear);
+        document.getElementById('infoCardYear') && (document.getElementById('infoCardYear').textContent = currentYear);
       }
 
-      // ---------- USER CREDENTIALS (unchanged) ----------
+      // ---------- USER CREDENTIALS ----------
       const userMap = {
-        "malikseidu4@gmail.com": "Abdul-Malik",
-        "Malikseidu4@gmail.com": "Abdul-Malik",
-        "abdul0247080685@gmail.com": "Abdul Latif",
-        "Abdul0247080685@gmail.com": "Abdul Latif",
-        "ednadie93@gmail.com": "Edna",
-        "Ednadie93@gmail.com": "Edna",
-        "issahaqalhassan26@gmail.com": "Alhassan",
-        "Issahaqalhassan26@gmail.com": "Alhassan",
-        "mudassiribrahim30@gmail.com": "Mudasir",
-        "Mudassiribrahim30@gmail.com": "Mudasir"
+        "malikseidu4@gmail.com": "Abdul-Malik", "Malikseidu4@gmail.com": "Abdul-Malik",
+        "abdul0247080685@gmail.com": "Abdul Latif", "Abdul0247080685@gmail.com": "Abdul Latif",
+        "ednadie93@gmail.com": "Edna", "Ednadie93@gmail.com": "Edna",
+        "issahaqalhassan26@gmail.com": "Alhassan", "Issahaqalhassan26@gmail.com": "Alhassan",
+        "mudassiribrahim30@gmail.com": "Mudasir", "Mudassiribrahim30@gmail.com": "Mudasir"
       };
-      
       const correctPassword = "Scholar123";
       
-      // ---------- GLOBAL VARIABLES (unchanged) ----------
+      // ---------- GLOBALS ----------
       let failedAttempts = 0;
       const maxAttempts = 5;
-      let currentUserName = "";
-      let currentUserEmail = "";
-      
+      let currentUserName = "", currentUserEmail = "";
       let ghanaTimeInterval;
       
       const SESSION_TIMEOUT = 2 * 60 * 1000;
@@ -582,7 +469,10 @@
       const USER_SESSION_KEY = 'aesrn_user_session';
       const SHOWN_GREETING_KEY = 'aesrn_shown_greeting';
       
-      // ---------- SESSION FUNCTIONS (fully preserved) ----------
+      // Flag to track if iframe has ever been fully loaded – we keep it alive
+      let iframeEverLoaded = false;
+      
+      // ---------- SESSION FUNCTIONS ----------
       function generateSessionId() { return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); }
       function getCurrentSessionId() { return sessionStorage.getItem(CURRENT_SESSION_KEY); }
       function setCurrentSessionId(sessionId) { sessionStorage.setItem(CURRENT_SESSION_KEY, sessionId); }
@@ -613,17 +503,6 @@
         return sessionId;
       }
       
-      function updateSessionExpiry() {
-        const sessions = getActiveSessions();
-        const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
-        if (userSession.email && sessions[userSession.email]) {
-          sessions[userSession.email].expiry = Date.now() + SESSION_TIMEOUT;
-          saveActiveSessions(sessions);
-          userSession.expiry = Date.now() + SESSION_TIMEOUT;
-          localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession));
-        }
-      }
-      
       function removeUserSession(email) {
         const sessions = getActiveSessions();
         if (sessions[email]) { clearGreetingStatus(sessions[email].sessionId); delete sessions[email]; saveActiveSessions(sessions); }
@@ -631,43 +510,20 @@
         sessionStorage.removeItem(CURRENT_SESSION_KEY);
       }
       
-      function getGreeting() { const h = new Date().getHours(); if (h<12) return "Good Morning"; if (h<17) return "Good Afternoon"; return "Good Evening"; }
-      function getGreetingIcon() { const h = new Date().getHours(); if (h<12) return "🌅"; if (h<17) return "☀️"; return "🌙"; }
-      
-      function showLoginGreeting() {
-        const sessionId = getCurrentSessionId();
-        if (hasGreetingBeenShown(sessionId)) return;
-        document.getElementById('greetingText').textContent = getGreeting();
-        document.getElementById('greetingIcon').textContent = getGreetingIcon();
-        document.getElementById('userGreeting').textContent = `${getGreeting()}, ${currentUserName}!`;
-        document.getElementById('loginGreeting').style.display = 'flex';
-        markGreetingAsShown(sessionId);
-        setTimeout(() => { 
-          document.getElementById('loginGreeting').style.animation = 'fadeOutUp 0.5s ease';
-          setTimeout(() => { 
-            document.getElementById('loginGreeting').style.display = 'none'; 
-            document.getElementById('loginGreeting').style.animation = 'slideInRight 0.5s ease';
-          }, 500);
-        }, 5000);
-      }
-      
-      function hideLoading() { 
-        const lo = document.getElementById('loadingOverlay'), ifr = document.getElementById('formIframe');
-        if (lo) { lo.style.opacity = '0'; setTimeout(() => { lo.style.display = 'none'; if (ifr) ifr.style.visibility = 'visible'; }, 300); }
-      }
-      function showLoading() { 
-        const lo = document.getElementById('loadingOverlay'), ifr = document.getElementById('formIframe');
-        if (lo) { lo.style.display = 'flex'; lo.style.opacity = '1'; } if (ifr) ifr.style.visibility = 'hidden';
-      }
-      
+      // ---------- TIME ----------
       function getGhanaTime() { 
         const g = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Accra' }));
         return `${g.getHours().toString().padStart(2,'0')}:${g.getMinutes().toString().padStart(2,'0')}:${g.getSeconds().toString().padStart(2,'0')}`;
       }
-      function updateGhanaTime() { const el = document.getElementById('ghanaTimeDisplay'); if (el) el.textContent = getGhanaTime(); }
-      function startGhanaTimeUpdates() { updateGhanaTime(); ghanaTimeInterval = setInterval(updateGhanaTime, 1000); }
+      function updateGhanaTimeDisplay() { 
+        const t = getGhanaTime();
+        const dash = document.getElementById('ghanaTimeDashboard');
+        if (dash) dash.textContent = t;
+      }
+      function startGhanaTimeUpdates() { updateGhanaTimeDisplay(); ghanaTimeInterval = setInterval(updateGhanaTimeDisplay, 1000); }
       function stopGhanaTimeUpdates() { clearInterval(ghanaTimeInterval); }
       
+      // ---------- LOGIN VALIDATION ----------
       function validateLogin(email, password) {
         const normEmail = email.trim(), normPass = password.trim();
         const key = Object.keys(userMap).find(k => k.toLowerCase() === normEmail.toLowerCase());
@@ -688,10 +544,100 @@
         setTimeout(() => { email.classList.remove('error'); pwd.classList.remove('error'); }, 2000);
       }
       
-      function loadTallyForm() { const ifr = document.getElementById('formIframe'); if (ifr && ifr.dataset.tallySrc) { ifr.src = ifr.dataset.tallySrc; showLoading(); } else setTimeout(hideLoading, 3000); }
+      // ---------- DASHBOARD – ONLY SHOW AFTER EVERYTHING IS READY ----------
+      function showDashboard() {
+        // Update all UI elements
+        document.getElementById('dashboardUserName').textContent = currentUserName;
+        document.getElementById('infoCardUserName').textContent = currentUserName;
+        
+        // Hide login, show dashboard
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('dashboardContainer').style.display = 'flex';
+        // Form container stays hidden until user clicks "Make Submission"
+        document.getElementById('formContainer').style.display = 'none';
+        
+        startGhanaTimeUpdates();
+        const sessionId = registerUserSession(currentUserEmail, currentUserName);
+        showLoginGreeting();
+        resetActivityTimers();
+        attachActivityListeners();
+      }
       
+      // ---------- IFRAME HANDLING – PERSISTENT, NEVER CLEARED ----------
+      function handleIframeLoad() {
+        iframeEverLoaded = true;
+        // If form container is visible, hide loading overlay immediately
+        if (document.getElementById('formContainer').style.display === 'flex') {
+          hideLoading();
+        } else {
+          // Background preload: ensure loading overlay stays hidden
+          document.getElementById('loadingOverlay').style.display = 'none';
+        }
+        // Ensure iframe stays visible when form is active, but we control via visibility
+      }
+      
+      function hideLoading() { 
+        const lo = document.getElementById('loadingOverlay');
+        if (lo) { 
+          lo.style.opacity = '0'; 
+          setTimeout(() => { 
+            lo.style.display = 'none'; 
+          }, 300); 
+        }
+        const ifr = document.getElementById('formIframe');
+        if (ifr) ifr.style.visibility = 'visible';
+      }
+      
+      function showLoading() { 
+        const lo = document.getElementById('loadingOverlay');
+        if (lo) { 
+          lo.style.display = 'flex'; 
+          lo.style.opacity = '1'; 
+        }
+      }
+      
+      // Open submission: INSTANTANEOUS on subsequent opens because iframe is always alive
+      function openSubmissionForm() {
+        document.getElementById('dashboardContainer').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'flex';
+        
+        const ifr = document.getElementById('formIframe');
+        if (ifr) {
+          // If iframe already loaded before, show it instantly with no loader
+          if (iframeEverLoaded) {
+            ifr.style.visibility = 'visible';
+            // Ensure loading overlay is hidden
+            document.getElementById('loadingOverlay').style.display = 'none';
+          } else {
+            // First time: show loading overlay
+            ifr.style.visibility = 'hidden';
+            showLoading();
+            // If iframe somehow already complete, hide loading after tiny delay
+            if (ifr.contentDocument && ifr.contentDocument.readyState === 'complete') {
+              setTimeout(hideLoading, 50);
+            }
+          }
+        }
+      }
+      
+      // Review materials: open SharePoint link
+      function openReviewMaterials() {
+        window.open('https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=P0tGLk', '_blank');
+      }
+      
+      // Back to dashboard – iframe stays loaded, just hidden from view
+      function backToDashboard() {
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('dashboardContainer').style.display = 'flex';
+        // Do NOT clear iframe src or unload – just hide it visually
+        const ifr = document.getElementById('formIframe');
+        if (ifr) ifr.style.visibility = 'hidden';
+        // Loading overlay stays hidden for next time
+        document.getElementById('loadingOverlay').style.display = 'none';
+      }
+      
+      // ---------- ACTIVITY TIMERS ----------
       function resetActivityTimers() {
-        lastActivityTime = Date.now();
         clearTimeout(inactivityTimer); clearTimeout(warningTimer); hideInactivityWarning();
         updateSessionExpiry();
         warningTimer = setTimeout(showInactivityWarning, WARNING_TIME);
@@ -704,10 +650,10 @@
         function update() { const m = Math.floor(remaining/60), s = remaining%60; timer.textContent = `${m}:${s<10?'0':''}${s}`; if (remaining<=0) clearInterval(i); else remaining--; }
         update(); const i = setInterval(update, 1000);
       }
-      function logoutDueToInactivity() { showCustomAlert('Session Expired', 'Your session has expired due to inactivity.', 'info'); logout(); }
+      function logoutDueToInactivity() { showCustomAlert('Session Expired', 'Session expired due to inactivity.', 'info'); logout(); }
       
-      function showCustomAlert(title, message, type = 'info') {
-        const icon = type==='info' ? 'ℹ️' : type==='warning' ? '⚠️' : '❌';
+      function showCustomAlert(title, message, type) {
+        const icon = type==='info' ? 'ℹ️' : '⚠️';
         const overlay = document.getElementById('confirmationDialog');
         overlay.innerHTML = `<div class="confirmation-dialog"><div class="confirmation-icon">${icon}</div><div class="confirmation-title">${title}</div><div class="confirmation-message">${message}</div><div class="confirmation-buttons"><button class="confirm-button confirm-no" id="closeAlert">OK</button></div></div>`;
         overlay.style.display = 'flex';
@@ -715,7 +661,77 @@
       }
       
       function trackUserActivity() { resetActivityTimers(); }
+      function attachActivityListeners() {
+        document.addEventListener('mousemove', trackUserActivity); document.addEventListener('keydown', trackUserActivity);
+        document.addEventListener('click', trackUserActivity); document.addEventListener('scroll', trackUserActivity);
+      }
+      function detachActivityListeners() {
+        document.removeEventListener('mousemove', trackUserActivity); document.removeEventListener('keydown', trackUserActivity);
+        document.removeEventListener('click', trackUserActivity); document.removeEventListener('scroll', trackUserActivity);
+      }
       
+      // ---------- GREETING ----------
+      function getGreeting() { const h = new Date().getHours(); if (h<12) return "Good Morning"; if (h<17) return "Good Afternoon"; return "Good Evening"; }
+      function getGreetingIcon() { const h = new Date().getHours(); if (h<12) return "🌅"; if (h<17) return "☀️"; return "🌙"; }
+      function showLoginGreeting() {
+        const sessionId = getCurrentSessionId();
+        if (hasGreetingBeenShown(sessionId)) return;
+        document.getElementById('greetingText').textContent = getGreeting();
+        document.getElementById('greetingIcon').textContent = getGreetingIcon();
+        document.getElementById('userGreeting').textContent = `${getGreeting()}, ${currentUserName}!`;
+        document.getElementById('loginGreeting').style.display = 'flex';
+        markGreetingAsShown(sessionId);
+        setTimeout(() => { 
+          document.getElementById('loginGreeting').style.animation = 'fadeOutUp 0.5s ease';
+          setTimeout(() => { 
+            document.getElementById('loginGreeting').style.display = 'none'; 
+            document.getElementById('loginGreeting').style.animation = 'slideInRight 0.5s ease'; 
+          }, 500);
+        }, 5000);
+      }
+      
+      // ---------- LOGOUT – preserve iframe, do not unload ----------
+      function logout() {
+        if (currentUserEmail) removeUserSession(currentUserEmail);
+        clearTimeout(inactivityTimer); clearTimeout(warningTimer); hideInactivityWarning(); stopGhanaTimeUpdates();
+        detachActivityListeners();
+        document.getElementById('confirmationDialog').style.display = 'none'; 
+        document.getElementById('loginGreeting').style.display = 'none';
+        
+        // Hide containers
+        document.getElementById('dashboardContainer').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'none';
+        
+        // Do NOT clear iframe src – keep it preloaded for next login
+        // Just hide it
+        const ifr = document.getElementById('formIframe');
+        if (ifr) ifr.style.visibility = 'hidden';
+        
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('email').value = ''; document.getElementById('password').value = ''; 
+        document.getElementById('email').focus();
+        currentUserName = ''; currentUserEmail = ''; failedAttempts = 0; 
+        
+        showLogoutNotification();
+      }
+      
+      function showLogoutNotification() {
+        const n = document.getElementById('logoutNotification'), c = document.getElementById('logoutCountdown');
+        n.style.display = 'flex'; 
+        let count = 5; 
+        c.textContent = count;
+        const i = setInterval(() => { 
+          count--; 
+          c.textContent = count; 
+          if (count <= 0) { 
+            clearInterval(i); 
+            n.style.display = 'none'; 
+            document.getElementById('loginContainer').style.display = 'flex';
+          } 
+        }, 1000);
+      }
+      
+      // ---------- SESSION CHECK ----------
       function checkExistingSession() {
         const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
         if (userSession.email && userSession.name && userSession.sessionId && Date.now() < userSession.expiry) {
@@ -723,63 +739,40 @@
           const activeSession = sessions[userSession.email];
           if (activeSession && activeSession.sessionId === userSession.sessionId) {
             currentUserEmail = userSession.email; currentUserName = userSession.name; setCurrentSessionId(userSession.sessionId);
-            loadFormAfterLogin(false); return true;
+            // Don't show dashboard yet – wait for app loader to finish
+            return true;
           }
         }
         if (userSession.email) removeUserSession(userSession.email);
         return false;
       }
       
-      function updateMobileUI() {
-        const m1 = document.getElementById('mobileUserName'), m2 = document.getElementById('mobileUserNameShort');
-        if (currentUserName) { m1.textContent = `Logged in as: ${currentUserName}`; m2.textContent = currentUserName.length > 10 ? currentUserName.substring(0,10)+'...' : currentUserName; }
-      }
-      
-      function loadFormAfterLogin(showGreeting = true) {
-        document.getElementById('userNameDisplay').textContent = currentUserName;
-        document.getElementById('loginContainer').style.display = 'none';
-        document.getElementById('formContainer').style.display = 'flex';
-        updateMobileUI();
-        if (window.innerWidth > 768) document.getElementById('siteFooter').style.display = 'flex'; else document.getElementById('siteFooter').style.display = 'none';
-        startGhanaTimeUpdates(); loadTallyForm();
-        const sessionId = registerUserSession(currentUserEmail, currentUserName);
-        if (showGreeting) showLoginGreeting();
-        resetActivityTimers();
-        document.addEventListener('mousemove', trackUserActivity); document.addEventListener('keydown', trackUserActivity);
-        document.addEventListener('click', trackUserActivity); document.addEventListener('scroll', trackUserActivity);
-      }
-      
-      function showLogoutNotification() {
-        const n = document.getElementById('logoutNotification'), c = document.getElementById('logoutCountdown');
-        n.style.display = 'flex'; let count = 5; c.textContent = count;
-        const i = setInterval(() => { count--; c.textContent = count; if (count<=0) { clearInterval(i); n.style.display = 'none'; document.getElementById('loginContainer').style.display = 'flex'; document.getElementById('formContainer').style.display = 'none'; document.getElementById('siteFooter').style.display = 'none'; } }, 1000);
-      }
-      
-      function logout() {
-        if (currentUserEmail) removeUserSession(currentUserEmail);
-        clearTimeout(inactivityTimer); clearTimeout(warningTimer); hideInactivityWarning(); stopGhanaTimeUpdates();
-        document.removeEventListener('mousemove', trackUserActivity); document.removeEventListener('keydown', trackUserActivity);
-        document.removeEventListener('click', trackUserActivity); document.removeEventListener('scroll', trackUserActivity);
-        document.getElementById('confirmationDialog').style.display = 'none'; document.getElementById('loginGreeting').style.display = 'none';
-        const ifr = document.getElementById('formIframe'); if (ifr) { ifr.src = ''; ifr.style.visibility = 'hidden'; }
-        const lo = document.getElementById('loadingOverlay'); if (lo) { lo.style.display = 'flex'; lo.style.opacity = '1'; }
-        document.getElementById('email').value = ''; document.getElementById('password').value = ''; document.getElementById('email').focus();
-        currentUserName = ''; currentUserEmail = ''; failedAttempts = 0; updateMobileUI(); showLogoutNotification();
-      }
-      
-      function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
-      
-      // ---------- INITIALIZATION ----------
+      // ---------- INIT – FULL LOAD THEN DASHBOARD (if session) OR LOGIN ----------
       document.addEventListener('DOMContentLoaded', function() {
-        // Update all copyright years automatically
         updateAllCopyrightYears();
         
-        if (checkExistingSession()) { console.log('Existing session found, auto-login (no greeting)'); return; }
-        document.getElementById('loginContainer').style.display = 'flex';
-        document.getElementById('formContainer').style.display = 'none';
-        document.getElementById('siteFooter').style.display = 'none';
-        document.getElementById('email').focus();
-        if (!getCurrentSessionId()) setCurrentSessionId(generateSessionId());
+        // Pre-hide iframe visibility
+        document.getElementById('formIframe').style.visibility = 'hidden';
+        document.getElementById('loadingOverlay').style.display = 'none';
+        
+        // Simulate full app load – wait 1.5 seconds to ensure everything is ready
+        setTimeout(function() {
+          // Fade out app loader
+          const loader = document.getElementById('appLoader');
+          loader.style.opacity = '0';
+          setTimeout(function() {
+            loader.style.display = 'none';
+            
+            // Now decide: existing session or login
+            if (checkExistingSession()) {
+              showDashboard();
+            } else {
+              document.getElementById('loginContainer').style.display = 'flex';
+              document.getElementById('email').focus();
+              if (!getCurrentSessionId()) setCurrentSessionId(generateSessionId());
+            }
+          }, 500);
+        }, 1500); // Ensures full load before dashboard appears
       });
       
       // ---------- EVENT LISTENERS ----------
@@ -788,26 +781,27 @@
         const email = document.getElementById('email').value, pass = document.getElementById('password').value;
         document.getElementById('errorMessage').style.display = 'none'; document.getElementById('attemptsWarning').style.display = 'none';
         if (validateLogin(email, pass)) {
-          if (isUserAlreadyLoggedIn(email)) showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device. The other session will be logged out.', 'warning');
-          failedAttempts = 0; loadFormAfterLogin(true);
+          if (isUserAlreadyLoggedIn(email)) showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
+          failedAttempts = 0; 
+          showDashboard();
         } else handleFailedLogin();
       });
       
-      document.getElementById('logoutButton').addEventListener('click', function() { document.getElementById('confirmationDialog').style.display = 'flex'; });
-      document.getElementById('mobileLogoutButton').addEventListener('click', function() { document.getElementById('confirmationDialog').style.display = 'flex'; });
-      document.getElementById('mobileTopButton').addEventListener('click', scrollToTop);
+      // Dashboard actions
+      document.getElementById('makeSubmissionCard').addEventListener('click', openSubmissionForm);
+      document.getElementById('reviewMaterialsCard').addEventListener('click', openReviewMaterials);
+      document.getElementById('backToDashboardBtn').addEventListener('click', backToDashboard);
+      
+      // Logout triggers
+      document.getElementById('dashboardLogoutBtn').addEventListener('click', function() { document.getElementById('confirmationDialog').style.display = 'flex'; });
+      document.getElementById('infoCardLogoutTrigger').addEventListener('click', function() { document.getElementById('confirmationDialog').style.display = 'flex'; });
+      
       document.getElementById('confirmLogout').addEventListener('click', logout);
       document.getElementById('cancelLogout').addEventListener('click', function() { document.getElementById('confirmationDialog').style.display = 'none'; });
       document.getElementById('keepActiveButton').addEventListener('click', resetActivityTimers);
       document.getElementById('confirmationDialog').addEventListener('click', function(e) { if (e.target === this) this.style.display = 'none'; });
-      document.getElementById('email').addEventListener('focus', function() { this.classList.remove('error'); });
-      document.getElementById('password').addEventListener('focus', function() { this.classList.remove('error'); });
-      document.getElementById('password').addEventListener('keypress', function(e) { if (e.key === 'Enter') document.getElementById('loginForm').dispatchEvent(new Event('submit')); });
       
-      window.addEventListener('resize', function() {
-        if (currentUserName) document.getElementById('siteFooter').style.display = window.innerWidth > 768 ? 'flex' : 'none';
-      });
-      
+      // Session cross-check
       setInterval(function() {
         if (currentUserEmail) {
           const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
@@ -816,6 +810,7 @@
         }
       }, 30000);
       
+      // Clean old greeting records
       function cleanOldGreetingRecords() {
         const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}');
         const oneWeek = Date.now() - 7*24*60*60*1000;
@@ -824,13 +819,7 @@
       }
       setInterval(cleanOldGreetingRecords, 24*60*60*1000); cleanOldGreetingRecords();
       
-      window.addEventListener('scroll', function() {
-        const btn = document.getElementById('mobileTopButton');
-        btn.style.display = window.scrollY > 300 ? 'flex' : 'none';
-      });
-      
-      // Re-run copyright update every day to ensure year is always current
-      setInterval(updateAllCopyrightYears, 24 * 60 * 60 * 1000);
+      setInterval(updateAllCopyrightYears, 24*60*60*1000);
     </script>
   </body>
 </html>
