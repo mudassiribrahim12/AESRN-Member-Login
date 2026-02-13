@@ -629,11 +629,15 @@
       let currentUserName = "", currentUserEmail = "";
       let ghanaTimeInterval;
       
-      // session timings: total 2min, warning at 1:50 (i.e., after 10 seconds)
-      const SESSION_TIMEOUT = 2 * 60 * 1000;        // 2 minutes
-      const WARNING_TIME = 10 * 1000;               // show warning after 10s (so timer starts at 1:50)
+      // session timings: 1 minute inactivity triggers warning, which shows countdown from 1:50 (110 seconds)
+      // but we want: if no activity (mouse click/move) for 60 seconds -> warning appears
+      // warning shows 1:50 countdown, but user can click "continue" to reset timers and hide warning.
+      const INACTIVITY_WARNING_TIME = 60 * 1000;      // 60 seconds -> show warning
+      const SESSION_TIMEOUT = 2 * 60 * 1000;          // full 2 min logout if no activity after warning (but we handle via countdown)
+      
       let inactivityTimer, warningTimer;
       let countdownInterval = null;
+      let warningActive = false;                        // track if warning popup is visible
       
       const ACTIVE_SESSIONS_KEY = 'aesrn_active_sessions';
       const CURRENT_SESSION_KEY = 'aesrn_current_session';
@@ -811,26 +815,54 @@
         document.getElementById('loadingOverlay').style.display = 'none';
       }
       
-      // ---------- ACTIVITY TIMERS (modified to count down from 1:50) ----------
+      // ---------- ACTIVITY TIMERS – new behaviour ----------
       function resetActivityTimers() {
-        clearTimeout(inactivityTimer); 
-        clearTimeout(warningTimer); 
-        if (countdownInterval) clearInterval(countdownInterval);
-        hideInactivityWarning();
+        // Clear existing timers and countdown
+        clearTimeout(inactivityTimer);
+        clearTimeout(warningTimer);
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
+        
+        // Hide warning if visible
+        if (warningActive) {
+          hideInactivityWarning();
+        }
+        
         updateSessionExpiry();
-        // warning after 10 seconds -> timer shows 1:50
-        warningTimer = setTimeout(showInactivityWarning, WARNING_TIME);
-        inactivityTimer = setTimeout(logoutDueToInactivity, SESSION_TIMEOUT);
+        
+        // Set timer to show warning after 60 seconds of inactivity (only if warning not active)
+        warningTimer = setTimeout(() => {
+          if (!warningActive) {
+            showInactivityWarning();
+          }
+        }, INACTIVITY_WARNING_TIME);
+        
+        // Inactivity timer for full logout (set for a bit longer than warning; but we handle logout via countdown)
+        // We'll rely on countdown to trigger logout, but keep a safety timer
+        inactivityTimer = setTimeout(() => {
+          // This is a fallback in case countdown fails; but we'll manage via countdown
+          if (warningActive) {
+            logoutDueToInactivity();
+          }
+        }, SESSION_TIMEOUT + 5000); // slightly longer than countdown max
       }
       
       function showInactivityWarning() {
+        if (warningActive) return; // already shown
+        warningActive = true;
         document.getElementById('inactivityWarning').style.display = 'block';
         startInactivityCountdown(110); // 110 seconds = 1:50
       }
       
-      function hideInactivityWarning() { 
+      function hideInactivityWarning() {
+        warningActive = false;
         document.getElementById('inactivityWarning').style.display = 'none';
-        if (countdownInterval) clearInterval(countdownInterval);
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
       }
       
       function startInactivityCountdown(seconds) {
@@ -855,8 +887,16 @@
       
       function logoutDueToInactivity() { 
         if (countdownInterval) clearInterval(countdownInterval);
+        warningActive = false;
         showCustomAlert('Session Expired', 'Session expired due to inactivity.', 'info'); 
         logout(); 
+      }
+      
+      // Continue session button: simply reset timers (hide warning, restart)
+      function continueSession() {
+        resetActivityTimers(); // this hides warning and clears timers, then sets new ones
+        // Also update session expiry
+        updateSessionExpiry();
       }
       
       function updateSessionExpiry() {
@@ -876,14 +916,48 @@
         document.getElementById('closeAlert').addEventListener('click', function() { overlay.style.display = 'none'; });
       }
       
-      function trackUserActivity() { resetActivityTimers(); }
-      function attachActivityListeners() {
-        document.addEventListener('mousemove', trackUserActivity); document.addEventListener('keydown', trackUserActivity);
-        document.addEventListener('click', trackUserActivity); document.addEventListener('scroll', trackUserActivity);
+      function trackUserActivity() { 
+        // Only reset timers if warning is not active? 
+        // But we want to reset if user does ANY activity, including while warning is shown.
+        // However, if warning is shown, we don't want a simple mouse move to dismiss it – only "Continue" button does.
+        // So we reset timers, but if warning is active we do NOT hide it automatically.
+        // Instead, we refresh the underlying timers but keep warning visible.
+        
+        // Clear the existing timers and set new ones, but if warning is active, we keep it.
+        clearTimeout(inactivityTimer);
+        clearTimeout(warningTimer);
+        
+        // Only set new timers if warning is not active, otherwise we let the countdown continue.
+        if (!warningActive) {
+          warningTimer = setTimeout(() => {
+            if (!warningActive) {
+              showInactivityWarning();
+            }
+          }, INACTIVITY_WARNING_TIME);
+          
+          inactivityTimer = setTimeout(() => {
+            if (warningActive) {
+              logoutDueToInactivity();
+            }
+          }, SESSION_TIMEOUT + 5000);
+        } else {
+          // If warning active, still update session expiry but don't interfere with countdown
+          updateSessionExpiry();
+        }
       }
+      
+      function attachActivityListeners() {
+        document.addEventListener('mousemove', trackUserActivity); 
+        document.addEventListener('keydown', trackUserActivity);
+        document.addEventListener('click', trackUserActivity); 
+        document.addEventListener('scroll', trackUserActivity);
+      }
+      
       function detachActivityListeners() {
-        document.removeEventListener('mousemove', trackUserActivity); document.removeEventListener('keydown', trackUserActivity);
-        document.removeEventListener('click', trackUserActivity); document.removeEventListener('scroll', trackUserActivity);
+        document.removeEventListener('mousemove', trackUserActivity); 
+        document.removeEventListener('keydown', trackUserActivity);
+        document.removeEventListener('click', trackUserActivity); 
+        document.removeEventListener('scroll', trackUserActivity);
       }
       
       // ---------- GREETING ----------
@@ -911,6 +985,7 @@
         if (currentUserEmail) removeUserSession(currentUserEmail);
         clearTimeout(inactivityTimer); clearTimeout(warningTimer); 
         if (countdownInterval) clearInterval(countdownInterval);
+        warningActive = false;
         hideInactivityWarning(); stopGhanaTimeUpdates();
         detachActivityListeners();
         document.getElementById('confirmationDialog').style.display = 'none'; 
@@ -1021,7 +1096,12 @@
       document.getElementById('cancelLogout').addEventListener('click', function() { 
         document.getElementById('confirmationDialog').style.display = 'none'; 
       });
-      document.getElementById('keepActiveButton').addEventListener('click', resetActivityTimers);
+      
+      // Continue session button (inactivity warning)
+      document.getElementById('keepActiveButton').addEventListener('click', function() {
+        continueSession();
+      });
+      
       document.getElementById('confirmationDialog').addEventListener('click', function(e) { 
         if (e.target === this) this.style.display = 'none'; 
       });
