@@ -27,11 +27,11 @@
         display: flex; 
         flex-direction: column; 
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        color: #1e1e1e;
+        color: #000000;
         -webkit-font-smoothing: antialiased;
       }
       
-      /* ---------- LOGIN CONTAINER - AESRN GRADIENT (matching main website) ---------- */
+      /* ---------- LOGIN CONTAINER - AESRN GRADIENT ---------- */
       .login-container {
         flex: 1;
         display: flex;
@@ -42,214 +42,354 @@
         background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
         width: 100%;
         min-height: 100vh;
+        position: relative;
       }
       
       .login-box {
         background: white;
-        border-radius: 8px;
-        padding: 40px 32px;
+        border-radius: 24px;
+        padding: 40px 32px 32px 32px;
         width: 100%;
-        max-width: 400px;
-        box-shadow: 0 10px 30px rgba(42,92,130,0.3);
+        max-width: 420px;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
       }
       .login-header { text-align: center; margin-bottom: 32px; }
       .login-logo-circle { width: 100px; height: 100px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; }
       .logo-circle-image { width: 100%; height: 100%; object-fit: contain; }
       .login-title { font-size: 24px; font-weight: 600; color: #2A5C82; margin-bottom: 8px; }
-      .login-subtitle { color: #5e5e5e; font-size: 14px; }
+      .login-subtitle { color: #000000; font-size: 14px; opacity: 0.8; font-weight: 400; }
       .form-group { margin-bottom: 20px; }
-      .form-label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 14px; color: #333; }
-      .form-input { width: 100%; padding: 12px 14px; border: 1px solid #d1d1d1; border-radius: 4px; font-size: 15px; }
-      .form-input:focus { outline: none; border-color: #2A5C82; box-shadow: 0 0 0 3px rgba(42,92,130,0.1); }
+      .form-label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 14px; color: #000000; }
+      .form-input { 
+        width: 100%; 
+        padding: 14px 16px; 
+        border: 1px solid #d1d1d1; 
+        border-radius: 12px; 
+        font-size: 15px;
+        transition: all 0.3s ease;
+      }
+      .form-input:focus { 
+        outline: none; 
+        border-color: #2A5C82; 
+        box-shadow: 0 0 0 4px rgba(42,92,130,0.15);
+      }
+      
+      /* Login button with loading state */
       .login-button { 
         width: 100%; 
         padding: 14px 18px; 
         background: #E63946; 
         color: white; 
         border: none; 
-        border-radius: 4px; 
-        font-size: 15px; 
+        border-radius: 12px; 
+        font-size: 16px; 
         font-weight: 600; 
         cursor: pointer; 
-        margin-top: 12px;
+        margin-top: 16px;
         transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
       }
-      .login-button:hover { 
+      .login-button:hover:not(:disabled) { 
         background: #2A5C82; 
         transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(230,57,70,0.3);
+        box-shadow: 0 10px 25px rgba(230,57,70,0.4);
       }
-      .copyright-full { text-align: center; margin-top: 32px; font-size: 12px; color: #666; border-top: 1px solid #eee; padding-top: 20px; }
-      .error-message, .attempts-warning { color: #d32f2f; font-size: 13px; margin-top: 16px; text-align: center; display: none; padding: 12px; background: #ffebee; border-radius: 4px; }
-      .attempts-warning { color: #b85a00; background: #fff1e0; }
+      .login-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        background: #E63946;
+      }
       
-      /* ---------- DASHBOARD – AESRN COLOR SCHEME ---------- */
+      /* Loading spinner */
+      .button-spinner {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: button-spin 0.8s linear infinite;
+        margin-right: 10px;
+      }
+      @keyframes button-spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* Go to AESRN link - black text */
+      .go-to-aesrn-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid #eaeef2;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        width: 100%;
+        letter-spacing: 0.2px;
+        opacity: 0.8;
+      }
+      .go-to-aesrn-link i {
+        font-size: 14px;
+        color: #2A5C82;
+        transition: transform 0.2s ease;
+      }
+      .go-to-aesrn-link:hover {
+        color: #2A5C82;
+        opacity: 1;
+      }
+      .go-to-aesrn-link:hover i {
+        transform: translateX(-4px);
+        color: #E63946;
+      }
+      
+      .copyright-full { 
+        text-align: center; 
+        margin-top: 24px; 
+        font-size: 12px; 
+        color: #000000; 
+        opacity: 0.6;
+        border-top: 1px solid #eaeef2; 
+        padding-top: 16px; 
+      }
+      .error-message, .attempts-warning { 
+        color: #d32f2f; 
+        font-size: 13px; 
+        margin-top: 16px; 
+        text-align: center; 
+        display: none; 
+        padding: 12px; 
+        background: #ffebee; 
+        border-radius: 12px; 
+      }
+      .attempts-warning { 
+        color: #b85a00; 
+        background: #fff1e0; 
+      }
+      
+      /* ---------- DASHBOARD – MODERN CARDS, CLEAN BACKGROUND ---------- */
       .dashboard-container {
         flex: 1;
         display: none;
         flex-direction: column;
-        background: #f5f7fc;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         width: 100%;
         min-height: 100vh;
-        padding: 30px 20px;
       }
       
       .dashboard-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: white;
-        padding: 16px 30px;
-        border-radius: 16px;
-        box-shadow: 0 4px 12px rgba(42,92,130,0.1);
-        margin-bottom: 40px;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px 35px;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        margin: 30px 30px 0 30px;
+        border-radius: 20px;
         flex-wrap: wrap;
         gap: 15px;
+        border: 1px solid rgba(255,255,255,0.2);
       }
       .dashboard-welcome { 
         display: flex; 
         align-items: center; 
-        gap: 12px; 
+        gap: 15px; 
         font-size: 18px; 
         font-weight: 500; 
-        color: #2A5C82; 
+        color: #000000; 
       }
       .dashboard-welcome span { 
-        background: #2A5C82; 
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white; 
-        padding: 6px 14px; 
-        border-radius: 30px; 
+        padding: 8px 20px; 
+        border-radius: 40px; 
         font-size: 15px; 
         font-weight: 600; 
+        box-shadow: 0 4px 15px rgba(102,126,234,0.3);
       }
       .dashboard-logout { 
-        background: #E63946; 
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
         color: white; 
         border: none; 
-        border-radius: 30px; 
-        padding: 10px 24px; 
+        border-radius: 40px; 
+        padding: 12px 30px; 
         font-weight: 600; 
         cursor: pointer; 
         font-size: 14px;
         transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(245,87,108,0.3);
       }
       .dashboard-logout:hover { 
-        background: #2A5C82; 
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(230,57,70,0.3);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 20px 35px rgba(245,87,108,0.4);
+      }
+      
+      .dashboard-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 40px 30px;
       }
       
       .action-grid {
         display: flex;
         flex-wrap: wrap;
-        gap: 30px;
+        gap: 25px;
         justify-content: center;
-        align-items: center;
+        align-items: stretch;
         max-width: 1100px;
-        margin: 20px auto;
+        margin: 0 auto 40px auto;
         width: 100%;
       }
+      
+      /* Modern card design - smaller, professional size, stays white on hover */
       .action-card {
         background: white;
         border-radius: 24px;
-        padding: 40px 30px;
-        box-shadow: 0 15px 35px rgba(42,92,130,0.1);
-        flex: 1 1 280px;
-        max-width: 360px;
+        padding: 30px 25px;
+        box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+        flex: 1 1 260px;
+        max-width: 300px;
         display: flex;
         flex-direction: column;
         align-items: center;
         text-align: center;
-        transition: all 0.25s ease;
-        border: 1px solid rgba(42,92,130,0.08);
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
         cursor: pointer;
+        position: relative;
+        overflow: hidden;
       }
+      
+      /* Subtle shadow enhancement on hover - but card stays white */
       .action-card:hover { 
-        transform: translateY(-6px); 
-        box-shadow: 0 25px 45px rgba(42,92,130,0.15); 
-        border-color: rgba(230,57,70,0.2); 
+        transform: translateY(-8px);
+        box-shadow: 0 30px 50px -15px rgba(0,0,0,0.3);
+        background: white; /* Keep white background */
       }
+      
       .action-icon { 
-        font-size: 52px; 
+        font-size: 48px; 
         margin-bottom: 20px; 
-        background: rgba(42,92,130,0.1); 
+        background: #f0f4ff;
         width: 100px; 
         height: 100px; 
         display: flex; 
         align-items: center; 
         justify-content: center; 
         border-radius: 50%; 
-        color: #2A5C82; 
-      }
-      .action-title { 
-        font-size: 26px; 
-        font-weight: 700; 
-        color: #2A5C82; 
-        margin-bottom: 12px; 
-        letter-spacing: -0.5px; 
-      }
-      .action-desc { color: #5a5a6e; font-size: 16px; line-height: 1.5; margin-bottom: 10px; }
-      .action-badge { 
-        margin-top: 15px; 
-        background: rgba(26,154,160,0.1); 
-        color: #1A9AA0; 
-        padding: 8px 18px; 
-        border-radius: 40px; 
-        font-size: 14px; 
-        font-weight: 600; 
+        color: #667eea; 
+        transition: all 0.3s ease;
+        border: 1px solid rgba(102,126,234,0.1);
       }
       
-      /* Session info card – white, centered */
-      .session-info-card {
-        background: white;
-        border-radius: 60px;
+      /* Icon changes slightly on hover but card stays white */
+      .action-card:hover .action-icon {
+        background: #e8edff;
+        color: #667eea;
+        transform: scale(1.02);
+      }
+      
+      .action-title { 
+        font-size: 22px; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 12px; 
+        letter-spacing: -0.3px; 
+      }
+      
+      .action-desc { 
+        color: #4a5568; 
+        font-size: 14px; 
+        line-height: 1.6; 
+        margin-bottom: 20px;
+        font-weight: 400;
+        max-width: 240px;
+      }
+      
+      .action-badge { 
+        margin-top: 5px; 
+        background: #f0f4ff;
+        color: #667eea; 
+        padding: 6px 18px; 
+        border-radius: 50px; 
+        font-size: 13px; 
+        font-weight: 600;
+        border: 1px solid rgba(102,126,234,0.2);
+        transition: all 0.3s ease;
+      }
+      
+      .action-card:hover .action-badge {
+        background: #e8edff;
+        color: #667eea;
+      }
+      
+      /* Simple, full-length footer */
+      .dashboard-footer {
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
         padding: 18px 30px;
-        margin: 50px auto 20px auto;
+        margin-top: auto;
+        width: 100%;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      .footer-content {
         display: flex;
         flex-wrap: wrap;
         align-items: center;
         justify-content: center;
         gap: 25px;
-        box-shadow: 0 5px 20px rgba(42,92,130,0.08);
-        border: 1px solid rgba(42,92,130,0.1);
-        max-width: 750px;
-        width: 100%;
-        color: #1e1e1e;
-        font-size: 15px;
+        max-width: 1200px;
+        margin: 0 auto;
+        color: rgba(255,255,255,0.9);
+        font-size: 14px;
       }
-      .session-info-item {
+      
+      .footer-item {
         display: flex;
         align-items: center;
         gap: 8px;
-        background: #fafcff;
-        padding: 5px 16px;
-        border-radius: 40px;
-        color: #2c3e50;
-      }
-      .session-info-strong { color: #2A5C82; font-weight: 700; margin-left: 4px; }
-      .ghana-time-dash {
-        font-family: monospace;
-        font-weight: 700;
-        color: #1A9AA0;
-        background: rgba(26,154,160,0.1);
-        padding: 5px 12px;
-        border-radius: 40px;
-      }
-      .copyright-white {
-        color: #5e5e5e;
-        font-size: 13px;
-        font-weight: 400;
-        letter-spacing: 0.2px;
       }
       
-      /* ---------- FORM CONTAINER – ALWAYS ACTIVE, NEVER UNLOADED ---------- */
+      .footer-item a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      
+      .footer-item a:hover {
+        text-decoration: underline;
+      }
+      
+      .footer-divider {
+        color: rgba(255,255,255,0.3);
+        font-size: 16px;
+      }
+      
+      .footer-copyright {
+        color: rgba(255,255,255,0.7);
+        font-size: 13px;
+      }
+      
+      /* ---------- FORM CONTAINER ---------- */
       .form-container {
         flex: 1;
         position: relative;
         display: none;
         width: 100%;
         min-height: 100vh;
-        background: white;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
       }
       iframe { 
         position: absolute; 
@@ -268,34 +408,34 @@
         left: 20px;
         z-index: 2000;
         background: white;
-        color: #2A5C82;
-        border: 1px solid #2A5C82;
+        color: #667eea;
+        border: none;
         padding: 12px 26px;
-        border-radius: 40px;
+        border-radius: 50px;
         font-weight: 600;
-        font-size: 16px;
+        font-size: 15px;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 10px;
         cursor: pointer;
-        box-shadow: 0 8px 20px rgba(42,92,130,0.15);
-        transition: all 0.2s;
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
       }
       .back-to-dashboard:hover { 
-        background: #2A5C82; 
-        color: white; 
-        border-color: #2A5C82;
-        transform: translateY(-2px);
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 25px 45px -10px rgba(102,126,234,0.5);
       }
       
-      /* ---------- LOADING OVERLAY – FAST CONFIG ---------- */
+      /* ---------- LOADING OVERLAY ---------- */
       .loading-overlay {
         position: absolute; 
         top: 0; 
         left: 0; 
         right: 0; 
         bottom: 0;
-        background: rgba(255,255,255,0.95); 
+        background: rgba(255,255,255,0.98); 
         display: flex; 
         flex-direction: column;
         justify-content: center; 
@@ -306,19 +446,19 @@
         width: 50px; 
         height: 50px; 
         border: 4px solid #f3f3f3; 
-        border-top: 4px solid #E63946;
+        border-top: 4px solid #667eea;
         border-radius: 50%; 
         animation: spin 1s linear infinite; 
         margin-bottom: 20px;
       }
       .loading-text {
         font-size: 16px;
-        color: #2A5C82;
+        color: #667eea;
         font-weight: 500;
       }
       @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       
-      /* ---------- GLOBAL LOADER (ensures everything loads before dashboard) ---------- */
+      /* ---------- GLOBAL LOADER ---------- */
       .app-loader {
         position: fixed;
         top: 0;
@@ -349,20 +489,22 @@
       
       /* ---------- NOTIFICATIONS & MODALS ---------- */
       .login-greeting-notification { 
-        position: fixed; top: 20px; right: 20px; background: #2A5C82; color: white; 
-        padding: 20px 30px; border-radius: 8px; box-shadow: 0 10px 30px rgba(42,92,130,0.3); 
+        position: fixed; top: 20px; right: 20px; background: white; color: #333; 
+        padding: 20px 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
         z-index: 2000; display: none; align-items: center; gap: 15px; 
         animation: slideInRight 0.5s ease; max-width: 350px; 
+        border-left: 5px solid #667eea;
       }
       .logout-notification { 
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        background: #2A5C82; color: white; padding: 30px 40px; border-radius: 12px; 
-        box-shadow: 0 20px 60px rgba(42,92,130,0.4); z-index: 3000; display: none; 
-        flex-direction: column; align-items: center; gap: 20px; min-width: 300px; 
+        background: white; color: #333; padding: 40px 50px; border-radius: 24px; 
+        box-shadow: 0 40px 80px rgba(0,0,0,0.3); z-index: 3000; display: none; 
+        flex-direction: column; align-items: center; gap: 20px; min-width: 320px; 
         text-align: center; 
+        border: 1px solid rgba(255,255,255,0.2);
       }
       
-      /* ========== MINIMAL / MODERN INACTIVITY WARNING ========== */
+      /* ---------- INACTIVITY WARNING - Updated to 1:30 ---------- */
       .inactivity-warning {
         display: none;
         position: fixed;
@@ -370,16 +512,16 @@
         left: 50%;
         transform: translate(-50%, -50%);
         background: white;
-        color: #1a1e3a;
+        color: #000000;
         border-radius: 28px;
         padding: 40px 36px;
         width: 90%;
         max-width: 420px;
         z-index: 4000;
         text-align: center;
-        box-shadow: 0 30px 50px rgba(42,92,130,0.3);
-        border: 1px solid rgba(42,92,130,0.1);
-        backdrop-filter: blur(4px);
+        box-shadow: 0 40px 70px -15px rgba(0,0,0,0.4);
+        border: 1px solid rgba(255,255,255,0.3);
+        backdrop-filter: blur(10px);
         animation: fadeScale 0.25s ease-out;
       }
       @keyframes fadeScale {
@@ -391,28 +533,28 @@
         font-weight: 600;
         margin-bottom: 16px;
         letter-spacing: -0.3px;
-        color: #2A5C82;
+        color: #667eea;
       }
       .inactivity-timer {
         font-size: 48px;
         font-weight: 700;
         font-family: 'Courier New', monospace;
-        background: rgba(42,92,130,0.08);
+        background: rgba(102,126,234,0.08);
         display: inline-block;
         padding: 16px 28px;
         border-radius: 60px;
         margin: 20px 0 18px;
-        color: #E63946;
-        border: 1px solid rgba(230,57,70,0.2);
+        color: #f5576c;
+        border: 1px solid rgba(245,87,108,0.2);
       }
       .inactivity-message {
         font-size: 17px;
-        color: #4a4a6a;
+        color: #333333;
         margin-bottom: 28px;
         line-height: 1.5;
       }
       .keep-active-button {
-        background: #E63946;
+        background: linear-gradient(135deg, #667eea, #764ba2);
         color: white;
         border: none;
         border-radius: 60px;
@@ -421,17 +563,15 @@
         font-weight: 600;
         cursor: pointer;
         width: 100%;
-        transition: all 0.2s;
-        border: 1px solid #E63946;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(102,126,234,0.3);
       }
       .keep-active-button:hover {
-        background: #2A5C82;
-        transform: scale(1.02);
-        box-shadow: 0 10px 20px rgba(42,92,130,0.3);
-        border-color: #2A5C82;
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 20px 35px rgba(102,126,234,0.4);
       }
       
-      /* ========== MINIMAL LOGOUT CONFIRMATION ========== */
+      /* ---------- LOGOUT CONFIRMATION ---------- */
       .confirmation-overlay { 
         display: none; 
         position: fixed; 
@@ -439,9 +579,8 @@
         left: 0; 
         right: 0; 
         bottom: 0; 
-        background: rgba(42,92,130,0.3);
-        backdrop-filter: blur(6px);
-        -webkit-backdrop-filter: blur(6px);
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px);
         z-index: 5000; 
         justify-content: center; 
         align-items: center; 
@@ -456,9 +595,8 @@
         width: 90%; 
         max-width: 420px; 
         text-align: center; 
-        box-shadow: 0 30px 50px rgba(42,92,130,0.3);
+        box-shadow: 0 40px 80px rgba(0,0,0,0.3);
         animation: scaleUp 0.25s ease;
-        border: 1px solid rgba(255,255,255,0.3);
       }
       @keyframes scaleUp { 
         from { opacity: 0.8; transform: scale(0.96); } 
@@ -468,7 +606,7 @@
       .confirmation-icon {
         font-size: 44px;
         margin-bottom: 24px;
-        background: rgba(42,92,130,0.08);
+        background: rgba(102,126,234,0.08);
         width: 100px;
         height: 100px;
         display: flex;
@@ -477,24 +615,24 @@
         border-radius: 50%;
         margin-left: auto;
         margin-right: auto;
-        color: #2A5C82;
-        border: 1px solid rgba(42,92,130,0.1);
+        color: #667eea;
+        border: 1px solid rgba(102,126,234,0.2);
       }
       
       .confirmation-title { 
         font-size: 30px; 
         font-weight: 600; 
-        color: #2A5C82; 
+        color: #667eea; 
         margin-bottom: 12px;
         letter-spacing: -0.4px;
       }
       
       .confirmation-message { 
-        color: #5a5a7a; 
+        color: #333333; 
         font-size: 18px; 
         margin-bottom: 36px;
         line-height: 1.5;
-        font-weight: 420;
+        font-weight: 400;
       }
       
       .confirmation-buttons { 
@@ -519,34 +657,38 @@
         gap: 6px;
         background: white;
         border: 1.5px solid #d0d6e8;
-        color: #2c3e50;
+        color: #333333;
       }
       .confirm-button:hover {
-        background: rgba(42,92,130,0.05);
-        border-color: #2A5C82;
+        background: rgba(102,126,234,0.05);
+        border-color: #667eea;
       }
       
       .confirm-yes {
-        background: #E63946;
-        border: 1.5px solid #E63946;
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        border: none;
         color: white;
       }
       .confirm-yes:hover {
-        background: #2A5C82;
-        border-color: #2A5C82;
+        background: linear-gradient(135deg, #f5576c, #f093fb);
       }
       
       @media (max-width: 768px) {
-        .dashboard-header { flex-direction: column; align-items: flex-start; }
-        .session-info-card { flex-direction: column; align-items: center; border-radius: 30px; padding: 20px; gap: 15px; }
+        .dashboard-header { margin: 20px 20px 0 20px; padding: 15px 20px; }
+        .dashboard-main { padding: 30px 20px; }
+        .footer-content { gap: 15px; flex-direction: column; }
+        .footer-divider { display: none; }
         .confirmation-dialog { padding: 36px 28px; }
         .confirmation-title { font-size: 28px; }
         .inactivity-timer { font-size: 40px; }
+        .action-card { max-width: 280px; padding: 25px 20px; }
       }
     </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   </head>
   <body>
-    <!-- GLOBAL APP LOADER – ensures everything loads before dashboard appears -->
+    <!-- GLOBAL APP LOADER -->
     <div class="app-loader" id="appLoader">
       <img src="https://raw.githubusercontent.com/aesrn30/aesrn/main/Lablogo.png" alt="AESRN Logo" class="app-loader-logo">
       <div class="app-loader-text">Loading Portal...</div>
@@ -571,7 +713,15 @@
             <label class="form-label" for="password">Password</label>
             <input type="password" id="password" class="form-input" placeholder="Enter access password" required autocomplete="off">
           </div>
-          <button type="submit" class="login-button" id="loginButton">Log In</button>
+          <button type="submit" class="login-button" id="loginButton">
+            <span class="button-text">Log In</span>
+          </button>
+          
+          <!-- Small professional "Go to AESRN" link under login form -->
+          <a href="https://aesrn.mudasiribrahim.com/#home" class="go-to-aesrn-link">
+            <i class="fas fa-arrow-left"></i> Go to AESRN Website
+          </a>
+          
           <div class="copyright-full" id="copyrightFull">Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.</div>
           <div class="error-message" id="errorMessage">Invalid email or password.</div>
           <div class="attempts-warning" id="attemptsWarning">Multiple failed attempts may temporarily restrict access.</div>
@@ -579,7 +729,7 @@
       </div>
     </div>
     
-    <!-- DASHBOARD – THREE action cards: 1) View Assignment, 2) Make a Submission, 3) Review Materials -->
+    <!-- DASHBOARD -->
     <div class="dashboard-container" id="dashboardContainer">
       <div class="dashboard-header">
         <div class="dashboard-welcome">
@@ -588,46 +738,52 @@
         <button class="dashboard-logout" id="dashboardLogoutBtn">Log out</button>
       </div>
       
-      <div class="action-grid">
-        <!-- CARD 1: View Assignment (renamed, "kinda" removed) -->
-        <div class="action-card" id="viewAssignmentCard">
-          <div class="action-icon">📋</div>
-          <div class="action-title">View Assignment</div>
-          <div class="action-desc">Check your assigned tasks & materials.</div>
-        </div>
-        <!-- CARD 2: Make a Submission -->
-        <div class="action-card" id="makeSubmissionCard">
-          <div class="action-icon">📄</div>
-          <div class="action-title">Make a Submission</div>
-          <div class="action-desc">Drop your assigned section here.</div>
-        </div>
-        <!-- CARD 3: Review Materials -->
-        <div class="action-card" id="reviewMaterialsCard">
-          <div class="action-icon">📚</div>
-          <div class="action-title">Review Materials</div>
-          <div class="action-desc">Catch up on everything, section by section.</div>
+      <div class="dashboard-main">
+        <div class="action-grid">
+          <!-- CARD 1: View Assignment -->
+          <div class="action-card" id="viewAssignmentCard">
+            <div class="action-icon">📋</div>
+            <div class="action-title">View Assignment</div>
+            <div class="action-desc">Check your assigned tasks, deadlines, and project requirements.</div>
+            <div class="action-badge">Member Tasks</div>
+          </div>
+          <!-- CARD 2: Make a Submission -->
+          <div class="action-card" id="makeSubmissionCard">
+            <div class="action-icon">📄</div>
+            <div class="action-title">Make a Submission</div>
+            <div class="action-desc">Upload your completed work and submit assignments for review.</div>
+            <div class="action-badge">Submit Work</div>
+          </div>
+          <!-- CARD 3: Review Materials -->
+          <div class="action-card" id="reviewMaterialsCard">
+            <div class="action-icon">📚</div>
+            <div class="action-title">Review Materials</div>
+            <div class="action-desc">Access research papers and resources to support your work.</div>
+            <div class="action-badge">Resources</div>
+          </div>
         </div>
       </div>
       
-      <!-- SESSION INFO CARD – white, centered. "Logged in as" and "Logout" items COMPLETELY REMOVED from footer. -->
-      <div class="session-info-card" id="sessionInfoCard">
-        <!-- 👤 Logged in as: and 🚪 Logout items have been removed entirely. -->
-        <!-- Only the following three items remain: email, Ghana time, copyright -->
-        <div class="session-info-item">
-          📧 <a href="mailto:research.aesrn@yahoo.com" style="color: #2A5C82; text-decoration: none; font-weight: 500;">research.aesrn@yahoo.com</a>
-        </div>
-        <div class="session-info-item">
-          🇬🇭 <span class="ghana-time-dash" id="ghanaTimeDashboard">11:30:57</span> GMT
-        </div>
-        <div class="session-info-item copyright-white">
-          © <span id="infoCardYear">2026</span> AESRN. All rights reserved.
+      <!-- Simple full-length footer -->
+      <div class="dashboard-footer">
+        <div class="footer-content">
+          <div class="footer-item">
+            📧 <a href="mailto:research.aesrn@yahoo.com">research.aesrn@yahoo.com</a>
+          </div>
+          <span class="footer-divider">•</span>
+          <div class="footer-item">
+            🇬🇭 <span class="ghana-time-dash" id="ghanaTimeDashboard">11:30:57</span> GMT
+          </div>
+          <span class="footer-divider">•</span>
+          <div class="footer-item footer-copyright">
+            © <span id="infoCardYear">2026</span> AESRN. All rights reserved.
+          </div>
         </div>
       </div>
     </div>
     
-    <!-- FORM CONTAINER – PRELOADED, KEPT ALIVE, NEVER UNLOADED -->
+    <!-- FORM CONTAINER -->
     <div class="form-container" id="formContainer">
-      <!-- LOADING OVERLAY – shown only briefly on first open, then hidden forever -->
       <div class="loading-overlay" id="loadingOverlay" style="display: none;">
         <div class="loading-spinner"></div>
         <div class="loading-text">Opening submission form...</div>
@@ -637,7 +793,6 @@
         ←  Dashboard
       </button>
       
-      <!-- iframe PRELOADED and PERSISTENT: src is set ONCE and never cleared -->
       <iframe 
         src="https://tally.so/r/dWd6gA?transparentBackground=1&formEventsForwarding=1" 
         width="100%" 
@@ -645,7 +800,7 @@
         frameborder="0" 
         marginheight="0" 
         marginwidth="0" 
-        title="AESRN Submission Form (persistent)"
+        title="AESRN Submission Form"
         id="formIframe"
         style="visibility: hidden; background: white;"
         onload="handleIframeLoad()"
@@ -663,15 +818,15 @@
       <div class="logout-countdown">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
     </div>
     
-    <!-- MINIMAL INACTIVITY WARNING (timer from 1:50) -->
+    <!-- INACTIVITY WARNING (for dashboard only) - Updated to 1:30 -->
     <div class="inactivity-warning" id="inactivityWarning">
       <h3>Session timeout</h3>
-      <div class="inactivity-timer" id="inactivityTimer">1:50</div>
-      <p class="inactivity-message">You've been inactive. Stay logged in?</p>
+      <div class="inactivity-timer" id="inactivityTimer">1:30</div>
+      <p class="inactivity-message">You've been inactive. Click continue to stay logged in.</p>
       <button class="keep-active-button" id="keepActiveButton">Continue session</button>
     </div>
     
-    <!-- MINIMAL LOGOUT CONFIRMATION DIALOG -->
+    <!-- LOGOUT CONFIRMATION -->
     <div class="confirmation-overlay" id="confirmationDialog">
       <div class="confirmation-dialog">
         <div class="confirmation-icon">🚪</div>
@@ -707,23 +862,22 @@
       const maxAttempts = 5;
       let currentUserName = "", currentUserEmail = "";
       let ghanaTimeInterval;
+      let isInDashboard = true;
       
-      // session timings: 1 minute inactivity triggers warning, which shows countdown from 1:50 (110 seconds)
-      // but we want: if no activity (mouse click/move) for 60 seconds -> warning appears
-      // warning shows 1:50 countdown, but user can click "continue" to reset timers and hide warning.
-      const INACTIVITY_WARNING_TIME = 60 * 1000;      // 60 seconds -> show warning
-      const SESSION_TIMEOUT = 2 * 60 * 1000;          // full 2 min logout if no activity after warning (but we handle via countdown)
+      // Updated timings: 1 minute inactivity triggers warning with 1:30 countdown
+      const INACTIVITY_WARNING_TIME = 60 * 1000; // 60 seconds -> show warning
+      const WARNING_COUNTDOWN_SECONDS = 90; // 1:30 countdown
+      const SESSION_TIMEOUT = (60 + WARNING_COUNTDOWN_SECONDS) * 1000; // 2:30 total
       
       let inactivityTimer, warningTimer;
       let countdownInterval = null;
-      let warningActive = false;                        // track if warning popup is visible
+      let warningActive = false;
       
       const ACTIVE_SESSIONS_KEY = 'aesrn_active_sessions';
       const CURRENT_SESSION_KEY = 'aesrn_current_session';
       const USER_SESSION_KEY = 'aesrn_user_session';
       const SHOWN_GREETING_KEY = 'aesrn_shown_greeting';
       
-      // Flag to track if iframe has ever been fully loaded – we keep it alive
       let iframeEverLoaded = false;
       
       // ---------- SESSION FUNCTIONS ----------
@@ -792,50 +946,87 @@
         err.style.display = 'block'; email.classList.add('error'); pwd.classList.add('error'); pwd.value = ''; email.focus();
         if (failedAttempts >= 3) warn.style.display = 'block';
         if (failedAttempts >= maxAttempts) {
-          btn.disabled = true; btn.textContent = 'Access Temporarily Restricted';
-          setTimeout(() => { btn.disabled = false; btn.textContent = 'Log In'; warn.style.display = 'none'; failedAttempts = 0; }, 30000);
+          btn.disabled = true; 
+          const btnText = btn.querySelector('.button-text');
+          if (btnText) btnText.textContent = 'Access Restricted';
+          setTimeout(() => { 
+            btn.disabled = false; 
+            if (btnText) btnText.textContent = 'Log In';
+            warn.style.display = 'none'; 
+            failedAttempts = 0; 
+          }, 30000);
         }
         setTimeout(() => { email.classList.remove('error'); pwd.classList.remove('error'); }, 2000);
       }
       
-      // ---------- DASHBOARD – ONLY SHOW AFTER EVERYTHING IS READY ----------
+      // ---------- DASHBOARD ----------
       function showDashboard() {
-        // Update all UI elements
         document.getElementById('dashboardUserName').textContent = currentUserName;
         
-        // Hide login, show dashboard
         document.getElementById('loginContainer').style.display = 'none';
         document.getElementById('dashboardContainer').style.display = 'flex';
-        // Form container stays hidden until user clicks "Make Submission"
         document.getElementById('formContainer').style.display = 'none';
         
         startGhanaTimeUpdates();
-        const sessionId = registerUserSession(currentUserEmail, currentUserName);
+        registerUserSession(currentUserEmail, currentUserName);
         showLoginGreeting();
+        
+        isInDashboard = true;
         resetActivityTimers();
         attachActivityListeners();
       }
       
-      // ---------- IFRAME HANDLING – PERSISTENT, NEVER CLEARED ----------
+      // ---------- LOGIN WITH LOADING ----------
+      function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('password').value;
+        const loginBtn = document.getElementById('loginButton');
+        const btnText = loginBtn.querySelector('.button-text');
+        
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('attemptsWarning').style.display = 'none';
+        
+        if (validateLogin(email, pass)) {
+          // Show loading spinner
+          loginBtn.disabled = true;
+          btnText.innerHTML = '<span class="button-spinner"></span> Logging in...';
+          
+          // Simulate 5 second loading
+          setTimeout(() => {
+            if (isUserAlreadyLoggedIn(email)) {
+              showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
+              // Reset button
+              loginBtn.disabled = false;
+              btnText.textContent = 'Log In';
+            } else {
+              failedAttempts = 0;
+              showDashboard();
+              // Reset button for next time (though dashboard is shown)
+              loginBtn.disabled = false;
+              btnText.textContent = 'Log In';
+            }
+          }, 5000);
+        } else {
+          handleFailedLogin();
+        }
+      }
+      
+      // ---------- IFRAME HANDLING ----------
       function handleIframeLoad() {
         iframeEverLoaded = true;
-        // If form container is visible, hide loading overlay immediately
         if (document.getElementById('formContainer').style.display === 'flex') {
           hideLoading();
         } else {
-          // Background preload: ensure loading overlay stays hidden
           document.getElementById('loadingOverlay').style.display = 'none';
         }
-        // Ensure iframe stays visible when form is active, but we control via visibility
       }
       
       function hideLoading() { 
         const lo = document.getElementById('loadingOverlay');
         if (lo) { 
           lo.style.opacity = '0'; 
-          setTimeout(() => { 
-            lo.style.display = 'none'; 
-          }, 300); 
+          setTimeout(() => { lo.style.display = 'none'; }, 300); 
         }
         const ifr = document.getElementById('formIframe');
         if (ifr) ifr.style.visibility = 'visible';
@@ -849,90 +1040,87 @@
         }
       }
       
-      // Open submission: INSTANTANEOUS on subsequent opens because iframe is always alive
       function openSubmissionForm() {
         document.getElementById('dashboardContainer').style.display = 'none';
         document.getElementById('formContainer').style.display = 'flex';
         
+        // Pause inactivity timer when leaving dashboard
+        isInDashboard = false;
+        clearInactivityTimers();
+        
         const ifr = document.getElementById('formIframe');
         if (ifr) {
-          // If iframe already loaded before, show it instantly with no loader
           if (iframeEverLoaded) {
             ifr.style.visibility = 'visible';
-            // Ensure loading overlay is hidden
             document.getElementById('loadingOverlay').style.display = 'none';
           } else {
-            // First time: show loading overlay
             ifr.style.visibility = 'hidden';
             showLoading();
-            // If iframe somehow already complete, hide loading after tiny delay
-            if (ifr.contentDocument && ifr.contentDocument.readyState === 'complete') {
-              setTimeout(hideLoading, 50);
-            }
           }
         }
       }
       
-      // Review materials
       function openReviewMaterials() {
-        window.open('https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam', '_blank');
+        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam';
       }
       
-      // View Assignment 
       function openViewAssignment() {
-        window.open('https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF', '_blank');
+        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF';
       }
       
-      // Back to dashboard – iframe stays loaded, just hidden from view
       function backToDashboard() {
         document.getElementById('formContainer').style.display = 'none';
         document.getElementById('dashboardContainer').style.display = 'flex';
-        // Do NOT clear iframe src or unload – just hide it visually
+        
+        // Resume inactivity timer when returning to dashboard
+        isInDashboard = true;
+        resetActivityTimers();
+        
         const ifr = document.getElementById('formIframe');
         if (ifr) ifr.style.visibility = 'hidden';
-        // Loading overlay stays hidden for next time
         document.getElementById('loadingOverlay').style.display = 'none';
       }
       
-      // ---------- ACTIVITY TIMERS – new behaviour ----------
-      function resetActivityTimers() {
-        // Clear existing timers and countdown
+      // ---------- INACTIVITY TIMERS (Dashboard only) ----------
+      function clearInactivityTimers() {
         clearTimeout(inactivityTimer);
         clearTimeout(warningTimer);
         if (countdownInterval) {
           clearInterval(countdownInterval);
           countdownInterval = null;
         }
-        
-        // Hide warning if visible
         if (warningActive) {
           hideInactivityWarning();
         }
+      }
+      
+      function resetActivityTimers() {
+        if (!isInDashboard) return;
+        
+        clearInactivityTimers();
         
         updateSessionExpiry();
         
-        // Set timer to show warning after 60 seconds of inactivity (only if warning not active)
+        // Set timer to show warning after 60 seconds of inactivity
         warningTimer = setTimeout(() => {
-          if (!warningActive) {
+          if (isInDashboard && !warningActive) {
             showInactivityWarning();
           }
         }, INACTIVITY_WARNING_TIME);
         
-        // Inactivity timer for full logout (set for a bit longer than warning; but we handle logout via countdown)
-        // We'll rely on countdown to trigger logout, but keep a safety timer
+        // Fallback timer for safety
         inactivityTimer = setTimeout(() => {
-          // This is a fallback in case countdown fails; but we'll manage via countdown
-          if (warningActive) {
+          if (isInDashboard && warningActive) {
             logoutDueToInactivity();
           }
-        }, SESSION_TIMEOUT + 5000); // slightly longer than countdown max
+        }, SESSION_TIMEOUT + 2000);
       }
       
       function showInactivityWarning() {
-        if (warningActive) return; // already shown
+        if (warningActive || !isInDashboard) return;
         warningActive = true;
         document.getElementById('inactivityWarning').style.display = 'block';
-        startInactivityCountdown(110); // 110 seconds = 1:50
+        startInactivityCountdown(WARNING_COUNTDOWN_SECONDS); // 90 seconds (1:30)
       }
       
       function hideInactivityWarning() {
@@ -954,7 +1142,9 @@
           timerEl.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
           if (seconds <= 0) {
             clearInterval(countdownInterval);
-            logoutDueToInactivity();
+            if (isInDashboard) {
+              logoutDueToInactivity();
+            }
           }
         }
         updateDisplay();
@@ -965,25 +1155,30 @@
       }
       
       function logoutDueToInactivity() { 
-        if (countdownInterval) clearInterval(countdownInterval);
-        warningActive = false;
+        clearInactivityTimers();
         showCustomAlert('Session Expired', 'Session expired due to inactivity.', 'info'); 
         logout(); 
       }
       
-      // Continue session button: simply reset timers (hide warning, restart)
       function continueSession() {
-        resetActivityTimers(); // this hides warning and clears timers, then sets new ones
-        // Also update session expiry
-        updateSessionExpiry();
+        if (isInDashboard) {
+          resetActivityTimers();
+          updateSessionExpiry();
+        }
       }
       
       function updateSessionExpiry() {
         if (currentUserEmail) {
           const sessions = getActiveSessions();
-          if (sessions[currentUserEmail]) { sessions[currentUserEmail].expiry = Date.now() + SESSION_TIMEOUT; saveActiveSessions(sessions); }
+          if (sessions[currentUserEmail]) { 
+            sessions[currentUserEmail].expiry = Date.now() + SESSION_TIMEOUT; 
+            saveActiveSessions(sessions); 
+          }
           const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
-          if (userSession.email) { userSession.expiry = Date.now() + SESSION_TIMEOUT; localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession)); }
+          if (userSession.email) { 
+            userSession.expiry = Date.now() + SESSION_TIMEOUT; 
+            localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession)); 
+          }
         }
       }
       
@@ -996,32 +1191,8 @@
       }
       
       function trackUserActivity() { 
-        // Only reset timers if warning is not active? 
-        // But we want to reset if user does ANY activity, including while warning is shown.
-        // However, if warning is shown, we don't want a simple mouse move to dismiss it – only "Continue" button does.
-        // So we reset timers, but if warning is active we do NOT hide it automatically.
-        // Instead, we refresh the underlying timers but keep warning visible.
-        
-        // Clear the existing timers and set new ones, but if warning is active, we keep it.
-        clearTimeout(inactivityTimer);
-        clearTimeout(warningTimer);
-        
-        // Only set new timers if warning is not active, otherwise we let the countdown continue.
-        if (!warningActive) {
-          warningTimer = setTimeout(() => {
-            if (!warningActive) {
-              showInactivityWarning();
-            }
-          }, INACTIVITY_WARNING_TIME);
-          
-          inactivityTimer = setTimeout(() => {
-            if (warningActive) {
-              logoutDueToInactivity();
-            }
-          }, SESSION_TIMEOUT + 5000);
-        } else {
-          // If warning active, still update session expiry but don't interfere with countdown
-          updateSessionExpiry();
+        if (isInDashboard) {
+          resetActivityTimers();
         }
       }
       
@@ -1059,23 +1230,18 @@
         }, 5000);
       }
       
-      // ---------- LOGOUT – preserve iframe, do not unload ----------
+      // ---------- LOGOUT ----------
       function logout() {
         if (currentUserEmail) removeUserSession(currentUserEmail);
-        clearTimeout(inactivityTimer); clearTimeout(warningTimer); 
-        if (countdownInterval) clearInterval(countdownInterval);
-        warningActive = false;
-        hideInactivityWarning(); stopGhanaTimeUpdates();
+        clearInactivityTimers();
+        stopGhanaTimeUpdates();
         detachActivityListeners();
         document.getElementById('confirmationDialog').style.display = 'none'; 
         document.getElementById('loginGreeting').style.display = 'none';
         
-        // Hide containers
         document.getElementById('dashboardContainer').style.display = 'none';
         document.getElementById('formContainer').style.display = 'none';
         
-        // Do NOT clear iframe src – keep it preloaded for next login
-        // Just hide it
         const ifr = document.getElementById('formIframe');
         if (ifr) ifr.style.visibility = 'hidden';
         
@@ -1083,6 +1249,7 @@
         document.getElementById('email').value = ''; document.getElementById('password').value = ''; 
         document.getElementById('email').focus();
         currentUserName = ''; currentUserEmail = ''; failedAttempts = 0; 
+        isInDashboard = true;
         
         showLogoutNotification();
       }
@@ -1111,7 +1278,6 @@
           const activeSession = sessions[userSession.email];
           if (activeSession && activeSession.sessionId === userSession.sessionId) {
             currentUserEmail = userSession.email; currentUserName = userSession.name; setCurrentSessionId(userSession.sessionId);
-            // Don't show dashboard yet – wait for app loader to finish
             return true;
           }
         }
@@ -1119,23 +1285,19 @@
         return false;
       }
       
-      // ---------- INIT – FULL LOAD THEN DASHBOARD (if session) OR LOGIN ----------
+      // ---------- INIT ----------
       document.addEventListener('DOMContentLoaded', function() {
         updateAllCopyrightYears();
         
-        // Pre-hide iframe visibility
         document.getElementById('formIframe').style.visibility = 'hidden';
         document.getElementById('loadingOverlay').style.display = 'none';
         
-        // Simulate full app load – wait 1.5 seconds to ensure everything is ready
         setTimeout(function() {
-          // Fade out app loader
           const loader = document.getElementById('appLoader');
           loader.style.opacity = '0';
           setTimeout(function() {
             loader.style.display = 'none';
             
-            // Now decide: existing session or login
             if (checkExistingSession()) {
               showDashboard();
             } else {
@@ -1144,29 +1306,18 @@
               if (!getCurrentSessionId()) setCurrentSessionId(generateSessionId());
             }
           }, 500);
-        }, 1500); // Ensures full load before dashboard appears
+        }, 1500);
       });
       
       // ---------- EVENT LISTENERS ----------
-      document.getElementById('loginForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value, pass = document.getElementById('password').value;
-        document.getElementById('errorMessage').style.display = 'none'; document.getElementById('attemptsWarning').style.display = 'none';
-        if (validateLogin(email, pass)) {
-          if (isUserAlreadyLoggedIn(email)) showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
-          failedAttempts = 0; 
-          showDashboard();
-        } else handleFailedLogin();
-      });
+      document.getElementById('loginForm').addEventListener('submit', handleLogin);
       
-      // Dashboard actions – REORDERED: View Assignment first, then Make Submission, then Review Materials
       document.getElementById('viewAssignmentCard').addEventListener('click', openViewAssignment);
       document.getElementById('makeSubmissionCard').addEventListener('click', openSubmissionForm);
       document.getElementById('reviewMaterialsCard').addEventListener('click', openReviewMaterials);
       
       document.getElementById('backToDashboardBtn').addEventListener('click', backToDashboard);
       
-      // Logout triggers – only dashboard logout button now (footer item removed)
       document.getElementById('dashboardLogoutBtn').addEventListener('click', function() { 
         document.getElementById('confirmationDialog').style.display = 'flex'; 
       });
@@ -1176,7 +1327,6 @@
         document.getElementById('confirmationDialog').style.display = 'none'; 
       });
       
-      // Continue session button (inactivity warning)
       document.getElementById('keepActiveButton').addEventListener('click', function() {
         continueSession();
       });
@@ -1189,12 +1339,15 @@
       setInterval(function() {
         if (currentUserEmail) {
           const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
-          const sessions = getActiveSessions(); const activeSession = sessions[currentUserEmail];
-          if (!activeSession || activeSession.sessionId !== userSession.sessionId) { showCustomAlert('Session Ended', 'You logged in from another device.', 'info'); logout(); }
+          const sessions = getActiveSessions(); 
+          const activeSession = sessions[currentUserEmail];
+          if (!activeSession || activeSession.sessionId !== userSession.sessionId) { 
+            showCustomAlert('Session Ended', 'You logged in from another device.', 'info'); 
+            logout(); 
+          }
         }
       }, 30000);
       
-      // Clean old greeting records
       function cleanOldGreetingRecords() {
         const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}');
         const oneWeek = Date.now() - 7*24*60*60*1000;
