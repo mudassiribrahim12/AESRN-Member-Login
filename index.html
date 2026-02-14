@@ -504,7 +504,7 @@
         border: 1px solid rgba(255,255,255,0.2);
       }
       
-      /* ---------- INACTIVITY WARNING - Updated to 1:30 ---------- */
+      /* ---------- INACTIVITY WARNING - Only closes with Continue button ---------- */
       .inactivity-warning {
         display: none;
         position: fixed;
@@ -517,13 +517,28 @@
         padding: 40px 36px;
         width: 90%;
         max-width: 420px;
-        z-index: 4000;
+        z-index: 10000; /* Higher than everything */
         text-align: center;
         box-shadow: 0 40px 70px -15px rgba(0,0,0,0.4);
         border: 1px solid rgba(255,255,255,0.3);
-        backdrop-filter: blur(10px);
         animation: fadeScale 0.25s ease-out;
+        pointer-events: auto; /* Ensures clicks only on dialog */
       }
+      
+      /* Overlay behind warning - prevents interaction with dashboard */
+      .inactivity-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        z-index: 9999;
+        pointer-events: none; /* Allows clicks to pass through to warning only */
+      }
+      
       @keyframes fadeScale {
         from { opacity: 0.8; transform: translate(-50%, -50%) scale(0.96); }
         to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
@@ -565,6 +580,7 @@
         width: 100%;
         transition: all 0.3s ease;
         box-shadow: 0 10px 25px rgba(102,126,234,0.3);
+        pointer-events: auto;
       }
       .keep-active-button:hover {
         transform: translateY(-3px) scale(1.02);
@@ -744,21 +760,21 @@
           <div class="action-card" id="viewAssignmentCard">
             <div class="action-icon">📋</div>
             <div class="action-title">View Assignment</div>
-            <div class="action-desc">Check your assigned tasks, deadlines, and project requirements.</div>
+            <div class="action-desc">Check your assigned tasks & materials.</div>
             <div class="action-badge">Member Tasks</div>
           </div>
           <!-- CARD 2: Make a Submission -->
           <div class="action-card" id="makeSubmissionCard">
             <div class="action-icon">📄</div>
             <div class="action-title">Make a Submission</div>
-            <div class="action-desc">Upload your completed work and submit assignments for review.</div>
+            <div class="action-desc">Drop your assigned section here using the form.</div>
             <div class="action-badge">Submit Work</div>
           </div>
           <!-- CARD 3: Review Materials -->
           <div class="action-card" id="reviewMaterialsCard">
             <div class="action-icon">📚</div>
             <div class="action-title">Review Materials</div>
-            <div class="action-desc">Access research papers and resources to support your work.</div>
+            <div class="action-desc">Catch up on everything, section by section.</div>
             <div class="action-badge">Resources</div>
           </div>
         </div>
@@ -818,7 +834,8 @@
       <div class="logout-countdown">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
     </div>
     
-    <!-- INACTIVITY WARNING (for dashboard only) - Updated to 1:30 -->
+    <!-- INACTIVITY WARNING - Background overlay and dialog -->
+    <div class="inactivity-overlay" id="inactivityOverlay"></div>
     <div class="inactivity-warning" id="inactivityWarning">
       <h3>Session timeout</h3>
       <div class="inactivity-timer" id="inactivityTimer">1:30</div>
@@ -1118,17 +1135,30 @@
       
       function showInactivityWarning() {
         if (warningActive || !isInDashboard) return;
+        
+        // Show warning with overlay - ONLY "Continue session" button can close it
         warningActive = true;
+        document.getElementById('inactivityOverlay').style.display = 'block';
         document.getElementById('inactivityWarning').style.display = 'block';
+        
+        // Stop tracking user activity while warning is active
+        detachActivityListeners();
+        
         startInactivityCountdown(WARNING_COUNTDOWN_SECONDS); // 90 seconds (1:30)
       }
       
       function hideInactivityWarning() {
         warningActive = false;
+        document.getElementById('inactivityOverlay').style.display = 'none';
         document.getElementById('inactivityWarning').style.display = 'none';
         if (countdownInterval) {
           clearInterval(countdownInterval);
           countdownInterval = null;
+        }
+        
+        // Re-attach activity listeners only if still in dashboard
+        if (isInDashboard) {
+          attachActivityListeners();
         }
       }
       
@@ -1162,6 +1192,7 @@
       
       function continueSession() {
         if (isInDashboard) {
+          hideInactivityWarning();
           resetActivityTimers();
           updateSessionExpiry();
         }
@@ -1191,7 +1222,8 @@
       }
       
       function trackUserActivity() { 
-        if (isInDashboard) {
+        // Only track activity if warning is not active
+        if (isInDashboard && !warningActive) {
           resetActivityTimers();
         }
       }
@@ -1238,6 +1270,8 @@
         detachActivityListeners();
         document.getElementById('confirmationDialog').style.display = 'none'; 
         document.getElementById('loginGreeting').style.display = 'none';
+        document.getElementById('inactivityOverlay').style.display = 'none';
+        document.getElementById('inactivityWarning').style.display = 'none';
         
         document.getElementById('dashboardContainer').style.display = 'none';
         document.getElementById('formContainer').style.display = 'none';
@@ -1250,6 +1284,7 @@
         document.getElementById('email').focus();
         currentUserName = ''; currentUserEmail = ''; failedAttempts = 0; 
         isInDashboard = true;
+        warningActive = false;
         
         showLogoutNotification();
       }
@@ -1291,6 +1326,8 @@
         
         document.getElementById('formIframe').style.visibility = 'hidden';
         document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('inactivityOverlay').style.display = 'none';
+        document.getElementById('inactivityWarning').style.display = 'none';
         
         setTimeout(function() {
           const loader = document.getElementById('appLoader');
@@ -1327,6 +1364,7 @@
         document.getElementById('confirmationDialog').style.display = 'none'; 
       });
       
+      // ONLY this button closes the inactivity warning
       document.getElementById('keepActiveButton').addEventListener('click', function() {
         continueSession();
       });
