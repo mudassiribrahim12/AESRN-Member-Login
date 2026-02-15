@@ -209,12 +209,12 @@
         background: #fff1e0; 
       }
       
-      /* ---------- DASHBOARD – MODERN CARDS, CLEAN BACKGROUND ---------- */
+      /* ---------- DASHBOARD – MODERN CARDS, AESRN GRADIENT BACKGROUND ---------- */
       .dashboard-container {
         flex: 1;
         display: none;
         flex-direction: column;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
         width: 100%;
         min-height: 100vh;
       }
@@ -242,16 +242,16 @@
         color: #000000; 
       }
       .dashboard-welcome span { 
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
         color: white; 
         padding: 8px 20px; 
         border-radius: 40px; 
         font-size: 15px; 
         font-weight: 600; 
-        box-shadow: 0 4px 15px rgba(102,126,234,0.3);
+        box-shadow: 0 4px 15px rgba(42,92,130,0.3);
       }
       .dashboard-logout { 
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        background: #E63946;
         color: white; 
         border: none; 
         border-radius: 40px; 
@@ -260,11 +260,12 @@
         cursor: pointer; 
         font-size: 14px;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 25px rgba(245,87,108,0.3);
+        box-shadow: 0 10px 25px rgba(230,57,70,0.3);
       }
       .dashboard-logout:hover { 
+        background: #2A5C82;
         transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 20px 35px rgba(245,87,108,0.4);
+        box-shadow: 0 20px 35px rgba(42,92,130,0.4);
       }
       
       .dashboard-main {
@@ -321,15 +322,15 @@
         align-items: center; 
         justify-content: center; 
         border-radius: 50%; 
-        color: #667eea; 
+        color: #2A5C82; 
         transition: all 0.3s ease;
-        border: 1px solid rgba(102,126,234,0.1);
+        border: 1px solid rgba(42,92,130,0.1);
       }
       
       /* Icon changes slightly on hover but card stays white */
       .action-card:hover .action-icon {
         background: #e8edff;
-        color: #667eea;
+        color: #1A9AA0;
         transform: scale(1.02);
       }
       
@@ -353,18 +354,18 @@
       .action-badge { 
         margin-top: 5px; 
         background: #f0f4ff;
-        color: #667eea; 
+        color: #2A5C82; 
         padding: 6px 18px; 
         border-radius: 50px; 
         font-size: 13px; 
         font-weight: 600;
-        border: 1px solid rgba(102,126,234,0.2);
+        border: 1px solid rgba(42,92,130,0.2);
         transition: all 0.3s ease;
       }
       
       .action-card:hover .action-badge {
         background: #e8edff;
-        color: #667eea;
+        color: #1A9AA0;
       }
       
       /* Simple, full-length footer */
@@ -422,7 +423,7 @@
         display: none;
         width: 100%;
         min-height: 100vh;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
       }
       iframe { 
         position: absolute; 
@@ -441,7 +442,7 @@
         left: 20px;
         z-index: 2000;
         background: white;
-        color: #667eea;
+        color: #2A5C82;
         border: none;
         padding: 12px 26px;
         border-radius: 50px;
@@ -455,10 +456,10 @@
         transition: all 0.3s ease;
       }
       .back-to-dashboard:hover { 
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
         color: white;
         transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 25px 45px -10px rgba(102,126,234,0.5);
+        box-shadow: 0 25px 45px -10px rgba(42,92,130,0.5);
       }
       
       /* ---------- LOADING OVERLAY ---------- */
@@ -479,14 +480,14 @@
         width: 50px; 
         height: 50px; 
         border: 4px solid #f3f3f3; 
-        border-top: 4px solid #667eea;
+        border-top: 4px solid #2A5C82;
         border-radius: 50%; 
         animation: spin 1s linear infinite; 
         margin-bottom: 20px;
       }
       .loading-text {
         font-size: 16px;
-        color: #667eea;
+        color: #2A5C82;
         font-weight: 500;
       }
       @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
@@ -526,7 +527,7 @@
         padding: 20px 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
         z-index: 2000; display: none; align-items: center; gap: 15px; 
         animation: slideInRight 0.5s ease; max-width: 350px; 
-        border-left: 5px solid #667eea;
+        border-left: 5px solid #2A5C82;
       }
       .logout-notification { 
         position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
@@ -581,19 +582,19 @@
         font-weight: 600;
         margin-bottom: 16px;
         letter-spacing: -0.3px;
-        color: #667eea;
+        color: #2A5C82;
       }
       .inactivity-timer {
         font-size: 48px;
         font-weight: 700;
         font-family: 'Courier New', monospace;
-        background: rgba(102,126,234,0.08);
+        background: rgba(42,92,130,0.08);
         display: inline-block;
         padding: 16px 28px;
         border-radius: 60px;
         margin: 20px 0 18px;
-        color: #f5576c;
-        border: 1px solid rgba(245,87,108,0.2);
+        color: #E63946;
+        border: 1px solid rgba(230,57,70,0.2);
       }
       .inactivity-message {
         font-size: 17px;
@@ -602,7 +603,7 @@
         line-height: 1.5;
       }
       .keep-active-button {
-        background: linear-gradient(135deg, #667eea, #764ba2);
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
         color: white;
         border: none;
         border-radius: 60px;
@@ -612,12 +613,13 @@
         cursor: pointer;
         width: 100%;
         transition: all 0.3s ease;
-        box-shadow: 0 10px 25px rgba(102,126,234,0.3);
+        box-shadow: 0 10px 25px rgba(42,92,130,0.3);
         pointer-events: auto;
       }
       .keep-active-button:hover {
+        background: linear-gradient(135deg, #1A9AA0, #2A5C82);
         transform: translateY(-3px) scale(1.02);
-        box-shadow: 0 20px 35px rgba(102,126,234,0.4);
+        box-shadow: 0 20px 35px rgba(42,92,130,0.4);
       }
       
       /* ---------- LOGOUT CONFIRMATION ---------- */
@@ -655,7 +657,7 @@
       .confirmation-icon {
         font-size: 44px;
         margin-bottom: 24px;
-        background: rgba(102,126,234,0.08);
+        background: rgba(42,92,130,0.08);
         width: 100px;
         height: 100px;
         display: flex;
@@ -664,14 +666,14 @@
         border-radius: 50%;
         margin-left: auto;
         margin-right: auto;
-        color: #667eea;
-        border: 1px solid rgba(102,126,234,0.2);
+        color: #2A5C82;
+        border: 1px solid rgba(42,92,130,0.2);
       }
       
       .confirmation-title { 
         font-size: 30px; 
         font-weight: 600; 
-        color: #667eea; 
+        color: #2A5C82; 
         margin-bottom: 12px;
         letter-spacing: -0.4px;
       }
@@ -709,17 +711,17 @@
         color: #333333;
       }
       .confirm-button:hover {
-        background: rgba(102,126,234,0.05);
-        border-color: #667eea;
+        background: rgba(42,92,130,0.05);
+        border-color: #2A5C82;
       }
       
       .confirm-yes {
-        background: linear-gradient(135deg, #f093fb, #f5576c);
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
         border: none;
         color: white;
       }
       .confirm-yes:hover {
-        background: linear-gradient(135deg, #f5576c, #f093fb);
+        background: linear-gradient(135deg, #1A9AA0, #2A5C82);
       }
       
       @media (max-width: 768px) {
