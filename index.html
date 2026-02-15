@@ -74,6 +74,39 @@
         box-shadow: 0 0 0 4px rgba(42,92,130,0.15);
       }
       
+      /* Password wrapper for eye icon */
+      .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .password-wrapper .form-input {
+        padding-right: 48px; /* space for the eye */
+      }
+      .toggle-password {
+        position: absolute;
+        right: 14px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #757575;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        width: 28px;
+        height: 28px;
+        transition: color 0.2s;
+      }
+      .toggle-password:hover {
+        color: #2A5C82;
+      }
+      .toggle-password:focus {
+        outline: none;
+        color: #2A5C82;
+      }
+      
       /* Login button with loading state */
       .login-button { 
         width: 100%; 
@@ -727,7 +760,13 @@
           </div>
           <div class="form-group">
             <label class="form-label" for="password">Password</label>
-            <input type="password" id="password" class="form-input" placeholder="Enter access password" required autocomplete="off">
+            <!-- Password wrapper with eye toggle -->
+            <div class="password-wrapper">
+              <input type="password" id="password" class="form-input" placeholder="Enter access password" required autocomplete="off">
+              <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
+                <i class="far fa-eye" id="toggleIcon"></i>
+              </button>
+            </div>
           </div>
           <button type="submit" class="login-button" id="loginButton">
             <span class="button-text">Log In</span>
@@ -1319,6 +1358,30 @@
         if (userSession.email) removeUserSession(userSession.email);
         return false;
       }
+
+      // ---------- PASSWORD TOGGLE (EYE ICON) ----------
+      function setupPasswordToggle() {
+        const toggleBtn = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (toggleBtn && passwordInput && toggleIcon) {
+          toggleBtn.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle the eye / eye-slash icon
+            if (type === 'text') {
+              toggleIcon.classList.remove('fa-eye');
+              toggleIcon.classList.add('fa-eye-slash');
+            } else {
+              toggleIcon.classList.remove('fa-eye-slash');
+              toggleIcon.classList.add('fa-eye');
+            }
+          });
+        }
+      }
       
       // ---------- INIT ----------
       document.addEventListener('DOMContentLoaded', function() {
@@ -1328,6 +1391,9 @@
         document.getElementById('loadingOverlay').style.display = 'none';
         document.getElementById('inactivityOverlay').style.display = 'none';
         document.getElementById('inactivityWarning').style.display = 'none';
+        
+        // Initialize password toggle
+        setupPasswordToggle();
         
         setTimeout(function() {
           const loader = document.getElementById('appLoader');
