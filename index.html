@@ -539,7 +539,7 @@
         border: 1px solid rgba(255,255,255,0.2);
       }
       
-      /* ---------- INACTIVITY WARNING - Only closes with Continue button ---------- */
+      /* ---------- INACTIVITY WARNING - Blocks all clicks behind it ---------- */
       .inactivity-warning {
         display: none;
         position: fixed;
@@ -571,7 +571,7 @@
         background: rgba(0,0,0,0.5);
         backdrop-filter: blur(5px);
         z-index: 9999;
-        pointer-events: none; /* Allows clicks to pass through to warning only */
+        pointer-events: all; /* CAPTURES all clicks, blocking them from reaching cards */
       }
       
       @keyframes fadeScale {
@@ -1110,6 +1110,9 @@
       }
       
       function openSubmissionForm() {
+        // Block if inactivity warning is active
+        if (warningActive) return;
+        
         document.getElementById('dashboardContainer').style.display = 'none';
         document.getElementById('formContainer').style.display = 'flex';
         
@@ -1130,10 +1133,14 @@
       }
       
       function openReviewMaterials() {
+        // Block if inactivity warning is active
+        if (warningActive) return;
         window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam';
       }
       
       function openViewAssignment() {
+        // Block if inactivity warning is active
+        if (warningActive) return;
         window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF';
       }
       
