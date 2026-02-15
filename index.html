@@ -868,7 +868,7 @@
     <!-- NOTIFICATIONS / MODALS -->
     <div class="login-greeting-notification" id="loginGreeting">
       <div class="greeting-icon" id="greetingIcon">👋</div>
-      <div class="greeting-content"><h4 id="greetingText">Welcome</h4><p id="userGreeting"></p></div>
+      <div class="greeting-content"><h4 id="greetingText">Greetings</h4><p id="userGreeting"></p></div>
     </div>
     <div class="logout-notification" id="logoutNotification">
       <div class="logout-spinner"></div>
@@ -906,13 +906,19 @@
         document.getElementById('infoCardYear') && (document.getElementById('infoCardYear').textContent = currentYear);
       }
 
-      // ---------- USER CREDENTIALS ----------
+      // ---------- USER CREDENTIALS (UPDATED FULL NAMES) ----------
       const userMap = {
-        "malikseidu4@gmail.com": "Abdul-Malik", "Malikseidu4@gmail.com": "Abdul-Malik",
-        "abdul0247080685@gmail.com": "Abdul Latif", "Abdul0247080685@gmail.com": "Abdul Latif",
-        "ednadie93@gmail.com": "Edna", "Ednadie93@gmail.com": "Edna",
-        "issahaqalhassan26@gmail.com": "Alhassan", "Issahaqalhassan26@gmail.com": "Alhassan",
-        "mudassiribrahim30@gmail.com": "Mudasir", "Mudassiribrahim30@gmail.com": "Mudasir"
+        // Format: email (case-insensitive) : "Full Name"
+        "malikseidu4@gmail.com": "Abdul-Malik Seidu",
+        "Malikseidu4@gmail.com": "Abdul-Malik Seidu",
+        "abdul0247080685@gmail.com": "Abdul Latif Abdul Rahman",
+        "Abdul0247080685@gmail.com": "Abdul Latif Abdul Rahman",
+        "ednadie93@gmail.com": "Edna Die",
+        "Ednadie93@gmail.com": "Edna Die",
+        "issahaqalhassan26@gmail.com": "Alhassan Issahaq",
+        "Issahaqalhassan26@gmail.com": "Alhassan Issahaq",
+        "mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim",
+        "Mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim"
       };
       const correctPassword = "Scholar123";
       
@@ -994,7 +1000,11 @@
       function validateLogin(email, password) {
         const normEmail = email.trim(), normPass = password.trim();
         const key = Object.keys(userMap).find(k => k.toLowerCase() === normEmail.toLowerCase());
-        if (key) { currentUserName = userMap[key]; currentUserEmail = key; return normPass === correctPassword; }
+        if (key) { 
+          currentUserName = userMap[key]; // Full name as per updated map
+          currentUserEmail = key; 
+          return normPass === correctPassword; 
+        }
         return false;
       }
       
@@ -1284,17 +1294,20 @@
         document.removeEventListener('scroll', trackUserActivity);
       }
       
-      // ---------- GREETING ----------
+      // ---------- GREETING (only first login per session) ----------
       function getGreeting() { const h = new Date().getHours(); if (h<12) return "Good Morning"; if (h<17) return "Good Afternoon"; return "Good Evening"; }
       function getGreetingIcon() { const h = new Date().getHours(); if (h<12) return "🌅"; if (h<17) return "☀️"; return "🌙"; }
       function showLoginGreeting() {
         const sessionId = getCurrentSessionId();
+        // Only show if greeting hasn't been shown for this session (ensures no greeting on reload)
         if (hasGreetingBeenShown(sessionId)) return;
-        document.getElementById('greetingText').textContent = getGreeting();
+        
+        document.getElementById('greetingText').textContent = 'Greetings';
         document.getElementById('greetingIcon').textContent = getGreetingIcon();
         document.getElementById('userGreeting').textContent = `${getGreeting()}, ${currentUserName}!`;
         document.getElementById('loginGreeting').style.display = 'flex';
-        markGreetingAsShown(sessionId);
+        markGreetingAsShown(sessionId); // Mark shown immediately so reload doesn't show it again
+        
         setTimeout(() => { 
           document.getElementById('loginGreeting').style.animation = 'fadeOutUp 0.5s ease';
           setTimeout(() => { 
