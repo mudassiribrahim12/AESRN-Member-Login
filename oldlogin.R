@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <title>African Emerging Scholars Research Network (AESRN) | Member Portal</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png" type="image/png">
+    <link itemprop="image" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png">
+    <meta property="og:logo" content="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png">
+    <meta name="twitter:logo" content="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png">
+      <meta name="google-site-verification" content="6zzEO7tBZ4x_xpC3utqGKn3jJekDVz2EkfZ7rCODSqQ" />
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/favicon-16x16.png">
+    <link rel="manifest" href="https://raw.githubusercontent.com/aesrn30/aesrn/main/site.webmanifest">
+    <script async src="https://tally.so/widgets/embed.js"></script>
+    <style type="text/css">
+      /* ---------- RESET & BASE ---------- */
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      
+      html, body { 
+        height: 100%; 
+        width: 100%;
+        overflow-x: hidden;
+      }
+      
+      body { 
+        display: flex; 
+        flex-direction: column; 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+        color: #000000;
+        -webkit-font-smoothing: antialiased;
+      }
+      
+      /* ---------- LOGIN CONTAINER - AESRN GRADIENT ---------- */
+      .login-container {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 24px;
+        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
+        width: 100%;
+        min-height: 100vh;
+        position: relative;
+      }
+      
+      .login-box {
+        background: white;
+        border-radius: 24px;
+        padding: 40px 32px 32px 32px;
+        width: 100%;
+        max-width: 420px;
+        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+      }
+      .login-header { text-align: center; margin-bottom: 32px; }
+      .login-logo-circle { width: 100px; height: 100px; margin: 0 auto 20px auto; display: flex; align-items: center; justify-content: center; }
+      .logo-circle-image { width: 100%; height: 100%; object-fit: contain; }
+      .login-title { font-size: 24px; font-weight: 600; color: #2A5C82; margin-bottom: 8px; }
+      .login-subtitle { color: #000000; font-size: 14px; opacity: 0.8; font-weight: 400; }
+      .form-group { margin-bottom: 20px; }
+      .form-label { display: block; margin-bottom: 6px; font-weight: 500; font-size: 14px; color: #000000; }
+      .form-input { 
+        width: 100%; 
+        padding: 14px 16px; 
+        border: 1px solid #d1d1d1; 
+        border-radius: 12px; 
+        font-size: 15px;
+        transition: all 0.3s ease;
+      }
+      .form-input:focus { 
+        outline: none; 
+        border-color: #2A5C82; 
+        box-shadow: 0 0 0 4px rgba(42,92,130,0.15);
+      }
+      
+      /* Password wrapper for eye icon */
+      .password-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+      }
+      .password-wrapper .form-input {
+        padding-right: 48px; /* space for the eye */
+      }
+      .toggle-password {
+        position: absolute;
+        right: 14px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-size: 20px;
+        color: #757575;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0;
+        width: 28px;
+        height: 28px;
+        transition: color 0.2s;
+      }
+      .toggle-password:hover {
+        color: #2A5C82;
+      }
+      .toggle-password:focus {
+        outline: none;
+        color: #2A5C82;
+      }
+      
+      /* Login button with loading state */
+      .login-button { 
+        width: 100%; 
+        padding: 14px 18px; 
+        background: #E63946; 
+        color: white; 
+        border: none; 
+        border-radius: 12px; 
+        font-size: 16px; 
+        font-weight: 600; 
+        cursor: pointer; 
+        margin-top: 16px;
+        transition: all 0.3s ease;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 52px;
+      }
+      .login-button:hover:not(:disabled) { 
+        background: #2A5C82; 
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px rgba(230,57,70,0.4);
+      }
+      .login-button:disabled {
+        opacity: 0.7;
+        cursor: not-allowed;
+        background: #E63946;
+      }
+      
+      /* Loading spinner */
+      .button-spinner {
+        display: inline-block;
+        width: 22px;
+        height: 22px;
+        border: 3px solid rgba(255,255,255,0.3);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: button-spin 0.8s linear infinite;
+        margin-right: 10px;
+      }
+      @keyframes button-spin {
+        to { transform: rotate(360deg); }
+      }
+      
+      /* Go to AESRN link - black text */
+      .go-to-aesrn-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 24px;
+        padding-top: 16px;
+        border-top: 1px solid #eaeef2;
+        text-align: center;
+        font-size: 14px;
+        font-weight: 500;
+        color: #000000;
+        text-decoration: none;
+        transition: all 0.2s ease;
+        width: 100%;
+        letter-spacing: 0.2px;
+        opacity: 0.8;
+      }
+      .go-to-aesrn-link i {
+        font-size: 14px;
+        color: #2A5C82;
+        transition: transform 0.2s ease;
+      }
+      .go-to-aesrn-link:hover {
+        color: #2A5C82;
+        opacity: 1;
+      }
+      .go-to-aesrn-link:hover i {
+        transform: translateX(-4px);
+        color: #E63946;
+      }
+      
+      .copyright-full { 
+        text-align: center; 
+        margin-top: 24px; 
+        font-size: 12px; 
+        color: #000000; 
+        opacity: 0.6;
+        border-top: 1px solid #eaeef2; 
+        padding-top: 16px; 
+      }
+      .error-message, .attempts-warning { 
+        color: #d32f2f; 
+        font-size: 13px; 
+        margin-top: 16px; 
+        text-align: center; 
+        display: none; 
+        padding: 12px; 
+        background: #ffebee; 
+        border-radius: 12px; 
+      }
+      .attempts-warning { 
+        color: #b85a00; 
+        background: #fff1e0; 
+      }
+      
+      /* ---------- DASHBOARD – MODERN CARDS, AESRN GRADIENT BACKGROUND ---------- */
+      .dashboard-container {
+        flex: 1;
+        display: none;
+        flex-direction: column;
+        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
+        width: 100%;
+        min-height: 100vh;
+      }
+      
+      .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: rgba(255,255,255,0.95);
+        backdrop-filter: blur(10px);
+        padding: 20px 35px;
+        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        margin: 30px 30px 0 30px;
+        border-radius: 20px;
+        flex-wrap: wrap;
+        gap: 15px;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+      .dashboard-welcome { 
+        display: flex; 
+        align-items: center; 
+        gap: 15px; 
+        font-size: 18px; 
+        font-weight: 500; 
+        color: #000000; 
+      }
+      .dashboard-welcome span { 
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
+        color: white; 
+        padding: 8px 20px; 
+        border-radius: 40px; 
+        font-size: 15px; 
+        font-weight: 600; 
+        box-shadow: 0 4px 15px rgba(42,92,130,0.3);
+      }
+      .dashboard-logout { 
+        background: #E63946;
+        color: white; 
+        border: none; 
+        border-radius: 40px; 
+        padding: 12px 30px; 
+        font-weight: 600; 
+        cursor: pointer; 
+        font-size: 14px;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(230,57,70,0.3);
+      }
+      .dashboard-logout:hover { 
+        background: #2A5C82;
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 20px 35px rgba(42,92,130,0.4);
+      }
+      
+      .dashboard-main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 40px 30px;
+      }
+      
+      .action-grid {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 25px;
+        justify-content: center;
+        align-items: stretch;
+        max-width: 1100px;
+        margin: 0 auto 40px auto;
+        width: 100%;
+      }
+      
+      /* Modern card design - smaller, professional size, stays white on hover */
+      .action-card {
+        background: white;
+        border-radius: 24px;
+        padding: 30px 25px;
+        box-shadow: 0 20px 40px -12px rgba(0,0,0,0.2);
+        flex: 1 1 260px;
+        max-width: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255,255,255,0.1);
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      /* Subtle shadow enhancement on hover - but card stays white */
+      .action-card:hover { 
+        transform: translateY(-8px);
+        box-shadow: 0 30px 50px -15px rgba(0,0,0,0.3);
+        background: white; /* Keep white background */
+      }
+      
+      .action-icon { 
+        font-size: 48px; 
+        margin-bottom: 20px; 
+        background: #f0f4ff;
+        width: 100px; 
+        height: 100px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center; 
+        border-radius: 50%; 
+        color: #2A5C82; 
+        transition: all 0.3s ease;
+        border: 1px solid rgba(42,92,130,0.1);
+      }
+      
+      /* Icon changes slightly on hover but card stays white */
+      .action-card:hover .action-icon {
+        background: #e8edff;
+        color: #1A9AA0;
+        transform: scale(1.02);
+      }
+      
+      .action-title { 
+        font-size: 22px; 
+        font-weight: 700; 
+        color: #000000; 
+        margin-bottom: 12px; 
+        letter-spacing: -0.3px; 
+      }
+      
+      .action-desc { 
+        color: #4a5568; 
+        font-size: 14px; 
+        line-height: 1.6; 
+        margin-bottom: 20px;
+        font-weight: 400;
+        max-width: 240px;
+      }
+      
+      .action-badge { 
+        margin-top: 5px; 
+        background: #f0f4ff;
+        color: #2A5C82; 
+        padding: 6px 18px; 
+        border-radius: 50px; 
+        font-size: 13px; 
+        font-weight: 600;
+        border: 1px solid rgba(42,92,130,0.2);
+        transition: all 0.3s ease;
+      }
+      
+      .action-card:hover .action-badge {
+        background: #e8edff;
+        color: #1A9AA0;
+      }
+      
+      /* Simple, full-length footer */
+      .dashboard-footer {
+        background: rgba(0,0,0,0.2);
+        backdrop-filter: blur(10px);
+        padding: 18px 30px;
+        margin-top: auto;
+        width: 100%;
+        border-top: 1px solid rgba(255,255,255,0.1);
+      }
+      
+      .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 25px;
+        max-width: 1200px;
+        margin: 0 auto;
+        color: rgba(255,255,255,0.9);
+        font-size: 14px;
+      }
+      
+      .footer-item {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      
+      .footer-item a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+      }
+      
+      .footer-item a:hover {
+        text-decoration: underline;
+      }
+      
+      .footer-divider {
+        color: rgba(255,255,255,0.3);
+        font-size: 16px;
+      }
+      
+      .footer-copyright {
+        color: rgba(255,255,255,0.7);
+        font-size: 13px;
+      }
+      
+      /* ---------- FORM CONTAINER ---------- */
+      .form-container {
+        flex: 1;
+        position: relative;
+        display: none;
+        width: 100%;
+        min-height: 100vh;
+        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
+      }
+      iframe { 
+        position: absolute; 
+        top: 0; 
+        right: 0; 
+        bottom: 0; 
+        left: 0; 
+        border: 0; 
+        background: white;  
+      }
+      
+      /* Back button – form view */
+      .back-to-dashboard {
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        z-index: 2000;
+        background: white;
+        color: #2A5C82;
+        border: none;
+        padding: 12px 26px;
+        border-radius: 50px;
+        font-weight: 600;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        cursor: pointer;
+        box-shadow: 0 20px 40px -10px rgba(0,0,0,0.3);
+        transition: all 0.3s ease;
+      }
+      .back-to-dashboard:hover { 
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
+        color: white;
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 25px 45px -10px rgba(42,92,130,0.5);
+      }
+      
+      /* ---------- LOADING OVERLAY ---------- */
+      .loading-overlay {
+        position: absolute; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0;
+        background: rgba(255,255,255,0.98); 
+        display: flex; 
+        flex-direction: column;
+        justify-content: center; 
+        align-items: center; 
+        z-index: 100;
+      }
+      .loading-spinner {
+        width: 50px; 
+        height: 50px; 
+        border: 4px solid #f3f3f3; 
+        border-top: 4px solid #2A5C82;
+        border-radius: 50%; 
+        animation: spin 1s linear infinite; 
+        margin-bottom: 20px;
+      }
+      .loading-text {
+        font-size: 16px;
+        color: #2A5C82;
+        font-weight: 500;
+      }
+      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      
+      /* ---------- GLOBAL LOADER ---------- */
+      .app-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+        transition: opacity 0.5s ease;
+      }
+      .app-loader-logo {
+        width: 120px;
+        height: 120px;
+        margin-bottom: 30px;
+        animation: pulse 1.5s infinite;
+      }
+      .app-loader-text {
+        color: white;
+        font-size: 20px;
+        font-weight: 500;
+        letter-spacing: 2px;
+      }
+      @keyframes pulse { 0% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.8; transform: scale(1); } }
+      
+      /* ---------- NOTIFICATIONS & MODALS ---------- */
+      .login-greeting-notification { 
+        position: fixed; top: 20px; right: 20px; background: white; color: #333; 
+        padding: 20px 30px; border-radius: 16px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); 
+        z-index: 2000; display: none; align-items: center; gap: 15px; 
+        animation: slideInRight 0.5s ease; max-width: 350px; 
+        border-left: 5px solid #2A5C82;
+      }
+      .logout-notification { 
+        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+        background: white; color: #333; padding: 40px 50px; border-radius: 24px; 
+        box-shadow: 0 40px 80px rgba(0,0,0,0.3); z-index: 3000; display: none; 
+        flex-direction: column; align-items: center; gap: 20px; min-width: 320px; 
+        text-align: center; 
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+      
+      /* ---------- INACTIVITY WARNING - Blocks all clicks behind it ---------- */
+      .inactivity-warning {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: white;
+        color: #000000;
+        border-radius: 28px;
+        padding: 40px 36px;
+        width: 90%;
+        max-width: 420px;
+        z-index: 10000; /* Higher than everything */
+        text-align: center;
+        box-shadow: 0 40px 70px -15px rgba(0,0,0,0.4);
+        border: 1px solid rgba(255,255,255,0.3);
+        animation: fadeScale 0.25s ease-out;
+        pointer-events: auto; /* Ensures clicks only on dialog */
+      }
+      
+      /* Overlay behind warning - prevents interaction with dashboard */
+      .inactivity-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(5px);
+        z-index: 9999;
+        pointer-events: all; /* CAPTURES all clicks, blocking them from reaching cards */
+      }
+      
+      @keyframes fadeScale {
+        from { opacity: 0.8; transform: translate(-50%, -50%) scale(0.96); }
+        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      }
+      .inactivity-warning h3 {
+        font-size: 28px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        letter-spacing: -0.3px;
+        color: #2A5C82;
+      }
+      .inactivity-timer {
+        font-size: 48px;
+        font-weight: 700;
+        font-family: 'Courier New', monospace;
+        background: rgba(42,92,130,0.08);
+        display: inline-block;
+        padding: 16px 28px;
+        border-radius: 60px;
+        margin: 20px 0 18px;
+        color: #E63946;
+        border: 1px solid rgba(230,57,70,0.2);
+      }
+      .inactivity-message {
+        font-size: 17px;
+        color: #333333;
+        margin-bottom: 28px;
+        line-height: 1.5;
+      }
+      .keep-active-button {
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
+        color: white;
+        border: none;
+        border-radius: 60px;
+        padding: 16px 32px;
+        font-size: 18px;
+        font-weight: 600;
+        cursor: pointer;
+        width: 100%;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 25px rgba(42,92,130,0.3);
+        pointer-events: auto;
+      }
+      .keep-active-button:hover {
+        background: linear-gradient(135deg, #1A9AA0, #2A5C82);
+        transform: translateY(-3px) scale(1.02);
+        box-shadow: 0 20px 35px rgba(42,92,130,0.4);
+      }
+      
+      /* ---------- LOGOUT CONFIRMATION ---------- */
+      .confirmation-overlay { 
+        display: none; 
+        position: fixed; 
+        top: 0; 
+        left: 0; 
+        right: 0; 
+        bottom: 0; 
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px);
+        z-index: 5000; 
+        justify-content: center; 
+        align-items: center; 
+        animation: fadeIn 0.2s ease;
+      }
+      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+      
+      .confirmation-dialog { 
+        background: white; 
+        border-radius: 32px; 
+        padding: 44px 40px; 
+        width: 90%; 
+        max-width: 420px; 
+        text-align: center; 
+        box-shadow: 0 40px 80px rgba(0,0,0,0.3);
+        animation: scaleUp 0.25s ease;
+      }
+      @keyframes scaleUp { 
+        from { opacity: 0.8; transform: scale(0.96); } 
+        to { opacity: 1; transform: scale(1); } 
+      }
+      
+      .confirmation-icon {
+        font-size: 44px;
+        margin-bottom: 24px;
+        background: rgba(42,92,130,0.08);
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        margin-left: auto;
+        margin-right: auto;
+        color: #2A5C82;
+        border: 1px solid rgba(42,92,130,0.2);
+      }
+      
+      .confirmation-title { 
+        font-size: 30px; 
+        font-weight: 600; 
+        color: #2A5C82; 
+        margin-bottom: 12px;
+        letter-spacing: -0.4px;
+      }
+      
+      .confirmation-message { 
+        color: #333333; 
+        font-size: 18px; 
+        margin-bottom: 36px;
+        line-height: 1.5;
+        font-weight: 400;
+      }
+      
+      .confirmation-buttons { 
+        display: flex; 
+        gap: 16px; 
+        justify-content: center; 
+        width: 100%;
+      }
+      
+      .confirm-button {
+        flex: 1;
+        padding: 16px 20px;
+        border: none;
+        border-radius: 60px;
+        font-size: 17px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.15s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        background: white;
+        border: 1.5px solid #d0d6e8;
+        color: #333333;
+      }
+      .confirm-button:hover {
+        background: rgba(42,92,130,0.05);
+        border-color: #2A5C82;
+      }
+      
+      .confirm-yes {
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
+        border: none;
+        color: white;
+      }
+      .confirm-yes:hover {
+        background: linear-gradient(135deg, #1A9AA0, #2A5C82);
+      }
+      
+      @media (max-width: 768px) {
+        .dashboard-header { margin: 20px 20px 0 20px; padding: 15px 20px; }
+        .dashboard-main { padding: 30px 20px; }
+        .footer-content { gap: 15px; flex-direction: column; }
+        .footer-divider { display: none; }
+        .confirmation-dialog { padding: 36px 28px; }
+        .confirmation-title { font-size: 28px; }
+        .inactivity-timer { font-size: 40px; }
+        .action-card { max-width: 280px; padding: 25px 20px; }
+      }
+    </style>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  </head>
+  <body>
+    <!-- GLOBAL APP LOADER -->
+    <div class="app-loader" id="appLoader">
+      <img src="https://raw.githubusercontent.com/aesrn30/aesrn/main/Lablogo.png" alt="AESRN Logo" class="app-loader-logo">
+      <div class="app-loader-text">Loading Portal...</div>
+    </div>
+
+    <!-- LOGIN CONTAINER -->
+    <div class="login-container" id="loginContainer" style="display: none;">
+      <div class="login-box">
+        <div class="login-header">
+          <div class="login-logo-circle">
+            <img src="https://raw.githubusercontent.com/aesrn30/aesrn/main/Lablogo.png" alt="AESRN Logo" class="logo-circle-image">
+          </div>
+          <div class="login-title">Member Access Portal</div>
+          <div class="login-subtitle">Enter your credentials to access member services.</div>
+        </div>
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" id="email" class="form-input" placeholder="Enter registered email address" required autocomplete="off">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="password">Password</label>
+            <!-- Password wrapper with eye toggle -->
+            <div class="password-wrapper">
+              <input type="password" id="password" class="form-input" placeholder="Enter access password" required autocomplete="off">
+              <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
+                <i class="far fa-eye" id="toggleIcon"></i>
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="login-button" id="loginButton">
+            <span class="button-text">Log In</span>
+          </button>
+          
+          <!-- Small professional "Go to AESRN" link under login form -->
+          <a href="https://www.aesrn.net/#home" class="go-to-aesrn-link">
+            <i class="fas fa-arrow-left"></i> Go to AESRN 
+          </a>
+          
+          <div class="copyright-full" id="copyrightFull">Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.</div>
+          <div class="error-message" id="errorMessage">Invalid email or password.</div>
+          <div class="attempts-warning" id="attemptsWarning">Multiple failed attempts may temporarily restrict access.</div>
+        </form>
+      </div>
+    </div>
+    
+    <!-- DASHBOARD -->
+    <div class="dashboard-container" id="dashboardContainer">
+      <div class="dashboard-header">
+        <div class="dashboard-welcome">
+          <span id="dashboardUserName"></span> · Member Dashboard
+        </div>
+        <button class="dashboard-logout" id="dashboardLogoutBtn">Log out</button>
+      </div>
+      
+      <div class="dashboard-main">
+        <div class="action-grid">
+          <!-- CARD 1: View Assignment -->
+          <div class="action-card" id="viewAssignmentCard">
+            <div class="action-icon">📋</div>
+            <div class="action-title">View Assignment</div>
+            <div class="action-desc">Check your assigned tasks & materials.</div>
+            <div class="action-badge">Member Tasks</div>
+          </div>
+          <!-- CARD 2: Make a Submission -->
+          <div class="action-card" id="makeSubmissionCard">
+            <div class="action-icon">📄</div>
+            <div class="action-title">Make a Submission</div>
+            <div class="action-desc">Drop your assigned section here using the form.</div>
+            <div class="action-badge">Submit Work</div>
+          </div>
+          <!-- CARD 3: Review Materials -->
+          <div class="action-card" id="reviewMaterialsCard">
+            <div class="action-icon">📚</div>
+            <div class="action-title">Review Materials</div>
+            <div class="action-desc">Catch up on everything, section by section.</div>
+            <div class="action-badge">Resources</div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Simple full-length footer -->
+      <div class="dashboard-footer">
+        <div class="footer-content">
+          <div class="footer-item">
+            📧 <a href="mailto:research.aesrn@yahoo.com">research.aesrn@yahoo.com</a>
+          </div>
+          <span class="footer-divider">•</span>
+          <div class="footer-item">
+            🇬🇭 <span class="ghana-time-dash" id="ghanaTimeDashboard">11:30:57</span> GMT
+          </div>
+          <span class="footer-divider">•</span>
+          <div class="footer-item footer-copyright">
+            © <span id="infoCardYear">2026</span> AESRN. All rights reserved.
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- FORM CONTAINER -->
+    <div class="form-container" id="formContainer">
+      <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Opening submission form...</div>
+      </div>
+      
+      <button class="back-to-dashboard" id="backToDashboardBtn">
+        ←  Dashboard
+      </button>
+      
+      <iframe 
+        src="https://tally.so/r/dWd6gA?transparentBackground=1&formEventsForwarding=1" 
+        width="100%" 
+        height="100%" 
+        frameborder="0" 
+        marginheight="0" 
+        marginwidth="0" 
+        title="AESRN Submission Form"
+        id="formIframe"
+        style="visibility: hidden; background: white;"
+        onload="handleIframeLoad()"
+      ></iframe>
+    </div>
+    
+    <!-- NOTIFICATIONS / MODALS -->
+    <div class="login-greeting-notification" id="loginGreeting">
+      <div class="greeting-icon" id="greetingIcon">👋</div>
+      <div class="greeting-content"><h4 id="greetingText">Greetings</h4><p id="userGreeting"></p></div>
+    </div>
+    <div class="logout-notification" id="logoutNotification">
+      <div class="logout-spinner"></div>
+      <div class="logout-message">Logged out successfully!</div>
+      <div class="logout-countdown">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
+    </div>
+    
+    <!-- INACTIVITY WARNING - Background overlay and dialog -->
+    <div class="inactivity-overlay" id="inactivityOverlay"></div>
+    <div class="inactivity-warning" id="inactivityWarning">
+      <h3>Session timeout</h3>
+      <div class="inactivity-timer" id="inactivityTimer">1:30</div>
+      <p class="inactivity-message">You've been inactive. Click continue to stay logged in.</p>
+      <button class="keep-active-button" id="keepActiveButton">Continue session</button>
+    </div>
+    
+    <!-- LOGOUT CONFIRMATION -->
+    <div class="confirmation-overlay" id="confirmationDialog">
+      <div class="confirmation-dialog">
+        <div class="confirmation-icon">🚪</div>
+        <div class="confirmation-title">Log out</div>
+        <div class="confirmation-message">End your session?</div>
+        <div class="confirmation-buttons">
+          <button class="confirm-button confirm-yes" id="confirmLogout">Yes, logout</button>
+          <button class="confirm-button confirm-no" id="cancelLogout">Cancel</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // ---------- AUTO COPYRIGHT ----------
+      function updateAllCopyrightYears() {
+        const currentYear = new Date().getFullYear();
+        document.getElementById('dynamicYear') && (document.getElementById('dynamicYear').textContent = currentYear);
+        document.getElementById('infoCardYear') && (document.getElementById('infoCardYear').textContent = currentYear);
+      }
+
+      // ---------- USER CREDENTIALS (UPDATED FULL NAMES) ----------
+      const userMap = {
+        // Format: email (case-insensitive) : "Full Name"
+        "malikseidu4@gmail.com": "Abdul-Malik Seidu",
+        "Malikseidu4@gmail.com": "Abdul-Malik Seidu",
+        "abdul0247080685@gmail.com": "Abdul Latif Abdul Rahman",
+        "Abdul0247080685@gmail.com": "Abdul Latif Abdul Rahman",
+        "ednadie93@gmail.com": "Edna Die",
+        "Ednadie93@gmail.com": "Edna Die",
+        "issahaqalhassan26@gmail.com": "Alhassan Issahaq",
+        "Issahaqalhassan26@gmail.com": "Alhassan Issahaq",
+        "mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim",
+        "Mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim"
+      };
+      const correctPassword = "Scholar123";
+      
+      // ---------- GLOBALS ----------
+      let failedAttempts = 0;
+      const maxAttempts = 5;
+      let currentUserName = "", currentUserEmail = "";
+      let ghanaTimeInterval;
+      let isInDashboard = true;
+      
+      // Updated timings: 1 minute inactivity triggers warning with 1:30 countdown
+      const INACTIVITY_WARNING_TIME = 60 * 1000; // 60 seconds -> show warning
+      const WARNING_COUNTDOWN_SECONDS = 90; // 1:30 countdown
+      const SESSION_TIMEOUT = (60 + WARNING_COUNTDOWN_SECONDS) * 1000; // 2:30 total
+      
+      let inactivityTimer, warningTimer;
+      let countdownInterval = null;
+      let warningActive = false;
+      
+      const ACTIVE_SESSIONS_KEY = 'aesrn_active_sessions';
+      const CURRENT_SESSION_KEY = 'aesrn_current_session';
+      const USER_SESSION_KEY = 'aesrn_user_session';
+      const SHOWN_GREETING_KEY = 'aesrn_shown_greeting';
+      
+      let iframeEverLoaded = false;
+      
+      // ---------- SESSION FUNCTIONS ----------
+      function generateSessionId() { return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); }
+      function getCurrentSessionId() { return sessionStorage.getItem(CURRENT_SESSION_KEY); }
+      function setCurrentSessionId(sessionId) { sessionStorage.setItem(CURRENT_SESSION_KEY, sessionId); }
+      function getActiveSessions() { const s = localStorage.getItem(ACTIVE_SESSIONS_KEY); return s ? JSON.parse(s) : {}; }
+      function saveActiveSessions(sessions) { localStorage.setItem(ACTIVE_SESSIONS_KEY, JSON.stringify(sessions)); }
+      function hasGreetingBeenShown(sessionId) { const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}'); return g[sessionId] || false; }
+      function markGreetingAsShown(sessionId) { const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}'); g[sessionId] = true; localStorage.setItem(SHOWN_GREETING_KEY, JSON.stringify(g)); }
+      function clearGreetingStatus(sessionId) { const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}'); delete g[sessionId]; localStorage.setItem(SHOWN_GREETING_KEY, JSON.stringify(g)); }
+      
+      function isUserAlreadyLoggedIn(email) {
+        const sessions = getActiveSessions();
+        const userSession = sessions[email];
+        if (!userSession) return false;
+        if (Date.now() > userSession.expiry) { delete sessions[email]; saveActiveSessions(sessions); return false; }
+        const currentSessionId = getCurrentSessionId();
+        return !(userSession.sessionId === currentSessionId);
+      }
+      
+      function registerUserSession(email, name) {
+        const sessionId = generateSessionId();
+        const sessions = getActiveSessions();
+        if (sessions[email]) { clearGreetingStatus(sessions[email].sessionId); delete sessions[email]; }
+        sessions[email] = { sessionId, expiry: Date.now() + SESSION_TIMEOUT, name, loginTime: Date.now(), isFirstLogin: true };
+        saveActiveSessions(sessions);
+        setCurrentSessionId(sessionId);
+        const userSession = { email, name, sessionId, loginTime: Date.now(), expiry: Date.now() + SESSION_TIMEOUT, isFirstLogin: true };
+        localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession));
+        return sessionId;
+      }
+      
+      function removeUserSession(email) {
+        const sessions = getActiveSessions();
+        if (sessions[email]) { clearGreetingStatus(sessions[email].sessionId); delete sessions[email]; saveActiveSessions(sessions); }
+        localStorage.removeItem(USER_SESSION_KEY);
+        sessionStorage.removeItem(CURRENT_SESSION_KEY);
+      }
+      
+      // ---------- TIME ----------
+      function getGhanaTime() { 
+        const g = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Accra' }));
+        return `${g.getHours().toString().padStart(2,'0')}:${g.getMinutes().toString().padStart(2,'0')}:${g.getSeconds().toString().padStart(2,'0')}`;
+      }
+      function updateGhanaTimeDisplay() { 
+        const t = getGhanaTime();
+        const dash = document.getElementById('ghanaTimeDashboard');
+        if (dash) dash.textContent = t;
+      }
+      function startGhanaTimeUpdates() { updateGhanaTimeDisplay(); ghanaTimeInterval = setInterval(updateGhanaTimeDisplay, 1000); }
+      function stopGhanaTimeUpdates() { clearInterval(ghanaTimeInterval); }
+      
+      // ---------- LOGIN VALIDATION ----------
+      function validateLogin(email, password) {
+        const normEmail = email.trim(), normPass = password.trim();
+        const key = Object.keys(userMap).find(k => k.toLowerCase() === normEmail.toLowerCase());
+        if (key) { 
+          currentUserName = userMap[key]; // Full name as per updated map
+          currentUserEmail = key; 
+          return normPass === correctPassword; 
+        }
+        return false;
+      }
+      
+      function handleFailedLogin() {
+        failedAttempts++;
+        const err = document.getElementById('errorMessage'), warn = document.getElementById('attemptsWarning');
+        const email = document.getElementById('email'), pwd = document.getElementById('password'), btn = document.getElementById('loginButton');
+        err.style.display = 'block'; email.classList.add('error'); pwd.classList.add('error'); pwd.value = ''; email.focus();
+        if (failedAttempts >= 3) warn.style.display = 'block';
+        if (failedAttempts >= maxAttempts) {
+          btn.disabled = true; 
+          const btnText = btn.querySelector('.button-text');
+          if (btnText) btnText.textContent = 'Access Restricted';
+          setTimeout(() => { 
+            btn.disabled = false; 
+            if (btnText) btnText.textContent = 'Log In';
+            warn.style.display = 'none'; 
+            failedAttempts = 0; 
+          }, 30000);
+        }
+        setTimeout(() => { email.classList.remove('error'); pwd.classList.remove('error'); }, 2000);
+      }
+      
+      // ---------- DASHBOARD ----------
+      function showDashboard() {
+        document.getElementById('dashboardUserName').textContent = currentUserName;
+        
+        document.getElementById('loginContainer').style.display = 'none';
+        document.getElementById('dashboardContainer').style.display = 'flex';
+        document.getElementById('formContainer').style.display = 'none';
+        
+        startGhanaTimeUpdates();
+        registerUserSession(currentUserEmail, currentUserName);
+        showLoginGreeting();
+        
+        isInDashboard = true;
+        resetActivityTimers();
+        attachActivityListeners();
+      }
+      
+      // ---------- LOGIN WITH LOADING ----------
+      function handleLogin(e) {
+        e.preventDefault();
+        const email = document.getElementById('email').value;
+        const pass = document.getElementById('password').value;
+        const loginBtn = document.getElementById('loginButton');
+        const btnText = loginBtn.querySelector('.button-text');
+        
+        document.getElementById('errorMessage').style.display = 'none';
+        document.getElementById('attemptsWarning').style.display = 'none';
+        
+        if (validateLogin(email, pass)) {
+          // Show loading spinner
+          loginBtn.disabled = true;
+          btnText.innerHTML = '<span class="button-spinner"></span> Logging in...';
+          
+          // Simulate 5 second loading
+          setTimeout(() => {
+            if (isUserAlreadyLoggedIn(email)) {
+              showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
+              // Reset button
+              loginBtn.disabled = false;
+              btnText.textContent = 'Log In';
+            } else {
+              failedAttempts = 0;
+              showDashboard();
+              // Reset button for next time (though dashboard is shown)
+              loginBtn.disabled = false;
+              btnText.textContent = 'Log In';
+            }
+          }, 5000);
+        } else {
+          handleFailedLogin();
+        }
+      }
+      
+      // ---------- IFRAME HANDLING ----------
+      function handleIframeLoad() {
+        iframeEverLoaded = true;
+        if (document.getElementById('formContainer').style.display === 'flex') {
+          hideLoading();
+        } else {
+          document.getElementById('loadingOverlay').style.display = 'none';
+        }
+      }
+      
+      function hideLoading() { 
+        const lo = document.getElementById('loadingOverlay');
+        if (lo) { 
+          lo.style.opacity = '0'; 
+          setTimeout(() => { lo.style.display = 'none'; }, 300); 
+        }
+        const ifr = document.getElementById('formIframe');
+        if (ifr) ifr.style.visibility = 'visible';
+      }
+      
+      function showLoading() { 
+        const lo = document.getElementById('loadingOverlay');
+        if (lo) { 
+          lo.style.display = 'flex'; 
+          lo.style.opacity = '1'; 
+        }
+      }
+      
+      function openSubmissionForm() {
+        // Block if inactivity warning is active
+        if (warningActive) return;
+        
+        document.getElementById('dashboardContainer').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'flex';
+        
+        // Pause inactivity timer when leaving dashboard
+        isInDashboard = false;
+        clearInactivityTimers();
+        
+        const ifr = document.getElementById('formIframe');
+        if (ifr) {
+          if (iframeEverLoaded) {
+            ifr.style.visibility = 'visible';
+            document.getElementById('loadingOverlay').style.display = 'none';
+          } else {
+            ifr.style.visibility = 'hidden';
+            showLoading();
+          }
+        }
+      }
+      
+      function openReviewMaterials() {
+        // Block if inactivity warning is active
+        if (warningActive) return;
+        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam';
+      }
+      
+      function openViewAssignment() {
+        // Block if inactivity warning is active
+        if (warningActive) return;
+        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF';
+      }
+      
+      function backToDashboard() {
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('dashboardContainer').style.display = 'flex';
+        
+        // Resume inactivity timer when returning to dashboard
+        isInDashboard = true;
+        resetActivityTimers();
+        
+        const ifr = document.getElementById('formIframe');
+        if (ifr) ifr.style.visibility = 'hidden';
+        document.getElementById('loadingOverlay').style.display = 'none';
+      }
+      
+      // ---------- INACTIVITY TIMERS (Dashboard only) ----------
+      function clearInactivityTimers() {
+        clearTimeout(inactivityTimer);
+        clearTimeout(warningTimer);
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
+        if (warningActive) {
+          hideInactivityWarning();
+        }
+      }
+      
+      function resetActivityTimers() {
+        if (!isInDashboard) return;
+        
+        clearInactivityTimers();
+        
+        updateSessionExpiry();
+        
+        // Set timer to show warning after 60 seconds of inactivity
+        warningTimer = setTimeout(() => {
+          if (isInDashboard && !warningActive) {
+            showInactivityWarning();
+          }
+        }, INACTIVITY_WARNING_TIME);
+        
+        // Fallback timer for safety
+        inactivityTimer = setTimeout(() => {
+          if (isInDashboard && warningActive) {
+            logoutDueToInactivity();
+          }
+        }, SESSION_TIMEOUT + 2000);
+      }
+      
+      function showInactivityWarning() {
+        if (warningActive || !isInDashboard) return;
+        
+        // Show warning with overlay - ONLY "Continue session" button can close it
+        warningActive = true;
+        document.getElementById('inactivityOverlay').style.display = 'block';
+        document.getElementById('inactivityWarning').style.display = 'block';
+        
+        // Stop tracking user activity while warning is active
+        detachActivityListeners();
+        
+        startInactivityCountdown(WARNING_COUNTDOWN_SECONDS); // 90 seconds (1:30)
+      }
+      
+      function hideInactivityWarning() {
+        warningActive = false;
+        document.getElementById('inactivityOverlay').style.display = 'none';
+        document.getElementById('inactivityWarning').style.display = 'none';
+        if (countdownInterval) {
+          clearInterval(countdownInterval);
+          countdownInterval = null;
+        }
+        
+        // Re-attach activity listeners only if still in dashboard
+        if (isInDashboard) {
+          attachActivityListeners();
+        }
+      }
+      
+      function startInactivityCountdown(seconds) {
+        const timerEl = document.getElementById('inactivityTimer');
+        if (countdownInterval) clearInterval(countdownInterval);
+        
+        function updateDisplay() {
+          const mins = Math.floor(seconds / 60);
+          const secs = seconds % 60;
+          timerEl.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+          if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            if (isInDashboard) {
+              logoutDueToInactivity();
+            }
+          }
+        }
+        updateDisplay();
+        countdownInterval = setInterval(() => {
+          seconds--;
+          updateDisplay();
+        }, 1000);
+      }
+      
+      function logoutDueToInactivity() { 
+        clearInactivityTimers();
+        showCustomAlert('Session Expired', 'Session expired due to inactivity.', 'info'); 
+        logout(); 
+      }
+      
+      function continueSession() {
+        if (isInDashboard) {
+          hideInactivityWarning();
+          resetActivityTimers();
+          updateSessionExpiry();
+        }
+      }
+      
+      function updateSessionExpiry() {
+        if (currentUserEmail) {
+          const sessions = getActiveSessions();
+          if (sessions[currentUserEmail]) { 
+            sessions[currentUserEmail].expiry = Date.now() + SESSION_TIMEOUT; 
+            saveActiveSessions(sessions); 
+          }
+          const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
+          if (userSession.email) { 
+            userSession.expiry = Date.now() + SESSION_TIMEOUT; 
+            localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession)); 
+          }
+        }
+      }
+      
+      function showCustomAlert(title, message, type) {
+        const icon = type==='info' ? 'ℹ️' : '⚠️';
+        const overlay = document.getElementById('confirmationDialog');
+        overlay.innerHTML = `<div class="confirmation-dialog"><div class="confirmation-icon">${icon}</div><div class="confirmation-title">${title}</div><div class="confirmation-message">${message}</div><div class="confirmation-buttons"><button class="confirm-button confirm-no" id="closeAlert">OK</button></div></div>`;
+        overlay.style.display = 'flex';
+        document.getElementById('closeAlert').addEventListener('click', function() { overlay.style.display = 'none'; });
+      }
+      
+      function trackUserActivity() { 
+        // Only track activity if warning is not active
+        if (isInDashboard && !warningActive) {
+          resetActivityTimers();
+        }
+      }
+      
+      function attachActivityListeners() {
+        document.addEventListener('mousemove', trackUserActivity); 
+        document.addEventListener('keydown', trackUserActivity);
+        document.addEventListener('click', trackUserActivity); 
+        document.addEventListener('scroll', trackUserActivity);
+      }
+      
+      function detachActivityListeners() {
+        document.removeEventListener('mousemove', trackUserActivity); 
+        document.removeEventListener('keydown', trackUserActivity);
+        document.removeEventListener('click', trackUserActivity); 
+        document.removeEventListener('scroll', trackUserActivity);
+      }
+      
+      // ---------- GREETING (only first login per session) ----------
+      function getGreeting() { const h = new Date().getHours(); if (h<12) return "Good Morning"; if (h<17) return "Good Afternoon"; return "Good Evening"; }
+      function getGreetingIcon() { const h = new Date().getHours(); if (h<12) return "🌅"; if (h<17) return "☀️"; return "🌙"; }
+      function showLoginGreeting() {
+        const sessionId = getCurrentSessionId();
+        // Only show if greeting hasn't been shown for this session (ensures no greeting on reload)
+        if (hasGreetingBeenShown(sessionId)) return;
+        
+        document.getElementById('greetingText').textContent = 'Greetings';
+        document.getElementById('greetingIcon').textContent = getGreetingIcon();
+        document.getElementById('userGreeting').textContent = `${getGreeting()}, ${currentUserName}!`;
+        document.getElementById('loginGreeting').style.display = 'flex';
+        markGreetingAsShown(sessionId); // Mark shown immediately so reload doesn't show it again
+        
+        setTimeout(() => { 
+          document.getElementById('loginGreeting').style.animation = 'fadeOutUp 0.5s ease';
+          setTimeout(() => { 
+            document.getElementById('loginGreeting').style.display = 'none'; 
+            document.getElementById('loginGreeting').style.animation = 'slideInRight 0.5s ease'; 
+          }, 500);
+        }, 5000);
+      }
+      
+      // ---------- LOGOUT ----------
+      function logout() {
+        if (currentUserEmail) removeUserSession(currentUserEmail);
+        clearInactivityTimers();
+        stopGhanaTimeUpdates();
+        detachActivityListeners();
+        document.getElementById('confirmationDialog').style.display = 'none'; 
+        document.getElementById('loginGreeting').style.display = 'none';
+        document.getElementById('inactivityOverlay').style.display = 'none';
+        document.getElementById('inactivityWarning').style.display = 'none';
+        
+        document.getElementById('dashboardContainer').style.display = 'none';
+        document.getElementById('formContainer').style.display = 'none';
+        
+        const ifr = document.getElementById('formIframe');
+        if (ifr) ifr.style.visibility = 'hidden';
+        
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('email').value = ''; document.getElementById('password').value = ''; 
+        document.getElementById('email').focus();
+        currentUserName = ''; currentUserEmail = ''; failedAttempts = 0; 
+        isInDashboard = true;
+        warningActive = false;
+        
+        showLogoutNotification();
+      }
+      
+      function showLogoutNotification() {
+        const n = document.getElementById('logoutNotification'), c = document.getElementById('logoutCountdown');
+        n.style.display = 'flex'; 
+        let count = 5; 
+        c.textContent = count;
+        const i = setInterval(() => { 
+          count--; 
+          c.textContent = count; 
+          if (count <= 0) { 
+            clearInterval(i); 
+            n.style.display = 'none'; 
+            document.getElementById('loginContainer').style.display = 'flex';
+          } 
+        }, 1000);
+      }
+      
+      // ---------- SESSION CHECK ----------
+      function checkExistingSession() {
+        const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
+        if (userSession.email && userSession.name && userSession.sessionId && Date.now() < userSession.expiry) {
+          const sessions = getActiveSessions();
+          const activeSession = sessions[userSession.email];
+          if (activeSession && activeSession.sessionId === userSession.sessionId) {
+            currentUserEmail = userSession.email; currentUserName = userSession.name; setCurrentSessionId(userSession.sessionId);
+            return true;
+          }
+        }
+        if (userSession.email) removeUserSession(userSession.email);
+        return false;
+      }
+
+      // ---------- PASSWORD TOGGLE (EYE ICON) ----------
+      function setupPasswordToggle() {
+        const toggleBtn = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const toggleIcon = document.getElementById('toggleIcon');
+
+        if (toggleBtn && passwordInput && toggleIcon) {
+          toggleBtn.addEventListener('click', function() {
+            // Toggle the type attribute
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            
+            // Toggle the eye / eye-slash icon
+            if (type === 'text') {
+              toggleIcon.classList.remove('fa-eye');
+              toggleIcon.classList.add('fa-eye-slash');
+            } else {
+              toggleIcon.classList.remove('fa-eye-slash');
+              toggleIcon.classList.add('fa-eye');
+            }
+          });
+        }
+      }
+      
+      // ---------- INIT ----------
+      document.addEventListener('DOMContentLoaded', function() {
+        updateAllCopyrightYears();
+        
+        document.getElementById('formIframe').style.visibility = 'hidden';
+        document.getElementById('loadingOverlay').style.display = 'none';
+        document.getElementById('inactivityOverlay').style.display = 'none';
+        document.getElementById('inactivityWarning').style.display = 'none';
+        
+        // Initialize password toggle
+        setupPasswordToggle();
+        
+        setTimeout(function() {
+          const loader = document.getElementById('appLoader');
+          loader.style.opacity = '0';
+          setTimeout(function() {
+            loader.style.display = 'none';
+            
+            if (checkExistingSession()) {
+              showDashboard();
+            } else {
+              document.getElementById('loginContainer').style.display = 'flex';
+              document.getElementById('email').focus();
+              if (!getCurrentSessionId()) setCurrentSessionId(generateSessionId());
+            }
+          }, 500);
+        }, 1500);
+      });
+      
+      // ---------- EVENT LISTENERS ----------
+      document.getElementById('loginForm').addEventListener('submit', handleLogin);
+      
+      document.getElementById('viewAssignmentCard').addEventListener('click', openViewAssignment);
+      document.getElementById('makeSubmissionCard').addEventListener('click', openSubmissionForm);
+      document.getElementById('reviewMaterialsCard').addEventListener('click', openReviewMaterials);
+      
+      document.getElementById('backToDashboardBtn').addEventListener('click', backToDashboard);
+      
+      document.getElementById('dashboardLogoutBtn').addEventListener('click', function() { 
+        document.getElementById('confirmationDialog').style.display = 'flex'; 
+      });
+      
+      document.getElementById('confirmLogout').addEventListener('click', logout);
+      document.getElementById('cancelLogout').addEventListener('click', function() { 
+        document.getElementById('confirmationDialog').style.display = 'none'; 
+      });
+      
+      // ONLY this button closes the inactivity warning
+      document.getElementById('keepActiveButton').addEventListener('click', function() {
+        continueSession();
+      });
+      
+      document.getElementById('confirmationDialog').addEventListener('click', function(e) { 
+        if (e.target === this) this.style.display = 'none'; 
+      });
+      
+      // Session cross-check
+      setInterval(function() {
+        if (currentUserEmail) {
+          const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
+          const sessions = getActiveSessions(); 
+          const activeSession = sessions[currentUserEmail];
+          if (!activeSession || activeSession.sessionId !== userSession.sessionId) { 
+            showCustomAlert('Session Ended', 'You logged in from another device.', 'info'); 
+            logout(); 
+          }
+        }
+      }, 30000);
+      
+      function cleanOldGreetingRecords() {
+        const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}');
+        const oneWeek = Date.now() - 7*24*60*60*1000;
+        Object.keys(g).forEach(sid => { const ts = parseInt(sid.split('_')[1]); if (ts && ts < oneWeek) delete g[sid]; });
+        localStorage.setItem(SHOWN_GREETING_KEY, JSON.stringify(g));
+      }
+      setInterval(cleanOldGreetingRecords, 24*60*60*1000); cleanOldGreetingRecords();
+      
+      setInterval(updateAllCopyrightYears, 24*60*60*1000);
+    </script>
+  </body>
+</html>
