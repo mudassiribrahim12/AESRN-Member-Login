@@ -61,6 +61,7 @@
         max-width: 360px;  /* Reduced from 420px to 360px */
         box-shadow: 0 30px 60px rgba(0,0,0,0.1);
         border: 1px solid rgba(0,0,0,0.08);
+        transition: opacity 0.3s ease, transform 0.3s ease;
       }
       
       .dark-theme .login-box {
@@ -203,26 +204,40 @@
         color: #ffffff;
       }
       
-      /* Loading spinner */
-      .button-spinner {
-        display: inline-block;
-        width: 22px;
-        height: 22px;
-        border: 3px solid rgba(42,92,130,0.3);
+      /* Loading spinner - now only used for the login vanish phase */
+      .global-loader-circle {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: #f0f2f5;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 20000;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+        opacity: 0;
+        visibility: hidden;
+      }
+      .global-loader-circle.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .circle-spinner {
+        width: 70px;
+        height: 70px;
+        border: 6px solid rgba(42,92,130,0.15);
+        border-top: 6px solid #2A5C82;
         border-radius: 50%;
-        border-top-color: #2A5C82;
-        animation: button-spin 0.8s linear infinite;
-        margin-right: 10px;
+        animation: spin 1s linear infinite;
+        margin-bottom: 24px;
       }
-      
-      .dark-theme .button-spinner {
-        border: 3px solid rgba(93,138,168,0.3);
-        border-top-color: #5D8AA8;
+      .circle-text {
+        font-size: 18px;
+        color: #2A5C82;
+        font-weight: 500;
+        letter-spacing: 0.5px;
       }
-      
-      @keyframes button-spin {
-        to { transform: rotate(360deg); }
-      }
+      @keyframes spin { to { transform: rotate(360deg); } }
       
       /* Go to AESRN link */
       .go-to-aesrn-link {
@@ -315,6 +330,13 @@
         background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
         width: 100%;
         min-height: 100vh;
+        opacity: 0;
+        transform: scale(0.98);
+        transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
+      }
+      .dashboard-container.visible {
+        opacity: 1;
+        transform: scale(1);
       }
       
       .dashboard-header {
@@ -656,7 +678,7 @@
         color: #5D8AA8;
       }
       
-      /* ---------- LOADING OVERLAY ---------- */
+      /* ---------- LOADING OVERLAY (for iframe) ---------- */
       .loading-overlay {
         position: absolute; 
         top: 0; 
@@ -699,8 +721,6 @@
       .dark-theme .loading-text {
         color: #5D8AA8;
       }
-      
-      @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
       
       /* ---------- GLOBAL LOADER ---------- */
       .app-loader {
@@ -757,20 +777,68 @@
         border: 1px solid rgba(255,255,255,0.1);
       }
       
+      /* NICE LOGOUT CARD */
       .logout-notification { 
-        position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
-        background: white; color: #333; padding: 40px 50px; border-radius: 4px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        z-index: 3000; display: none; 
-        flex-direction: column; align-items: center; gap: 20px; min-width: 320px; 
+        position: fixed; 
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%) scale(0.9); 
+        background: white; 
+        color: #1e1e2f; 
+        padding: 40px 44px; 
+        border-radius: 40px; 
+        box-shadow: 0 40px 70px rgba(0,0,0,0.25), 0 0 0 1px rgba(255,255,255,0.2);
+        z-index: 3000; 
+        display: none; 
+        flex-direction: column; 
+        align-items: center; 
+        gap: 18px; 
+        min-width: 360px; 
         text-align: center; 
-        border: 1px solid rgba(0,0,0,0.08);
+        border: 1px solid rgba(255,255,255,0.6);
+        backdrop-filter: blur(8px);
+        transition: transform 0.3s ease;
       }
+      .logout-notification.show { transform: translate(-50%, -50%) scale(1); }
       
+      .logout-icon {
+        font-size: 58px;
+        background: #f0f4fa;
+        width: 110px;
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 60px;
+        margin-bottom: 6px;
+        color: #2A5C82;
+        border: 2px dashed #2A5C8233;
+      }
+      .logout-message { 
+        font-size: 28px; 
+        font-weight: 600; 
+        letter-spacing: -0.3px;
+        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .logout-countdown { 
+        font-size: 18px; 
+        color: #2A5C82; 
+        background: #eef2f7; 
+        padding: 10px 28px; 
+        border-radius: 50px; 
+        font-weight: 500;
+        margin-top: 8px;
+      }
       .dark-theme .logout-notification {
         background: #2a2c2e;
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.1);
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.2);
+      }
+      .dark-theme .logout-icon {
+        background: #3a3f44;
+        color: #5D8AA8;
       }
       
        /* ---------- INACTIVITY WARNING - Blocks all clicks behind it ---------- */
@@ -980,9 +1048,15 @@
       <div class="app-loader-text">Loading Portal...</div>
     </div>
 
+    <!-- GLOBAL CIRCLE LOADER (for login vanish) -->
+    <div class="global-loader-circle" id="globalCircleLoader">
+      <div class="circle-spinner"></div>
+      <div class="circle-text">Accessing Dashboard...</div>
+    </div>
+
     <!-- LOGIN CONTAINER -->
     <div class="login-container" id="loginContainer" style="display: none;">
-      <div class="login-box">
+      <div class="login-box" id="loginBox">
         <div class="login-header">
           <div class="login-logo-circle">
 <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" 
@@ -1108,9 +1182,11 @@
       <div class="greeting-icon" id="greetingIcon">👋</div>
       <div class="greeting-content"><h4 id="greetingText">Greetings</h4><p id="userGreeting"></p></div>
     </div>
+    
+    <!-- NICE LOGOUT CARD -->
     <div class="logout-notification" id="logoutNotification">
-      <div class="logout-spinner"></div>
-      <div class="logout-message">Logged out successfully!</div>
+      <div class="logout-icon">👋🏾</div>
+      <div class="logout-message">Logged out</div>
       <div class="logout-countdown">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
     </div>
     
@@ -1272,12 +1348,20 @@
         setTimeout(() => { email.classList.remove('error'); pwd.classList.remove('error'); }, 2000);
       }
       
-      // ---------- DASHBOARD ----------
+      // ---------- DASHBOARD SHOW WITH ANIMATION ----------
       function showDashboard() {
         document.getElementById('dashboardUserName').textContent = currentUserName;
         
+        // Hide login container (it has already vanished)
         document.getElementById('loginContainer').style.display = 'none';
-        document.getElementById('dashboardContainer').style.display = 'flex';
+        
+        // Make dashboard visible with animation class
+        const dash = document.getElementById('dashboardContainer');
+        dash.style.display = 'flex';
+        // force reflow
+        void dash.offsetWidth;
+        dash.classList.add('visible');
+        
         document.getElementById('formContainer').style.display = 'none';
         
         startGhanaTimeUpdates();
@@ -1289,37 +1373,46 @@
         attachActivityListeners();
       }
       
-      // ---------- LOGIN WITH LOADING ----------
+      // ---------- LOGIN WITH VANISH + GLOBAL CIRCLE LOADING ----------
       function handleLogin(e) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const pass = document.getElementById('password').value;
-        const loginBtn = document.getElementById('loginButton');
-        const btnText = loginBtn.querySelector('.button-text');
         
         document.getElementById('errorMessage').style.display = 'none';
         document.getElementById('attemptsWarning').style.display = 'none';
         
         if (validateLogin(email, pass)) {
-          // Show loading spinner
-          loginBtn.disabled = true;
-          btnText.innerHTML = '<span class="button-spinner"></span> Logging in...';
+          // 1. Check multiple login
+          if (isUserAlreadyLoggedIn(email)) {
+            showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
+            return;
+          }
           
-          // Simulate 5 second loading
+          // 2. Login card vanishes (opacity -> 0)
+          const loginBox = document.getElementById('loginBox');
+          loginBox.style.opacity = '0';
+          loginBox.style.transform = 'scale(0.9)';
+          
+          // 3. Show global circle loader
+          const circleLoader = document.getElementById('globalCircleLoader');
+          circleLoader.classList.add('active');
+          
+          // 4. after a brief moment, hide login container completely
           setTimeout(() => {
-            if (isUserAlreadyLoggedIn(email)) {
-              showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
-              // Reset button
-              loginBtn.disabled = false;
-              btnText.textContent = 'Log In';
-            } else {
-              failedAttempts = 0;
-              showDashboard();
-              // Reset button for next time (though dashboard is shown)
-              loginBtn.disabled = false;
-              btnText.textContent = 'Log In';
-            }
-          }, 5000);
+            document.getElementById('loginContainer').style.display = 'none';
+            // reset login box styles for next logout
+            loginBox.style.opacity = '1';
+            loginBox.style.transform = 'none';
+          }, 300);
+          
+          // 5. Simulate loading for default time (3 seconds) then show dashboard with animation
+          setTimeout(() => {
+            circleLoader.classList.remove('active');
+            failedAttempts = 0;
+            showDashboard(); // this sets dashboard visible with fade+scale
+          }, 3200); // default loading time
+          
         } else {
           handleFailedLogin();
         }
@@ -1354,13 +1447,11 @@
       }
       
       function openSubmissionForm() {
-        // Block if inactivity warning is active
         if (warningActive) return;
         
         document.getElementById('dashboardContainer').style.display = 'none';
         document.getElementById('formContainer').style.display = 'flex';
         
-        // Pause inactivity timer when leaving dashboard
         isInDashboard = false;
         clearInactivityTimers();
         
@@ -1377,13 +1468,11 @@
       }
       
       function openReviewMaterials() {
-        // Block if inactivity warning is active
         if (warningActive) return;
         window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam';
       }
       
       function openViewAssignment() {
-        // Block if inactivity warning is active
         if (warningActive) return;
         window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF';
       }
@@ -1392,7 +1481,6 @@
         document.getElementById('formContainer').style.display = 'none';
         document.getElementById('dashboardContainer').style.display = 'flex';
         
-        // Resume inactivity timer when returning to dashboard
         isInDashboard = true;
         resetActivityTimers();
         
@@ -1421,14 +1509,12 @@
         
         updateSessionExpiry();
         
-        // Set timer to show warning after 60 seconds of inactivity
         warningTimer = setTimeout(() => {
           if (isInDashboard && !warningActive) {
             showInactivityWarning();
           }
         }, INACTIVITY_WARNING_TIME);
         
-        // Fallback timer for safety
         inactivityTimer = setTimeout(() => {
           if (isInDashboard && warningActive) {
             logoutDueToInactivity();
@@ -1439,15 +1525,13 @@
       function showInactivityWarning() {
         if (warningActive || !isInDashboard) return;
         
-        // Show warning with overlay - ONLY "Continue session" button can close it
         warningActive = true;
         document.getElementById('inactivityOverlay').style.display = 'block';
         document.getElementById('inactivityWarning').style.display = 'block';
         
-        // Stop tracking user activity while warning is active
         detachActivityListeners();
         
-        startInactivityCountdown(WARNING_COUNTDOWN_SECONDS); // 90 seconds (1:30)
+        startInactivityCountdown(WARNING_COUNTDOWN_SECONDS);
       }
       
       function hideInactivityWarning() {
@@ -1459,7 +1543,6 @@
           countdownInterval = null;
         }
         
-        // Re-attach activity listeners only if still in dashboard
         if (isInDashboard) {
           attachActivityListeners();
         }
@@ -1525,7 +1608,6 @@
       }
       
       function trackUserActivity() { 
-        // Only track activity if warning is not active
         if (isInDashboard && !warningActive) {
           resetActivityTimers();
         }
@@ -1550,14 +1632,13 @@
       function getGreetingIcon() { const h = new Date().getHours(); if (h<12) return "🌅"; if (h<17) return "☀️"; return "🌙"; }
       function showLoginGreeting() {
         const sessionId = getCurrentSessionId();
-        // Only show if greeting hasn't been shown for this session (ensures no greeting on reload)
         if (hasGreetingBeenShown(sessionId)) return;
         
         document.getElementById('greetingText').textContent = 'Greetings';
         document.getElementById('greetingIcon').textContent = getGreetingIcon();
         document.getElementById('userGreeting').textContent = `${getGreeting()}, ${currentUserName}!`;
         document.getElementById('loginGreeting').style.display = 'flex';
-        markGreetingAsShown(sessionId); // Mark shown immediately so reload doesn't show it again
+        markGreetingAsShown(sessionId);
         
         setTimeout(() => { 
           document.getElementById('loginGreeting').style.animation = 'fadeOutUp 0.5s ease';
@@ -1568,7 +1649,7 @@
         }, 5000);
       }
       
-      // ---------- LOGOUT ----------
+      // ---------- LOGOUT (with nice card) ----------
       function logout() {
         if (currentUserEmail) removeUserSession(currentUserEmail);
         clearInactivityTimers();
@@ -1598,6 +1679,7 @@
       function showLogoutNotification() {
         const n = document.getElementById('logoutNotification'), c = document.getElementById('logoutCountdown');
         n.style.display = 'flex'; 
+        n.classList.add('show');
         let count = 5; 
         c.textContent = count;
         const i = setInterval(() => { 
@@ -1606,7 +1688,12 @@
           if (count <= 0) { 
             clearInterval(i); 
             n.style.display = 'none'; 
+            n.classList.remove('show');
             document.getElementById('loginContainer').style.display = 'flex';
+            // ensure login box is reset
+            const loginBox = document.getElementById('loginBox');
+            loginBox.style.opacity = '1';
+            loginBox.style.transform = 'none';
           } 
         }, 1000);
       }
@@ -1634,11 +1721,9 @@
 
         if (toggleBtn && passwordInput && toggleIcon) {
           toggleBtn.addEventListener('click', function() {
-            // Toggle the type attribute
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
             
-            // Toggle the eye / eye-slash icon
             if (type === 'text') {
               toggleIcon.classList.remove('fa-eye');
               toggleIcon.classList.add('fa-eye-slash');
@@ -1659,7 +1744,6 @@
         document.getElementById('inactivityOverlay').style.display = 'none';
         document.getElementById('inactivityWarning').style.display = 'none';
         
-        // Initialize password toggle
         setupPasswordToggle();
         
         setTimeout(function() {
@@ -1697,7 +1781,6 @@
         document.getElementById('confirmationDialog').style.display = 'none'; 
       });
       
-      // ONLY this button closes the inactivity warning
       document.getElementById('keepActiveButton').addEventListener('click', function() {
         continueSession();
       });
