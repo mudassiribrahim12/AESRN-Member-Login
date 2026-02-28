@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>African Emerging Scholars Research Network (AESRN) | Member Portal</title>
+    <title>AESRN Member Login Portal</title>
 <link rel="icon" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png" type="image/png">
 <link itemprop="image" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png">
 <meta property="og:logo" content="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png">
@@ -404,6 +404,17 @@
         max-width: 1100px;
         margin: 0 auto 40px auto;
         width: 100%;
+      }
+      
+            /* Required field asterisk */
+      .required-asterisk {
+        color: #ff0000;
+        margin-left: 4px;
+        font-weight: bold;
+      }
+      
+      .dark-theme .required-asterisk {
+        color: #ff6b6b;
       }
       
       /* Option cards - remain white */
@@ -1045,13 +1056,13 @@
     <!-- GLOBAL APP LOADER -->
     <div class="app-loader" id="appLoader">
       <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN Logo" class="app-loader-logo">
-      <div class="app-loader-text">Loading Portal...</div>
+      <div class="app-loader-text">Please Wait...</div>
     </div>
 
     <!-- GLOBAL CIRCLE LOADER (for login vanish) -->
     <div class="global-loader-circle" id="globalCircleLoader">
       <div class="circle-spinner"></div>
-      <div class="circle-text">Accessing Dashboard...</div>
+      <div class="circle-text">Loading Dashboard...</div>
     </div>
 
     <!-- LOGIN CONTAINER -->
@@ -1065,37 +1076,36 @@
      width="140" 
      height="140">
           </div>
-          <div class="login-title">Member Access Portal</div>
-          <div class="login-subtitle">Enter your credentials to access member services.</div>
+          <div class="login-title">Member Login</div>
         </div>
-        <form id="loginForm">
-          <div class="form-group">
-            <label class="form-label" for="email">Email</label>
-            <input type="email" id="email" class="form-input" placeholder="Enter registered email address" required autocomplete="off">
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="password">Password</label>
-            <!-- Password wrapper with eye toggle -->
-            <div class="password-wrapper">
-              <input type="password" id="password" class="form-input" placeholder="Enter access password" required autocomplete="off">
-              <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
-                <i class="far fa-eye" id="toggleIcon"></i>
-              </button>
-            </div>
-          </div>
-          <button type="submit" class="login-button" id="loginButton">
-            <span class="button-text">Log In</span>
-          </button>
-          
-          <!-- Small professional "Go to AESRN" link under login form -->
-          <a href="https://www.aesrn.net/#home" class="go-to-aesrn-link">
-            <i class="fas fa-arrow-left"></i> Go to AESRN 
-          </a>
-          
-          <div class="copyright-full" id="copyrightFull">Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.</div>
-          <div class="error-message" id="errorMessage">Invalid email or password.</div>
-          <div class="attempts-warning" id="attemptsWarning">Multiple failed attempts may temporarily restrict access.</div>
-        </form>
+       <form id="loginForm">
+  <div class="form-group">
+    <label class="form-label" for="email">Email <span class="required-asterisk">*</span></label>
+    <input type="email" id="email" class="form-input" placeholder="Enter your email address" required autocomplete="off">
+  </div>
+  <div class="form-group">
+    <label class="form-label" for="password">Password <span class="required-asterisk">*</span></label>
+    <!-- Password wrapper with eye toggle -->
+    <div class="password-wrapper">
+      <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="off">
+      <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
+        <i class="far fa-eye" id="toggleIcon"></i>
+      </button>
+    </div>
+  </div>
+  <button type="submit" class="login-button" id="loginButton">
+    <span class="button-text">Sign In</span>
+  </button>
+  
+  <!-- Small professional "Go to AESRN" link under login form -->
+  <a href="https://www.aesrn.net/#home" class="go-to-aesrn-link">
+    <i class="fas fa-arrow-left"></i> Go to AESRN 
+  </a>
+  
+  <div class="copyright-full" id="copyrightFull">Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.</div>
+  <div class="error-message" id="errorMessage">Invalid email or password.</div>
+  <div class="attempts-warning" id="attemptsWarning">Multiple failed attempts may temporarily restrict access.</div>
+</form>
       </div>
     </div>
     
