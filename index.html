@@ -1041,7 +1041,24 @@
         background: linear-gradient(135deg, #1A9AA0, #2A5C82);
       }
       
-      @media (max-width: 1100px) {
+      /* ---------- PHONE FIX: 1 CARD PER ROW, VERTICAL STACK ---------- */
+      @media (max-width: 640px) {
+        .action-grid {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 16px;
+        }
+        .action-card {
+          width: 100%;
+          max-width: 340px;   /* slightly larger for mobile */
+          min-width: 260px;
+          flex: 0 1 auto;
+          margin: 0 auto;
+        }
+      }
+      
+      @media (max-width: 1100px) and (min-width: 641px) {
         .action-grid {
           gap: 18px;
         }
@@ -1052,7 +1069,7 @@
         }
       }
       
-      @media (max-width: 900px) {
+      @media (max-width: 900px) and (min-width: 641px) {
         .action-grid {
           gap: 15px;
         }
@@ -1086,29 +1103,6 @@
         .action-card { max-width: 100%; min-width: 160px; }
       }
       
-      @media (max-width: 640px) {
-        .action-grid {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          gap: 12px;
-        }
-        .action-card {
-          max-width: 100%;
-          width: 100%;
-          padding: 18px 12px;
-        }
-        .action-icon {
-          font-size: 34px;
-          width: 60px;
-          height: 60px;
-        }
-        .action-title {
-          font-size: 16px;
-        }
-        .action-desc {
-          font-size: 12px;
-        }
-      }
     </style>
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
@@ -1195,7 +1189,7 @@
             <div class="action-desc">Drop your assigned section here using the form.</div>
             <div class="action-badge">Submit Work</div>
           </div>
-          <!-- CARD 3: View Corrections -->
+          <!-- CARD 3: View Corrections (personalized link) -->
           <div class="action-card" id="viewCorrectionsCard">
             <div class="action-icon">✏️</div>
             <div class="action-title">View Corrections</div>
@@ -1318,6 +1312,28 @@
         "mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim",
         "Mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim"
       };
+      
+      // ---------- PERSONALIZED CORRECTIONS LINK MAP (separate links per member) ----------
+      const correctionsLinkMap = {
+        // email (lowercase) : unique corrections URL
+        "malikseidu4@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgD9xiKlwu5uT4wIyCUtx8CEAWfmCIJEzoFXT694hE5Lswk?e=jZ7PEn",
+                "Malikseidu4@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgD9xiKlwu5uT4wIyCUtx8CEAWfmCIJEzoFXT694hE5Lswk?e=jZ7PEn",
+        "abdulrazakiddrisu1@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgCxO2xHXwtSSbptkWKxGGBwAdC4TDWfli4Tp1z7IE_PrTw?e=bWc5nR",
+                "Abdulrazakiddrisu1@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgCxO2xHXwtSSbptkWKxGGBwAdC4TDWfli4Tp1z7IE_PrTw?e=bWc5nR",
+        "abdul0247080685@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgChCoaEDswITaM13pAxNNpxAf63Gvalxk11ielEoDRlP4s?e=EFQrSN",
+                "Abdul0247080685@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgChCoaEDswITaM13pAxNNpxAf63Gvalxk11ielEoDRlP4s?e=EFQrSN",
+        "ednadie93@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
+                "Ednadie93@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
+        "Edna.die@tth.gov.gh": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
+                "edna.die@tth.gov.gh": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
+        "issahaqalhassan26@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgBP-ZvDfgz8R402lV3jNtpZAajXW_HKFwtuKAJAKuE4RZg?e=Ib5jfO",
+                "Issahaqalhassan26@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgBP-ZvDfgz8R402lV3jNtpZAajXW_HKFwtuKAJAKuE4RZg?e=Ib5jfO",
+        "mohammed.mudasir@tth.gov.gh": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=TD7Ls1",
+        "mudassiribrahim30@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=TD7Ls1"
+      };
+      // Fallback if email not found
+      const DEFAULT_CORRECTIONS_LINK = "https://onedrive.live.com/?cid=1A2B3C4D5E6F7G8H&id=1A2B3C4D5E6F7G8H%21123&authkey=!ABCD1234EFGH5678";
+      
       const correctPassword = "Scholar123";
       
       // ---------- GLOBALS ----------
@@ -1557,7 +1573,10 @@
       
       function openViewCorrections() {
         if (warningActive) return;
-        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=6xg1uK';
+        // Get personalized link based on currentUserEmail (which is stored in lowercase key)
+        const emailKey = currentUserEmail.toLowerCase();
+        const targetLink = correctionsLinkMap[emailKey] || DEFAULT_CORRECTIONS_LINK;
+        window.location.href = targetLink;
       }
       
       function backToDashboard() {
