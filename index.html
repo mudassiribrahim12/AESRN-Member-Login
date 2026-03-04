@@ -24,22 +24,13 @@
         
         /* LOGIN (square edges, smaller card) */
         .login-container { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#f0f2f5; padding:16px; }
-        .login-card { 
-            background:white; 
-            border-radius: 0; /* square edges */
-            padding:24px;      /* reduced padding */
-            width:100%; 
-            max-width:340px;   /* smaller width */
-            box-shadow:0 20px 40px rgba(0,0,0,0.08); 
-            transition:opacity 0.3s, transform 0.3s; 
-            border:1px solid rgba(0,0,0,0.03); 
-        }
+.login-card { background:white; border-radius:24px !important; padding:32px; width:100%; max-width:420px; box-shadow:0 20px 40px rgba(0,0,0,0.08); transition:opacity 0.3s, transform 0.3s; border:1px solid rgba(0,0,0,0.03); }
         .login-logo { text-align:center; margin-bottom:16px; }
-        .login-logo img { 
-            width:90px;        /* reduced from 120px */
-            height:90px; 
-            object-fit:contain; 
-        }
+.login-logo img { 
+    width:140px;        /* even larger */
+    height:140px; 
+    object-fit:contain; 
+}
         .login-title { font-size:22px; font-weight:700; color:#1e3c5c; text-align:center; margin-bottom:20px; letter-spacing:-0.3px; }
         .form-group { margin-bottom:16px; }
         .form-label { font-weight:600; font-size:13px; color:#1e2e44; margin-bottom:4px; display:block; }
@@ -50,7 +41,45 @@
         .toggle-password { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#7c8b9c; }
         .login-btn { width:100%; background:#2A5C82; color:white; border:none; padding:12px; border-radius:8px; font-weight:700; font-size:15px; cursor:pointer; transition:0.2s; box-shadow:0 8px 18px rgba(42,92,130,0.2); }
         .login-btn:disabled { opacity:0.5; pointer-events:none; background:#a0b8cc; }
-        .login-btn:hover:not(:disabled) { background:#1e4a6e; transform:translateY(-2px); box-shadow:0 15px 25px rgba(42,92,130,0.3); }
+.login-btn { 
+    width: 100%; 
+    background: #2A5C82; 
+    color: white; 
+    border: none; 
+    padding: 12px; 
+    border-radius: 8px; 
+    font-weight: 700; 
+    font-size: 15px; 
+    cursor: pointer; 
+    box-shadow: 0 8px 18px rgba(42,92,130,0.2); 
+    transition: none; /* NO TRANSITIONS */
+    transform: none !important; /* Prevent any transforms */
+    backface-visibility: hidden; /* Hardware acceleration */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-transform: translateZ(0); /* Force GPU rendering */
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    -ms-perspective: 1000;
+    perspective: 1000;
+}
+
+.login-btn:disabled { 
+    opacity: 0.5; 
+    pointer-events: none; 
+    background: #a0b8cc; 
+}
+
+.login-btn:hover:not(:disabled) { 
+    background: #1e4a6e; 
+    box-shadow: 0 15px 25px rgba(42,92,130,0.3); 
+    /* NO transform property at all */
+    transition: none; /* Ensure no transition on hover either */
+}
         .error-msg { color:#c62828; background:#ffebee; padding:10px; border-radius:8px; font-size:13px; font-weight:600; margin-top:14px; display:none; text-align:center; }
         .attempts-warning { color:#b85a00; background:#fff1e0; padding:8px; border-radius:8px; font-size:12px; font-weight:600; margin-top:10px; display:none; text-align:center; }
         .go-to-aesrn { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:16px; padding-top:14px; border-top:1px solid #e0e8f0; color:#2A5C82; text-decoration:none; font-weight:600; font-size:14px; }
@@ -652,20 +681,20 @@ body {
             <div class="login-logo">
                 <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN">
             </div>
-            <div class="login-title">member login</div>
+            <div class="login-title">Welcome back!</div>
             <form id="loginForm">
                 <div class="form-group">
-                    <label class="form-label">Email <span class="required-asterisk">*</span></label>
-                    <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required>
+                    <label class="form-label">Email<span class="required-asterisk">*</span></label>
+                    <input type="email" id="email" class="form-input" placeholder="" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password <span class="required-asterisk">*</span></label>
                     <div class="password-wrapper">
-                        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                        <input type="password" id="password" class="form-input" placeholder="" required>
                         <button type="button" class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></button>
                     </div>
                 </div>
-                <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+                <button type="submit" class="login-btn" id="loginBtn">Sign in</button>
                 <div class="error-msg" id="errorMessage">Invalid email or password</div>
                 <div class="attempts-warning" id="attemptsWarning">Too many attempts. Wait <span id="cooldownCounter">60</span>s</div>
                 <a href="https://www.aesrn.net/#home" class="go-to-aesrn"><i class="fas fa-arrow-left"></i> Go to AESRN</a>
