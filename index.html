@@ -2,1918 +2,1297 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-    <title>AESRN Member Login Portal</title>
-<link rel="icon" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png" type="image/png">
-<link itemprop="image" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png">
-<meta property="og:logo" content="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png">
-<meta name="twitter:logo" content="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png">
-
-      <meta name="google-site-verification" content="6zzEO7tBZ4x_xpC3utqGKn3jJekDVz2EkfZ7rCODSqQ" />
-    
-<link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-16x16.png">
-<link rel="manifest" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/site.webmanifest">
-
-    <script async src="https://tally.so/widgets/embed.js"></script>
-    <style type="text/css">
-      /* ---------- RESET & BASE ---------- */
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      
-      html, body { 
-        height: 100%; 
-        width: 100%;
-        overflow-x: hidden;
-      }
-      
-      body { 
-        display: flex; 
-        flex-direction: column; 
-        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-        color: #000000;
-        -webkit-font-smoothing: antialiased;
-      }
-      
-      /* ---------- LOGIN CONTAINER - SOFT LIGHT BACKGROUND ---------- */
-      .login-container {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 24px;
-        background: #f0f2f5;  /* Soft light gray background */
-        width: 100%;
-        min-height: 100vh;
-        position: relative;
-      }
-      
-      /* Dark theme for login container when dark mode is active */
-      .dark-theme .login-container {
-        background: #1a1c1e;  /* Soft dark background */
-      }
-      
-      .login-box {
-        background: white;  /* Keep white */
-        border-radius: 24px;  /* Changed from 0px to 24px for rounded edges */
-        padding: 24px 24px 24px 24px;  /* Reduced padding */
-        width: 100%;
-        max-width: 360px;  /* Reduced from 420px to 360px */
-        box-shadow: 0 30px 60px rgba(0,0,0,0.1);
-        border: 1px solid rgba(0,0,0,0.08);
-        transition: opacity 0.3s ease, transform 0.3s ease;
-      }
-      
-      .dark-theme .login-box {
-        background: #2a2c2e;  /* Soft dark card */
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      }
-      
-      .login-header { text-align: center; margin-bottom: 24px; }  /* Reduced margin */
-.login-logo-circle { width: 140px; height: 140px; margin: 0 auto 16px auto; display: flex; align-items: center; justify-content: center; }
-      .logo-circle-image { width: 140%; height: 140%; object-fit: contain; }
-      .login-title { font-size: 22px; font-weight: 600; color: #2A5C82; margin-bottom: 6px; }  /* Slightly reduced font size */
-      
-      .dark-theme .login-title {
-        color: #5D8AA8;
-      }
-      
-      .login-subtitle { color: #000000; font-size: 14px; opacity: 0.8; font-weight: 400; }
-      
-      .dark-theme .login-subtitle {
-        color: #ffffff;
-      }
-      
-      .form-group { margin-bottom: 16px; }  /* Reduced margin */
-      .form-label { display: block; margin-bottom: 4px; font-weight: 500; font-size: 14px; color: #000000; }  /* Reduced margin */
-      
-      .dark-theme .form-label {
-        color: #ffffff;
-      }
-      
-      .form-input { 
-        width: 100%; 
-        padding: 10px 14px;  /* Reduced padding */
-        border: 1px solid rgba(0,0,0,0.08);
-        border-radius: 0px;  /* Changed from 12px to 0px for square edges */
-        font-size: 15px;
-        transition: all 0.3s ease;
-        background: white;  /* White input background */
-        color: #000000;
-      }
-      
-      .dark-theme .form-input {
-        border: 1px solid rgba(255,255,255,0.1);
-        color: #ffffff;
-        background: #3a3c3e;  /* Dark input background */
-      }
-      
-      .form-input:focus { 
-        outline: none; 
-        border-color: #2A5C82; 
-        box-shadow: 0 0 0 4px rgba(42,92,130,0.15);
-      }
-      
-      /* Password wrapper for eye icon */
-      .password-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-      }
-      .password-wrapper .form-input {
-        padding-right: 48px;
-      }
-      .toggle-password {
-        position: absolute;
-        right: 14px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        font-size: 20px;
-        color: #757575;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-        width: 28px;
-        height: 28px;
-        transition: color 0.2s;
-      }
-      .toggle-password:hover {
-        color: #2A5C82;
-      }
-      .toggle-password:focus {
-        outline: none;
-        color: #2A5C82;
-      }
-      
-      .dark-theme .toggle-password {
-        color: #cccccc;
-      }
-      
-      .dark-theme .toggle-password:hover {
-        color: #5D8AA8;
-      }
-      
-      /* Login button - matching website button style */
-      .login-button { 
-        width: 100%; 
-        padding: 12px 18px;  /* Reduced padding */
-        background: transparent;
-        color: #000000;
-        border: 1px solid rgba(0,0,0,0.08);
-        border-radius: 0px;  /* Changed from 30px to 0px for square edges */
-        font-size: 16px; 
-        font-weight: 600; 
-        cursor: pointer; 
-        margin-top: 12px;  /* Reduced margin */
-        transition: all 0.2s ease;
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 48px;  /* Reduced height */
-      }
-      
-      .login-button:hover:not(:disabled) { 
-        border-color: #2A5C82;
-        color: #2A5C82;
-        transform: translateY(-2px);
-      }
-      
-      .dark-theme .login-button {
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .dark-theme .login-button:hover:not(:disabled) {
-        border-color: #5D8AA8;
-        color: #5D8AA8;
-      }
-      
-      .login-button:disabled {
-        opacity: 0.7;
-        cursor: not-allowed;
-        border-color: rgba(0,0,0,0.08);
-        color: #000000;
-      }
-      
-      .dark-theme .login-button:disabled {
-        border-color: rgba(255,255,255,0.1);
-        color: #ffffff;
-      }
-      
-      /* Loading spinner - now only used for the login vanish phase */
-      .global-loader-circle {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: #f0f2f5;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 20000;
-        transition: opacity 0.5s ease, visibility 0.5s ease;
-        opacity: 0;
-        visibility: hidden;
-      }
-      .global-loader-circle.active {
-        opacity: 1;
-        visibility: visible;
-      }
-      .circle-spinner {
-        width: 70px;
-        height: 70px;
-        border: 6px solid rgba(42,92,130,0.15);
-        border-top: 6px solid #2A5C82;
-        border-radius: 50%;
-        animation: spin 1s linear infinite;
-        margin-bottom: 24px;
-      }
-      .circle-text {
-        font-size: 18px;
-        color: #2A5C82;
-        font-weight: 500;
-        letter-spacing: 0.5px;
-      }
-      @keyframes spin { to { transform: rotate(360deg); } }
-      
-      /* Go to AESRN link */
-      .go-to-aesrn-link {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 16px;  /* Reduced margin */
-        padding-top: 12px;  /* Reduced padding */
-        border-top: 1px solid rgba(0,0,0,0.08);
-        text-align: center;
-        font-size: 14px;
-        font-weight: 500;
-        color: #000000;
-        text-decoration: none;
-        transition: all 0.2s ease;
-        width: 100%;
-        letter-spacing: 0.2px;
-        opacity: 0.8;
-      }
-      
-      .dark-theme .go-to-aesrn-link {
-        border-top: 1px solid rgba(255,255,255,0.1);
-        color: #ffffff;
-      }
-      
-      .go-to-aesrn-link i {
-        font-size: 14px;
-        color: #2A5C82;
-        transition: transform 0.2s ease;
-      }
-      
-      .dark-theme .go-to-aesrn-link i {
-        color: #5D8AA8;
-      }
-      
-      .go-to-aesrn-link:hover {
-        color: #2A5C82;
-        opacity: 1;
-      }
-      
-      .dark-theme .go-to-aesrn-link:hover {
-        color: #5D8AA8;
-      }
-      
-      .go-to-aesrn-link:hover i {
-        transform: translateX(-4px);
-        color: #E63946;
-      }
-      
-      .dark-theme .go-to-aesrn-link:hover i {
-        color: #5D8AA8;
-      }
-      
-      .copyright-full { 
-        text-align: center; 
-        margin-top: 16px;  /* Reduced margin */
-        font-size: 12px; 
-        color: #000000; 
-        opacity: 0.6;
-        border-top: 1px solid rgba(0,0,0,0.08); 
-        padding-top: 12px;  /* Reduced padding */
-      }
-      
-      .dark-theme .copyright-full {
-        color: #ffffff;
-        border-top: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .error-message, .attempts-warning { 
-        color: #d32f2f; 
-        font-size: 13px; 
-        margin-top: 12px;  /* Reduced margin */
-        text-align: center; 
-        display: none; 
-        padding: 8px;  /* Reduced padding */
-        background: #ffebee; 
-        border-radius: 0px;  /* Changed from 12px to 0px for square edges */
-      }
-      .attempts-warning { 
-        color: #b85a00; 
-        background: #fff1e0; 
-      }
-      
-         /* ---------- DASHBOARD – MODERN CARDS, AESRN GRADIENT BACKGROUND ---------- */
-      .dashboard-container {
-        flex: 1;
-        display: none;
-        flex-direction: column;
-        background: linear-gradient(135deg, #2A5C82 0%, #1A9AA0 50%, #E63946 100%);
-        width: 100%;
-        min-height: 100vh;
-        opacity: 0;
-        transform: scale(0.98);
-        transition: opacity 0.5s cubic-bezier(0.2, 0.9, 0.3, 1), transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1);
-      }
-      .dashboard-container.visible {
-        opacity: 1;
-        transform: scale(1);
-      }
-      
-      .dashboard-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        background: rgba(255,255,255,0.95);
-        backdrop-filter: blur(10px);
-        padding: 15px 25px;  /* Reduced padding */
-        box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-        margin: 20px 20px 0 20px;  /* Reduced margin */
-        border-radius: 16px;  /* Slightly reduced */
-        flex-wrap: wrap;
-        gap: 10px;
-        border: 1px solid rgba(255,255,255,0.2);
-      }
-      .dashboard-welcome { 
-        display: flex; 
-        align-items: center; 
-        gap: 10px; 
-        font-size: 16px;  /* Reduced font */
-        font-weight: 500; 
-        color: #000000; 
-      }
-      .dashboard-welcome span { 
-        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
-        color: white; 
-        padding: 6px 16px;  /* Reduced padding */
-        border-radius: 30px; 
-        font-size: 14px;  /* Reduced font */
-        font-weight: 600; 
-        box-shadow: 0 4px 15px rgba(42,92,130,0.3);
-      }
-      .dashboard-logout { 
-        background: #E63946;
-        color: white; 
-        border: none; 
-        border-radius: 30px; 
-        padding: 8px 20px;  /* Reduced padding */
-        font-weight: 600; 
-        cursor: pointer; 
-        font-size: 13px;  /* Reduced font */
-        transition: all 0.3s ease;
-        box-shadow: 0 10px 25px rgba(230,57,70,0.3);
-      }
-      .dashboard-logout:hover { 
-        background: #2A5C82;
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 15px 30px rgba(42,92,130,0.4);
-      }
-      
-      .dashboard-main {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        padding: 20px 20px;  /* Reduced padding */
-      }
-      
-      .action-grid {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;  /* Increased gap for better spacing */
-        justify-content: center;
-        align-items: stretch;
-        max-width: 1200px;  /* Increased max-width */
-        margin: 0 auto 20px auto;
-        width: 100%;
-      }
-      
-            /* Required field asterisk */
-      .required-asterisk {
-        color: #ff0000;
-        margin-left: 4px;
-        font-weight: bold;
-      }
-      
-      .dark-theme .required-asterisk {
-        color: #ff6b6b;
-      }
-      
-      /* Option cards - remain white - INCREASED SIZE FOR AUTOFIT */
-      .action-card {
-        background: white;  /* Keep white */
-        border-radius: 20px;  /* Slightly increased */
-        padding: 25px 20px;  /* Increased padding */
-        box-shadow: 0 12px 30px rgba(0,0,0,0.12);
-        flex: 1 1 220px;  /* Increased base width */
-        max-width: 260px;  /* Increased max-width */
-        min-width: 200px;  /* Increased min-width */
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-        transition: all 0.3s ease;
-        border: 1px solid rgba(255,255,255,0.2);
-        cursor: pointer;
-        position: relative;
-        overflow: hidden;
-        backdrop-filter: blur(10px);
-      }
-      
-      /* Add a nice hover effect */
-      .action-card:hover { 
-        transform: translateY(-4px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        border-color: rgba(42,92,130,0.3);
-      }
-      
-      .dark-theme .action-card {
-        background: rgba(42, 44, 46, 0.95);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-      }
-      
-      .dark-theme .action-card:hover {
-        border-color: rgba(93,138,168,0.3);
-      }
-      
-      .dark-theme .action-card {
-        background: #2a2c2e;  /* Dark card */
-        border: 1px solid rgba(255,255,255,0.1);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-      }
-      
-      /* Hover effect - card stays white */
-      .action-card:hover { 
-        transform: translateY(-2px);
-        background: white; /* Keep white */
-      }
-      
-      .dark-theme .action-card:hover {
-        background: #2a2c2e;  /* Keep dark card */
-      }
-      
-      .action-icon { 
-        font-size: 42px;  /* Increased from 32px */
-        margin-bottom: 15px;  /* Increased margin */
-        background: transparent;
-        width: 80px;  /* Increased from 60px */
-        height: 80px;  /* Increased from 60px */
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        border-radius: 4px;
-        color: #2A5C82; 
-        transition: all 0.2s ease;
-        border: none;
-      }
-      
-      .dark-theme .action-icon {
-        color: #5D8AA8;
-      }
-      
-      .action-card:hover .action-icon {
-        color: #1A9AA0;
-        transform: scale(1.02);
-      }
-      
-      .dark-theme .action-card:hover .action-icon {
-        color: #8AAAC8;
-      }
-      
-      .action-title { 
-        font-size: 20px;  /* Increased from 16px */
-        font-weight: 700; 
-        color: #000000; 
-        margin-bottom: 10px;  /* Increased margin */
-        letter-spacing: -0.02em;
-        line-height: 1.2;
-      }
-      
-      .dark-theme .action-title {
-        color: #ffffff;
-      }
-      
-      .action-desc { 
-        color: #000000;
-        font-size: 14px;  /* Increased from 12px */
-        line-height: 1.5;  /* Increased line height */
-        margin-bottom: 15px;  /* Increased margin */
-        font-weight: 400;
-        max-width: 220px;  /* Increased max-width */
-        opacity: 0.9;
-      }
-      
-      .dark-theme .action-desc {
-        color: #ffffff;
-        opacity: 0.9;
-      }
-      
-      .action-badge { 
-        margin-top: 5px;  /* Increased margin */
-        background: transparent;
-        color: #000000;
-        padding: 6px 16px;  /* Increased padding */
-        border-radius: 30px;  /* Increased */
-        font-size: 12px;  /* Increased from 11px */
-        font-weight: 500;
-        border: 1px solid rgba(0,0,0,0.08);
-        transition: all 0.2s ease;
-      }
-      
-      .dark-theme .action-badge {
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .action-card:hover .action-badge {
-        border-color: #2A5C82;
-        color: #2A5C82;
-      }
-      
-      .dark-theme .action-card:hover .action-badge {
-        border-color: #5D8AA8;
-        color: #5D8AA8;
-      }
-      
-      /* Dashboard footer */
-      .dashboard-footer {
-        background: white;  /* White card */
-        padding: 12px 20px;  /* Reduced padding */
-        margin-top: auto;
-        width: 100%;
-        border-top: 1px solid rgba(0,0,0,0.08);
-      }
-      
-      .dark-theme .dashboard-footer {
-        background: #2a2c2e;  /* Dark card */
-        border-top: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .footer-content {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        justify-content: center;
-        gap: 15px;  /* Reduced gap */
-        max-width: 1200px;
-        margin: 0 auto;
-        color: #000000;
-        font-size: 13px;  /* Reduced font */
-        opacity: 0.8;
-      }
-      
-      .dark-theme .footer-content {
-        color: #ffffff;
-      }
-      
-      .footer-item {
-        display: flex;
-        align-items: center;
-        gap: 5px;  /* Reduced gap */
-      }
-      
-      .footer-item a {
-        color: #2A5C82;
-        text-decoration: none;
-        font-weight: 500;
-      }
-      
-      .dark-theme .footer-item a {
-        color: #5D8AA8;
-      }
-      
-      .footer-item a:hover {
-        text-decoration: underline;
-      }
-      
-      .footer-divider {
-        color: rgba(0,0,0,0.3);
-        font-size: 14px;  /* Reduced */
-      }
-      
-      .dark-theme .footer-divider {
-        color: rgba(255,255,255,0.3);
-      }
-      
-      .footer-copyright {
-        color: #000000;
-        font-size: 12px;  /* Reduced */
-        opacity: 0.6;
-      }
-      
-      .dark-theme .footer-copyright {
-        color: #ffffff;
-      }
-      
-      /* ---------- FORM CONTAINER ---------- */
-      .form-container {
-        flex: 1;
-        position: relative;
-        display: none;
-        width: 100%;
-        min-height: 100vh;
-        background: #f0f2f5;  /* Match soft background */
-      }
-      
-      .dark-theme .form-container {
-        background: #1a1c1e;  /* Soft dark background */
-      }
-      
-      iframe { 
-        position: absolute; 
-        top: 0; 
-        right: 0; 
-        bottom: 0; 
-        left: 0; 
-        border: 0; 
-        background: white;  
-      }
-      
-      .dark-theme iframe {
-        background: #2a2c2e;
-      }
-      
-      /* Back button */
-      .back-to-dashboard {
-        position: fixed;
-        top: 20px;
-        left: 20px;
-        z-index: 2000;
-        background: white;  /* White card */
-        color: #000000;
-        border: 1px solid rgba(0,0,0,0.08);
-        padding: 8px 20px;  /* Reduced padding */
-        border-radius: 20px;  /* Reduced */
-        font-weight: 600;
-        font-size: 14px;  /* Reduced */
-        display: flex;
-        align-items: center;
-        gap: 8px;  /* Reduced */
-        cursor: pointer;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        transition: all 0.2s ease;
-      }
-      
-      .dark-theme .back-to-dashboard {
-        background: #2a2c2e;
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      .back-to-dashboard:hover { 
-        border-color: #2A5C82;
-        color: #2A5C82;
-        transform: translateY(-2px);
-      }
-      
-      .dark-theme .back-to-dashboard:hover {
-        border-color: #5D8AA8;
-        color: #5D8AA8;
-      }
-      
-      /* ---------- LOADING OVERLAY (for iframe) ---------- */
-      .loading-overlay {
-        position: absolute; 
-        top: 0; 
-        left: 0; 
-        right: 0; 
-        bottom: 0;
-        background: rgba(255,255,255,0.98); 
-        display: flex; 
-        flex-direction: column;
-        justify-content: center; 
-        align-items: center; 
-        z-index: 100;
-      }
-      
-      .dark-theme .loading-overlay {
-        background: rgba(26,28,30,0.98);
-      }
-      
-      .loading-spinner {
-        width: 40px;  /* Reduced */
-        height: 40px;  /* Reduced */
-        border: 3px solid rgba(42,92,130,0.3);  /* Thinner */
-        border-top: 3px solid #2A5C82;  /* Thinner */
-        border-radius: 50%; 
-        animation: spin 1s linear infinite; 
-        margin-bottom: 15px;  /* Reduced */
-      }
-      
-      .dark-theme .loading-spinner {
-        border: 3px solid rgba(93,138,168,0.3);
-        border-top: 3px solid #5D8AA8;
-      }
-      
-      .loading-text {
-        font-size: 14px;  /* Reduced */
-        color: #2A5C82;
-        font-weight: 500;
-      }
-      
-      .dark-theme .loading-text {
-        color: #5D8AA8;
-      }
-      
-      /* ---------- GLOBAL LOADER ---------- */
-      .app-loader {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: #f0f2f5;  /* Match soft background */
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        z-index: 10000;
-        transition: opacity 0.5s ease;
-      }
-      
-      .dark-theme .app-loader {
-        background: #1a1c1e;  /* Soft dark background */
-      }
-      
-      .app-loader-logo {
-        width: 100px;  /* Reduced */
-        height: 100px;  /* Reduced */
-        margin-bottom: 20px;  /* Reduced */
-        animation: pulse 1.5s infinite;
-      }
-      .app-loader-text {
-        color: #000000;
-        font-size: 18px;  /* Reduced */
-        font-weight: 500;
-        letter-spacing: 1px;  /* Reduced */
-      }
-      
-      .dark-theme .app-loader-text {
-        color: #ffffff;
-      }
-      
-      @keyframes pulse { 0% { opacity: 0.8; transform: scale(1); } 50% { opacity: 1; transform: scale(1.05); } 100% { opacity: 0.8; transform: scale(1); } }
-      
-      /* ---------- NOTIFICATIONS & MODALS ---------- */
-      .login-greeting-notification { 
-        position: fixed; top: 20px; right: 20px; background: white; color: #333; 
-        padding: 15px 25px;  /* Reduced padding */
-        border-radius: 4px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
-        z-index: 2000; display: none; align-items: center; gap: 12px;  /* Reduced gap */
-        animation: slideInRight 0.5s ease; max-width: 300px;  /* Reduced */
-        border: 1px solid rgba(0,0,0,0.08);
-      }
-      
-      .dark-theme .login-greeting-notification {
-        background: #2a2c2e;
-        color: #ffffff;
-        border: 1px solid rgba(255,255,255,0.1);
-      }
-      
-      /* REDUCED LOGOUT CARD */
-      .logout-notification { 
-        position: fixed; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%) scale(0.9); 
-        background: white; 
-        color: #1e1e2f; 
-        padding: 25px 30px;  /* Reduced from 40px 44px */
-        border-radius: 24px;  /* Reduced from 40px */
-        box-shadow: 0 30px 50px rgba(0,0,0,0.25);  /* Lighter shadow */
-        z-index: 3000; 
-        display: none; 
-        flex-direction: column; 
-        align-items: center; 
-        gap: 12px;  /* Reduced gap */
-        min-width: 280px;  /* Reduced from 360px */
-        text-align: center; 
-        border: 1px solid rgba(255,255,255,0.6);
-        backdrop-filter: blur(8px);
-        transition: transform 0.3s ease;
-      }
-      .logout-notification.show { transform: translate(-50%, -50%) scale(1); }
-      
-      .logout-icon {
-        font-size: 42px;  /* Reduced from 58px */
-        background: #f0f4fa;
-        width: 80px;  /* Reduced from 110px */
-        height: 80px;  /* Reduced from 110px */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 40px;  /* Reduced */
-        margin-bottom: 4px;  /* Reduced */
-        color: #2A5C82;
-        border: 2px dashed #2A5C8233;
-      }
-      .logout-message { 
-        font-size: 22px;  /* Reduced from 28px */
-        font-weight: 600; 
-        letter-spacing: -0.3px;
-        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-      .logout-countdown { 
-        font-size: 15px;  /* Reduced from 18px */
-        color: #2A5C82; 
-        background: #eef2f7; 
-        padding: 6px 20px;  /* Reduced padding */
-        border-radius: 30px;  /* Reduced */
-        font-weight: 500;
-        margin-top: 4px;  /* Reduced */
-      }
-      .dark-theme .logout-notification {
-        background: #2a2c2e;
-        color: #fff;
-        border: 1px solid rgba(255,255,255,0.2);
-      }
-      .dark-theme .logout-icon {
-        background: #3a3f44;
-        color: #5D8AA8;
-      }
-      
-       /* ---------- INACTIVITY WARNING - REDUCED SIZE ---------- */
-      .inactivity-warning {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        color: #000000;
-        border-radius: 20px;  /* Reduced from 28px */
-        padding: 25px 25px;  /* Reduced from 40px 36px */
-        width: 90%;
-        max-width: 350px;  /* Reduced from 420px */
-        z-index: 10000;
-        text-align: center;
-        box-shadow: 0 30px 50px -15px rgba(0,0,0,0.4);
-        border: 1px solid rgba(255,255,255,0.3);
-        animation: fadeScale 0.25s ease-out;
-        pointer-events: auto;
-      }
-      
-      /* Overlay behind warning */
-      .inactivity-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0,0,0,0.5);
-        backdrop-filter: blur(5px);
-        z-index: 9999;
-        pointer-events: all;
-      }
-      
-      @keyframes fadeScale {
-        from { opacity: 0.8; transform: translate(-50%, -50%) scale(0.96); }
-        to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-      }
-      .inactivity-warning h3 {
-        font-size: 22px;  /* Reduced from 28px */
-        font-weight: 600;
-        margin-bottom: 12px;  /* Reduced */
-        letter-spacing: -0.3px;
-        color: #2A5C82;
-      }
-      .inactivity-timer {
-        font-size: 36px;  /* Reduced from 48px */
-        font-weight: 700;
-        font-family: 'Courier New', monospace;
-        background: rgba(42,92,130,0.08);
-        display: inline-block;
-        padding: 10px 20px;  /* Reduced padding */
-        border-radius: 40px;  /* Reduced */
-        margin: 12px 0 12px;  /* Reduced margin */
-        color: #E63946;
-        border: 1px solid rgba(230,57,70,0.2);
-      }
-      .inactivity-message {
-        font-size: 15px;  /* Reduced from 17px */
-        color: #333333;
-        margin-bottom: 20px;  /* Reduced */
-        line-height: 1.4;
-      }
-      .keep-active-button {
-        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
-        color: white;
-        border: none;
-        border-radius: 40px;  /* Reduced */
-        padding: 12px 24px;  /* Reduced padding */
-        font-size: 16px;  /* Reduced from 18px */
-        font-weight: 600;
-        cursor: pointer;
-        width: 100%;
-        transition: all 0.3s ease;
-        box-shadow: 0 8px 20px rgba(42,92,130,0.3);
-        pointer-events: auto;
-      }
-      .keep-active-button:hover {
-        background: linear-gradient(135deg, #1A9AA0, #2A5C82);
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 15px 30px rgba(42,92,130,0.4);
-      }
-      
-      /* ---------- LOGOUT CONFIRMATION - REDUCED SIZE ---------- */
-      .confirmation-overlay { 
-        display: none; 
-        position: fixed; 
-        top: 0; 
-        left: 0; 
-        right: 0; 
-        bottom: 0; 
-        background: rgba(0,0,0,0.5);
-        backdrop-filter: blur(8px);
-        z-index: 5000; 
-        justify-content: center; 
-        align-items: center; 
-        animation: fadeIn 0.2s ease;
-      }
-      @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-      
-      .confirmation-dialog { 
-        background: white; 
-        border-radius: 24px;  /* Reduced from 32px */
-        padding: 30px 30px;  /* Reduced from 44px 40px */
-        width: 90%; 
-        max-width: 350px;  /* Reduced from 420px */
-        text-align: center; 
-        box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-        animation: scaleUp 0.25s ease;
-      }
-      @keyframes scaleUp { 
-        from { opacity: 0.8; transform: scale(0.96); } 
-        to { opacity: 1; transform: scale(1); } 
-      }
-      
-      .confirmation-icon {
-        font-size: 36px;  /* Reduced from 44px */
-        margin-bottom: 16px;  /* Reduced */
-        background: rgba(42,92,130,0.08);
-        width: 70px;  /* Reduced from 100px */
-        height: 70px;  /* Reduced from 100px */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        margin-left: auto;
-        margin-right: auto;
-        color: #2A5C82;
-        border: 1px solid rgba(42,92,130,0.2);
-      }
-      
-      .confirmation-title { 
-        font-size: 24px;  /* Reduced from 30px */
-        font-weight: 600; 
-        color: #2A5C82; 
-        margin-bottom: 8px;  /* Reduced */
-        letter-spacing: -0.4px;
-      }
-      
-      .confirmation-message { 
-        color: #333333; 
-        font-size: 16px;  /* Reduced from 18px */
-        margin-bottom: 24px;  /* Reduced */
-        line-height: 1.4;
-        font-weight: 400;
-      }
-      
-      .confirmation-buttons { 
-        display: flex; 
-        gap: 12px;  /* Reduced gap */
-        justify-content: center; 
-        width: 100%;
-      }
-      
-      .confirm-button {
-        flex: 1;
-        padding: 12px 16px;  /* Reduced padding */
-        border: none;
-        border-radius: 40px;  /* Reduced */
-        font-size: 15px;  /* Reduced from 17px */
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.15s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 4px;
-        background: white;
-        border: 1.5px solid #d0d6e8;
-        color: #333333;
-      }
-      .confirm-button:hover {
-        background: rgba(42,92,130,0.05);
-        border-color: #2A5C82;
-      }
-      
-      .confirm-yes {
-        background: linear-gradient(135deg, #2A5C82, #1A9AA0);
-        border: none;
-        color: white;
-      }
-      .confirm-yes:hover {
-        background: linear-gradient(135deg, #1A9AA0, #2A5C82);
-      }
-      
-      /* ---------- PHONE FIX: 1 CARD PER ROW, VERTICAL STACK ---------- */
-      @media (max-width: 640px) {
-        .action-grid {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 16px;
-        }
-        .action-card {
-          width: 100%;
-          max-width: 340px;   /* slightly larger for mobile */
-          min-width: 260px;
-          flex: 0 1 auto;
-          margin: 0 auto;
-        }
-      }
-      
-      @media (max-width: 1100px) and (min-width: 641px) {
-        .action-grid {
-          gap: 18px;
-        }
-        .action-card {
-          flex: 1 1 200px;
-          max-width: 240px;
-          min-width: 180px;
-        }
-      }
-      
-      @media (max-width: 900px) and (min-width: 641px) {
-        .action-grid {
-          gap: 15px;
-        }
-        .action-card {
-          flex: 1 1 180px;
-          max-width: 220px;
-          min-width: 160px;
-          padding: 20px 15px;
-        }
-        .action-icon {
-          font-size: 38px;
-          width: 70px;
-          height: 70px;
-        }
-        .action-title {
-          font-size: 18px;
-        }
-        .action-desc {
-          font-size: 13px;
-        }
-      }
-      
-      @media (max-width: 768px) {
-        .dashboard-header { margin: 15px 15px 0 15px; padding: 12px 15px; }
-        .dashboard-main { padding: 15px 15px; }
-        .footer-content { gap: 10px; flex-direction: column; }
-        .footer-divider { display: none; }
-        .confirmation-dialog { padding: 25px 20px; }
-        .confirmation-title { font-size: 22px; }
-        .inactivity-timer { font-size: 32px; }
-        .action-card { max-width: 100%; min-width: 160px; }
-      }
-      
-    </style>
-    <!-- Font Awesome for icons -->
+    <title>AESRN Member Portal</title>
+    <link rel="icon" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/favicon-32x32.png" type="image/png">
+    <meta name="google-site-verification" content="6zzEO7tBZ4x_xpC3utqGKn3jJekDVz2EkfZ7rCODSqQ" />
+    <link rel="apple-touch-icon" sizes="180x180" href="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/apple-touch-icon.png">
+    <!-- Font Awesome & Calendar -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  </head>
-  <body>
-    <!-- GLOBAL APP LOADER -->
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <!-- LogWork digital clock widget -->
+    <script src="https://cdn.logwork.com/widget/digital.js"></script>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { 
+            font-family: 'Inter', 'Segoe UI', Roboto, sans-serif; 
+            background: #f0f2f5;
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+        }
+        
+        /* LOGIN (clean white) */
+        .login-container { display:flex; justify-content:center; align-items:center; min-height:100vh; background:#f0f2f5; padding:16px; }
+        .login-card { background:white; border-radius:32px; padding:32px; width:100%; max-width:400px; box-shadow:0 20px 40px rgba(0,0,0,0.08); transition:opacity 0.3s, transform 0.3s; border:1px solid rgba(0,0,0,0.03); }
+        .login-logo { text-align:center; margin-bottom:20px; }
+        .login-logo img { width:120px; height:120px; object-fit:contain; }
+        .login-title { font-size:24px; font-weight:700; color:#1e3c5c; text-align:center; margin-bottom:24px; letter-spacing:-0.3px; }
+        .form-group { margin-bottom:20px; }
+        .form-label { font-weight:600; font-size:14px; color:#1e2e44; margin-bottom:6px; display:block; }
+        .required-asterisk { color:#E63946; margin-left:4px; font-weight:700; }
+        .form-input { width:100%; padding:12px 16px; border:1px solid #d4deec; border-radius:16px; font-size:15px; font-weight:500; transition:0.2s; background:white; }
+        .form-input:focus { outline:none; border-color:#2A5C82; box-shadow:0 0 0 3px rgba(42,92,130,0.15); }
+        .password-wrapper { position:relative; }
+        .toggle-password { position:absolute; right:16px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#7c8b9c; }
+        .login-btn { width:100%; background:#2A5C82; color:white; border:none; padding:14px; border-radius:40px; font-weight:700; font-size:16px; cursor:pointer; transition:0.2s; box-shadow:0 8px 18px rgba(42,92,130,0.2); }
+        .login-btn:disabled { opacity:0.5; pointer-events:none; background:#a0b8cc; }
+        .login-btn:hover:not(:disabled) { background:#1e4a6e; transform:translateY(-2px); box-shadow:0 15px 25px rgba(42,92,130,0.3); }
+        .error-msg { color:#c62828; background:#ffebee; padding:12px; border-radius:16px; font-size:14px; font-weight:600; margin-top:16px; display:none; text-align:center; }
+        .attempts-warning { color:#b85a00; background:#fff1e0; padding:8px; border-radius:12px; font-size:13px; font-weight:600; margin-top:12px; display:none; text-align:center; }
+        .go-to-aesrn { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:18px; padding-top:16px; border-top:1px solid #e0e8f0; color:#2A5C82; text-decoration:none; font-weight:600; }
+        .go-to-aesrn i { transition:transform 0.2s; }
+        .go-to-aesrn:hover i { transform:translateX(-4px); }
+        
+        /* LOADERS */
+        .global-loader-circle { position:fixed; inset:0; background:#f0f2f5; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:20000; opacity:0; visibility:hidden; transition:0.3s; }
+        .global-loader-circle.active { opacity:1; visibility:visible; }
+        .circle-spinner { width:70px; height:70px; border:6px solid rgba(42,92,130,0.15); border-top:6px solid #2A5C82; border-radius:50%; animation:spin 1s linear infinite; margin-bottom:24px; }
+        .circle-text { font-size:18px; font-weight:600; color:#2A5C82; }
+        @keyframes spin { to { transform:rotate(360deg); } }
+        
+        .app-loader { position:fixed; inset:0; background:#f0f2f5; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10000; transition:opacity 0.4s; }
+        .app-loader img { width:120px; height:120px; object-fit:contain; animation:pulse 1.5s infinite; margin-bottom:20px; }
+        .app-loader div { color:#2A5C82; font-weight:600; font-size:18px; }
+        @keyframes pulse { 0% { opacity:0.8; transform:scale(1); } 50% { opacity:1; transform:scale(1.05); } }
+        
+        /* Dashboard Transition Loader */
+        .dashboard-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(8px);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 15000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .dashboard-loader.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .dashboard-loader .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(42,92,130,0.1);
+            border-top: 4px solid #2A5C82;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 20px;
+        }
+        .dashboard-loader .text {
+            color: #2A5C82;
+            font-weight: 600;
+            font-size: 16px;
+            letter-spacing: 0.5px;
+        }
+        
+        /* DASHBOARD */
+        .dashboard { 
+            display:none; 
+            flex:1; 
+            background:#f8fafd; 
+            padding:20px; 
+            width:100%; 
+            min-height:100vh;
+            animation: fadeIn 0.4s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dashboard-wrapper { max-width:1600px; margin:0 auto; width:100%; }
+        
+        .dashboard-header { 
+            display:flex; justify-content:space-between; align-items:center; 
+            background:white; border-radius:28px; padding:16px 28px; margin-bottom:24px; 
+            box-shadow:0 10px 30px -10px rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.02);
+            transition:all 0.3s ease;
+            animation: slideDown 0.4s ease-out;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .dashboard-header:hover { transform:translateY(-2px); box-shadow:0 20px 35px -12px rgba(42,92,130,0.15); }
+        .user-welcome { display:flex; align-items:center; gap:12px; font-size:18px; font-weight:600; color:#1a2e44; }
+        .user-welcome span { background:linear-gradient(145deg, #2A5C82, #1A9AA0); color:white; padding:6px 22px; border-radius:40px; font-size:16px; font-weight:600; box-shadow:0 4px 10px rgba(42,92,130,0.2); }
+        .logout-btn { 
+            background:#E63946; color:white; border:none; padding:10px 26px; border-radius:40px; 
+            font-weight:700; cursor:pointer; font-size:15px; box-shadow:0 6px 14px rgba(230,57,70,0.2);
+            transition:all 0.2s;
+        }
+        .logout-btn:hover { background:#b71c1c; transform:scale(1.05); box-shadow:0 12px 24px rgba(230,57,70,0.3); }
+        
+        /* Profile + Calendar row */
+        .profile-calendar-row { display:flex; gap:24px; margin-bottom:32px; flex-wrap:wrap; }
+        .profile-card { 
+            background:white; border-radius:28px; padding:24px; flex:1 1 300px; display:flex; align-items:center; gap:24px; 
+            box-shadow:0 15px 35px -12px rgba(0,0,0,0.1); border:1px solid rgba(0,0,0,0.02);
+            transition:all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .profile-card:hover { transform:translateY(-6px); box-shadow:0 25px 40px -15px rgba(42,92,130,0.2); }
+        .member-pic-large { 
+            width:100px; height:100px; border-radius:50%; object-fit:cover; 
+            border:3px solid #2A5C82; box-shadow:0 10px 20px -5px rgba(42,92,130,0.3); 
+            transition:transform 0.3s ease; background:#f0f4fa; 
+        }
+        .profile-card:hover .member-pic-large { transform:scale(1.05); }
+        .profile-info h2 { font-size:24px; font-weight:700; color:#1e3c5c; margin-bottom:4px; letter-spacing:-0.3px; }
+        .profile-info .member-title { color:#2A5C82; font-weight:600; font-size:16px; }
+        .profile-info .workplace { color:#4a5f73; margin-top:8px; font-size:15px; font-weight:500; display:flex; align-items:center; gap:4px; }
+        
+        .calendar-card { 
+            background:white; border-radius:28px; padding:20px; flex:2 1 450px; 
+            box-shadow:0 15px 35px -12px rgba(0,0,0,0.1); border:1px solid rgba(0,0,0,0.02);
+            transition:all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out 0.1s both;
+        }
+        .calendar-card:hover { transform:translateY(-6px); box-shadow:0 25px 40px -15px rgba(42,92,130,0.2); }
+        .calendar-header { display:flex; align-items:center; gap:10px; margin-bottom:16px; color:#1e3c5c; }
+        .calendar-header span { font-weight:700; font-size:16px; }
+        #miniCalendar { height:240px; --fc-border-color: #eef2f7; --fc-today-bg: rgba(42,92,130,0.05); font-size:0.9rem; }
+        
+        /* Action tiles */
+        .section-title { font-size:20px; font-weight:700; color:#1e3c5c; margin-bottom:20px; display:flex; align-items:center; gap:8px; letter-spacing:-0.3px; }
+        .action-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:24px; margin-bottom:30px; }
+        .action-tile { 
+            background:white; border-radius:28px; padding:28px 20px; text-align:center; cursor:pointer; 
+            border:1px solid rgba(0,0,0,0.02); box-shadow:0 15px 35px -12px rgba(0,0,0,0.08);
+            transition:all 0.3s ease;
+            animation: fadeInScale 0.5s ease-out;
+        }
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .action-tile:hover { 
+            transform:translateY(-8px) scale(1.02); 
+            box-shadow:0 30px 45px -15px rgba(42,92,130,0.25); 
+            border-color:#2A5C8222;
+        }
+        .action-tile:active { transform:scale(0.98); }
+        .tile-icon { font-size:52px; margin-bottom:16px; color:#2A5C82; transition:transform 0.3s ease; }
+        .action-tile:hover .tile-icon { transform:scale(1.1) rotate(3deg); }
+        .tile-title { font-weight:700; font-size:20px; color:#1a2e44; margin-bottom:8px; }
+        
+        /* MEMBER CARDS GRID - Premium Design */
+        .members-grid-section { margin: 40px 0 30px; }
+        .members-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 24px; 
+            margin-top: 20px; 
+        }
+        .member-card { 
+            background: white; 
+            border-radius: 32px; 
+            padding: 28px 20px 24px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            text-align: center; 
+            cursor: pointer; 
+            border: 1px solid rgba(0,0,0,0.02); 
+            box-shadow: 0 20px 35px -15px rgba(0,0,0,0.1); 
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: cardAppear 0.5s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+        .member-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, #2A5C82, #1A9AA0);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .member-card:hover::before {
+            opacity: 1;
+        }
+        
+        @keyframes cardAppear {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .member-card:hover { 
+            transform: translateY(-10px) scale(1.02); 
+            box-shadow: 0 35px 50px -20px rgba(42,92,130,0.3); 
+            border-color: rgba(42,92,130,0.1); 
+        }
+        .member-card:active { transform: scale(0.98); }
+        .member-card-photo { 
+            width: 100px; 
+            height: 100px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 4px solid #2A5C82; 
+            margin-bottom: 18px; 
+            background: #f0f4fa;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 10px 25px -5px rgba(42,92,130,0.3);
+        }
+        .member-card:hover .member-card-photo { 
+            transform: scale(1.08); 
+            box-shadow: 0 15px 30px -5px rgba(42,92,130,0.4);
+        }
+        .member-card-name { 
+            font-weight: 800; 
+            font-size: 20px; 
+            color: #1e3c5c; 
+            margin-bottom: 6px; 
+            letter-spacing: -0.3px;
+        }
+        .member-card-title { 
+            color: #2A5C82; 
+            font-weight: 600; 
+            font-size: 15px; 
+            margin-bottom: 10px; 
+            background: rgba(42,92,130,0.08);
+            padding: 4px 14px;
+            border-radius: 40px;
+        }
+        .member-card-workplace { 
+            color: #4a5f73; 
+            font-size: 14px; 
+            font-weight: 500; 
+            display: flex; 
+            align-items: center; 
+            gap: 6px; 
+            margin-bottom: 14px;
+            line-height: 1.5;
+            padding: 0 8px;
+        }
+        .member-card-workplace i {
+            color: #2A5C82;
+            font-size: 14px;
+        }
+        .member-card-email { 
+            font-size: 13px; 
+            font-weight: 500;
+            color: #2A5C82; 
+            background: rgba(42,92,130,0.06); 
+            padding: 8px 16px; 
+            border-radius: 40px; 
+            width: 100%; 
+            overflow: hidden; 
+            text-overflow: ellipsis;
+            border: 1px solid rgba(42,92,130,0.1);
+            transition: all 0.3s ease;
+        }
+        .member-card:hover .member-card-email {
+            background: rgba(42,92,130,0.1);
+            border-color: rgba(42,92,130,0.2);
+        }
+        .view-indicator { 
+            margin-top: 14px; 
+            color: #2A5C82; 
+            font-size: 14px; 
+            font-weight: 700; 
+            opacity: 0; 
+            transform: translateY(10px);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .member-card:hover .view-indicator { 
+            opacity: 1; 
+            transform: translateY(0);
+        }
+        
+        /* Simple CSS to make it nice - Add to your existing <style> section */
+
+/* ---------- GLOBAL TWEAKS ---------- */
+body {
+    background: #f8fafd;
+    font-family: 'Inter', 'Segoe UI', Roboto, sans-serif;
+    color: #1e2e44;
+}
+
+/* ---------- LOGIN CARD REFINEMENT ---------- */
+.login-card {
+    border-radius: 40px;
+    box-shadow: 0 30px 60px -20px rgba(0, 30, 60, 0.3);
+    border: 1px solid rgba(255,255,255,0.5);
+    backdrop-filter: blur(2px);
+}
+
+.login-title {
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    color: #1e3c5c;
+}
+
+.form-input {
+    border-radius: 24px;
+    border: 1px solid #e0e8f2;
+    transition: all 0.2s;
+    background: #ffffff;
+}
+
+.form-input:focus {
+    border-color: #2A5C82;
+    box-shadow: 0 0 0 4px rgba(42,92,130,0.1);
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #2A5C82, #1e4a6e);
+    border-radius: 40px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    box-shadow: 0 10px 20px -5px rgba(42,92,130,0.4);
+}
+
+/* ---------- DASHBOARD CARDS - CLEAN & CRISP ---------- */
+.dashboard-header, 
+.profile-card, 
+.calendar-card, 
+.action-tile, 
+.dashboard-footer {
+    background: white;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px -15px rgba(0,0,0,0.05);
+    border: 1px solid rgba(0,0,0,0.02);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.dashboard-header:hover,
+.profile-card:hover,
+.calendar-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 20px 35px -15px rgba(42,92,130,0.15);
+    border-color: rgba(42,92,130,0.1);
+}
+
+.action-tile {
+    background: white;
+    border-radius: 24px;
+    padding: 24px 16px;
+    box-shadow: 0 8px 20px -10px rgba(0,0,0,0.05);
+}
+
+.action-tile:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 25px 35px -15px rgba(42,92,130,0.2);
+    border-color: rgba(42,92,130,0.2);
+}
+
+.tile-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+    color: #2A5C82;
+    transition: transform 0.2s;
+}
+
+.action-tile:hover .tile-icon {
+    transform: scale(1.1) rotate(2deg);
+}
+
+/* ---------- PROFILE PHOTO ENHANCEMENT ---------- */
+.member-pic-large {
+    border: 4px solid #2A5C82;
+    box-shadow: 0 15px 25px -10px rgba(42,92,130,0.25);
+    transition: transform 0.3s;
+}
+
+.profile-card:hover .member-pic-large {
+    transform: scale(1.02);
+}
+
+/* ---------- BUTTONS - MODERN & FRIENDLY ---------- */
+.logout-btn {
+    background: #E63946;
+    border-radius: 40px;
+    padding: 10px 28px;
+    font-weight: 600;
+    box-shadow: 0 8px 16px -5px rgba(230,57,70,0.3);
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background: #c72a38;
+    transform: scale(1.03);
+    box-shadow: 0 15px 25px -8px rgba(230,57,70,0.4);
+}
+
+.back-to-dashboard {
+    background: #2A5C82;
+    border-radius: 40px;
+    padding: 10px 24px;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(42,92,130,0.2);
+}
+
+/* ---------- FOOTER CLEANUP ---------- */
+.dashboard-footer {
+    background: white;
+    border-radius: 40px;
+    padding: 18px 32px;
+    color: #2e405b;
+}
+
+.footer-links a {
+    color: #2A5C82;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: #1e4a6e;
+    text-decoration: underline 2px rgba(42,92,130,0.2);
+    text-underline-offset: 4px;
+}
+
+/* ---------- MODALS - SOFT & CENTERED ---------- */
+.modal-card, .inactivity-box, .logout-notification {
+    border-radius: 36px;
+    box-shadow: 0 40px 70px -20px rgba(0,20,40,0.4);
+    border: 1px solid rgba(255,255,255,0.3);
+    backdrop-filter: blur(5px);
+    background: rgba(255,255,255,0.98);
+}
+
+.modal-btn {
+    padding: 12px 28px;
+    border-radius: 40px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cancel-btn {
+    background: #f0f4fa;
+    color: #1e3c5c;
+}
+
+.confirm-btn {
+    background: #E63946;
+    color: white;
+    box-shadow: 0 8px 16px -5px rgba(230,57,70,0.3);
+}
+
+/* ---------- RESPONSIVE TOUCHES ---------- */
+@media (max-width: 700px) {
+    .dashboard-header, .profile-card, .calendar-card {
+        border-radius: 24px;
+    }
+    
+    .action-grid {
+        gap: 16px;
+    }
+    
+    .dashboard-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+}
+
+/* ---------- MINI CALENDAR CLEANUP ---------- */
+#miniCalendar {
+    --fc-border-color: #eef2f7;
+    --fc-today-bg: rgba(42,92,130,0.03);
+    font-size: 0.9rem;
+}
+
+/* ---------- LOADER REFINEMENT ---------- */
+.app-loader img {
+    filter: drop-shadow(0 10px 20px rgba(42,92,130,0.15));
+}
+
+.circle-spinner {
+    border-width: 5px;
+    border-color: rgba(42,92,130,0.1);
+    border-top-color: #2A5C82;
+}
+        
+        /* Return to Admin View button */
+        .admin-return-btn {
+            background: #2A5C82;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 40px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px -5px rgba(42,92,130,0.3);
+            transition: all 0.3s ease;
+            margin-left: 16px;
+            animation: slideInRight 0.3s ease;
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .admin-return-btn:hover {
+            background: #1e4a6e;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px -5px rgba(42,92,130,0.4);
+        }
+        .admin-return-btn i {
+            transition: transform 0.3s ease;
+        }
+        .admin-return-btn:hover i {
+            transform: translateX(-4px);
+        }
+        
+        /* Footer */
+        .dashboard-footer { 
+            margin-top:auto; background:white; border-radius:40px; padding:18px 32px; 
+            display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; 
+            color:#2e405b; border:1px solid rgba(0,0,0,0.02); box-shadow:0 15px 30px -12px rgba(0,0,0,0.08);
+            font-weight: 500;
+            animation: fadeIn 0.5s ease-out 0.3s both;
+        }
+        .footer-links { display:flex; gap:24px; align-items:center; flex-wrap:wrap; }
+        .footer-links a { color:#2A5C82; text-decoration:none; font-weight:600; transition:color 0.2s; }
+        .footer-links a:hover { color:#1e4a6e; text-decoration:underline; }
+        .logwork-clock { display:inline-flex; align-items:center; }
+        
+        /* Modals */
+        .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.2); backdrop-filter:blur(4px); align-items:center; justify-content:center; z-index:2000; }
+        .modal-card { background:white; border-radius:32px; padding:32px; max-width:340px; text-align:center; box-shadow:0 30px 50px rgba(0,0,0,0.1); }
+        .inactivity-box { display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:white; border-radius:32px; padding:28px; max-width:340px; text-align:center; z-index:3000; box-shadow:0 30px 50px rgba(0,0,0,0.15); }
+        .inactivity-timer { font-size:40px; font-weight:700; color:#E63946; background:#fef0f0; padding:8px 16px; border-radius:60px; display:inline-block; margin:16px 0; }
+        .keep-btn { background:#2A5C82; color:white; border:none; padding:14px; width:100%; border-radius:40px; font-weight:600; cursor:pointer; transition:0.2s; }
+        .keep-btn:hover { background:#1e4a6e; transform:scale(1.02); }
+        
+        /* Form iframe container */
+        .form-container { display:none; position:fixed; inset:0; background:white; z-index:5000; flex-direction:column; }
+        .form-header { background:#f8fafd; padding:16px 24px; display:flex; align-items:center; gap:16px; border-bottom:1px solid #d4deec; }
+        .back-to-dashboard { background:#2A5C82; color:white; border:none; padding:8px 20px; border-radius:40px; font-weight:600; cursor:pointer; }
+        iframe { width:100%; flex:1; border:none; background:white; }
+        .loading-overlay { position:absolute; inset:0; background:white; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:10; }
+        
+        /* logout notification */
+        .logout-notification { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%) scale(0.9); background:white; border-radius:32px; padding:30px; text-align:center; z-index:6000; display:none; flex-direction:column; align-items:center; gap:12px; box-shadow:0 30px 50px rgba(0,0,0,0.15); transition:0.2s; }
+        .logout-notification.show { transform:translate(-50%,-50%) scale(1); }
+        
+        @media (max-width:700px){ 
+            .profile-calendar-row{ flex-direction:column; } 
+            .dashboard-header{ flex-direction:column; align-items:flex-start; gap:12px; }
+            .footer-links{ flex-direction:column; align-items:flex-start; gap:12px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- APP LOADER -->
     <div class="app-loader" id="appLoader">
-      <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN Logo" class="app-loader-logo">
-      <div class="app-loader-text">Please Wait...</div>
+        <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN logo">
+        <div>loading portal...</div>
     </div>
 
-    <!-- GLOBAL CIRCLE LOADER (for login vanish) -->
+    <!-- GLOBAL CIRCLE LOADER -->
     <div class="global-loader-circle" id="globalCircleLoader">
-      <div class="circle-spinner"></div>
-      <div class="circle-text">Loading Dashboard...</div>
+        <div class="circle-spinner"></div>
+        <div class="circle-text">Loading Dashboard...</div>
     </div>
 
-    <!-- LOGIN CONTAINER -->
-    <div class="login-container" id="loginContainer" style="display: none;">
-      <div class="login-box" id="loginBox">
-        <div class="login-header">
-          <div class="login-logo-circle">
-<img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" 
-     alt="AESRN Logo" 
-     class="logo-circle-image"
-     width="140" 
-     height="140">
-          </div>
-          <div class="login-title">Member Login</div>
+    <!-- DASHBOARD TRANSITION LOADER -->
+    <div class="dashboard-loader" id="dashboardLoader">
+        <div class="spinner"></div>
+        <div class="text">switching dashboard...</div>
+    </div>
+
+    <!-- LOGIN PAGE -->
+    <div class="login-container" id="loginContainer">
+        <div class="login-card" id="loginCard">
+            <div class="login-logo">
+                <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN">
+            </div>
+            <div class="login-title">member login</div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label class="form-label">Email <span class="required-asterisk">*</span></label>
+                    <input type="email" id="email" class="form-input" placeholder="your.email@example.com" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Password <span class="required-asterisk">*</span></label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></button>
+                    </div>
+                </div>
+                <button type="submit" class="login-btn" id="loginBtn">Sign In</button>
+                <div class="error-msg" id="errorMessage">Invalid email or password</div>
+                <div class="attempts-warning" id="attemptsWarning">Too many attempts. Wait <span id="cooldownCounter">60</span>s</div>
+                <a href="https://www.aesrn.net/#home" class="go-to-aesrn"><i class="fas fa-arrow-left"></i> Go to AESRN</a>
+            </form>
         </div>
-       <form id="loginForm">
-  <div class="form-group">
-    <label class="form-label" for="email">Email <span class="required-asterisk">*</span></label>
-    <input type="email" id="email" class="form-input" placeholder="Enter your email address" required autocomplete="off">
-  </div>
-  <div class="form-group">
-    <label class="form-label" for="password">Password <span class="required-asterisk">*</span></label>
-    <!-- Password wrapper with eye toggle -->
-    <div class="password-wrapper">
-      <input type="password" id="password" class="form-input" placeholder="Enter your password" required autocomplete="off">
-      <button type="button" class="toggle-password" id="togglePassword" aria-label="Show password">
-        <i class="far fa-eye" id="toggleIcon"></i>
-      </button>
     </div>
-  </div>
-  <button type="submit" class="login-button" id="loginButton">
-    <span class="button-text">Sign In</span>
-  </button>
-  
-  <!-- Small professional "Go to AESRN" link under login form -->
-  <a href="https://www.aesrn.net/#home" class="go-to-aesrn-link">
-    <i class="fas fa-arrow-left"></i> Go to AESRN 
-  </a>
-  
-  <div class="copyright-full" id="copyrightFull">Copyright © <span id="dynamicYear"></span> AESRN. All rights reserved.</div>
-  <div class="error-message" id="errorMessage">Invalid email or password.</div>
-  <div class="attempts-warning" id="attemptsWarning">Multiple failed attempts may temporarily restrict access.</div>
-</form>
-      </div>
-    </div>
-    
+
     <!-- DASHBOARD -->
-    <div class="dashboard-container" id="dashboardContainer">
-      <div class="dashboard-header">
-        <div class="dashboard-welcome">
-          <span id="dashboardUserName"></span> · Member Dashboard
+    <div class="dashboard" id="dashboardContainer">
+        <div class="dashboard-wrapper">
+            <div class="dashboard-header">
+                <div class="user-welcome">
+                    <i class="fas fa-user-circle" style="font-size:28px; color:#2A5C82;"></i>
+                    <span id="displayName"></span> · dashboard
+                    <!-- Return to Admin View button (only visible when viewing a member as founder) -->
+                    <button class="admin-return-btn" id="returnToAdminView" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Back to Admin View
+                    </button>
+                </div>
+                <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Log out</button>
+            </div>
+
+            <!-- PROFILE + CALENDAR row -->
+            <div class="profile-calendar-row">
+                <div class="profile-card">
+                    <img src="" alt="member" class="member-pic-large" id="memberPhoto">
+                    <div class="profile-info">
+                        <h2 id="profileName"></h2>
+                        <div class="member-title" id="profileRole"></div>
+                        <div class="workplace" id="profileWork"><i class="fas fa-university"></i> <span></span></div>
+                    </div>
+                </div>
+                <div class="calendar-card">
+                    <div class="calendar-header"><i class="fas fa-calendar-alt" style="color:#2A5C82;"></i><span>March 2026</span></div>
+                    <div id="miniCalendar"></div>
+                </div>
+            </div>
+
+            <!-- QUICK ACTIONS (visible to all users) -->
+            <div class="section-title"><i class="fas fa-clipboard-list" style="color:#2A5C82;"></i> quick actions</div>
+            <div class="action-grid">
+                <div class="action-tile" id="viewAssignment"><div class="tile-icon">📋</div><div class="tile-title">Assignments</div></div>
+                <div class="action-tile" id="makeSubmission"><div class="tile-icon">📤</div><div class="tile-title">Submit work</div></div>
+                <div class="action-tile" id="viewCorrections"><div class="tile-icon">✏️</div><div class="tile-title">Corrections</div></div>
+                <div class="action-tile" id="reviewMaterials"><div class="tile-icon">📚</div><div class="tile-title">Resources</div></div>
+            </div>
+
+            <!-- MEMBER CARDS SECTION - Only visible to founder/coordinator emails -->
+            <div class="members-grid-section" id="membersSection" style="display: none;">
+                <div class="section-title"><i class="fas fa-users" style="color:#2A5C82;"></i> all members · click to view dashboard</div>
+                <div class="members-grid" id="membersGrid"></div>
+            </div>
+
+            <!-- FOOTER -->
+            <div class="dashboard-footer">
+                <div class="footer-links">
+                    <a href="mailto:research.aesrn@yahoo.com"><i class="fas fa-envelope"></i> research.aesrn@yahoo.com</a>
+                    <span>•</span>
+                    <div class="logwork-clock">
+                        <a href="https://logwork.com/current-time-in-accra-ghana-greater-accra" class="digital-clock" data-style="round" data-size="250" data-timezone="Africa/Accra" data-language="en">Current time in Ghana</a>
+                    </div>
+                </div>
+                <div>© <span id="footerYear">2026</span> AESRN</div>
+            </div>
         </div>
-        <button class="dashboard-logout" id="dashboardLogoutBtn">Log out</button>
-      </div>
-      
-      <div class="dashboard-main">
-        <div class="action-grid">
-          <!-- CARD 1: View Assignment -->
-          <div class="action-card" id="viewAssignmentCard">
-            <div class="action-icon">📋</div>
-            <div class="action-title">View Assignment</div>
-            <div class="action-desc">Check your assigned tasks & materials.</div>
-            <div class="action-badge">Member Tasks</div>
-          </div>
-          <!-- CARD 2: Make a Submission -->
-          <div class="action-card" id="makeSubmissionCard">
-            <div class="action-icon">📄</div>
-            <div class="action-title">Make a Submission</div>
-            <div class="action-desc">Drop your assigned section here using the form.</div>
-            <div class="action-badge">Submit Work</div>
-          </div>
-          <!-- CARD 3: View Corrections (personalized link) -->
-          <div class="action-card" id="viewCorrectionsCard">
-            <div class="action-icon">✏️</div>
-            <div class="action-title">View Corrections</div>
-            <div class="action-desc">Review feedback, view corrections, and resubmit your work.</div>
-            <div class="action-badge">Review & Resubmit</div>
-          </div>
-          <!-- CARD 4: Review Materials -->
-          <div class="action-card" id="reviewMaterialsCard">
-            <div class="action-icon">📚</div>
-            <div class="action-title"> Past Review Materials</div>
-            <div class="action-desc">Catch up on everything, section by section.</div>
-            <div class="action-badge">Resources</div>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Simple full-length footer -->
-      <div class="dashboard-footer">
-        <div class="footer-content">
-          <div class="footer-item">
-            📧 <a href="mailto:research.aesrn@yahoo.com">research.aesrn@yahoo.com</a>
-          </div>
-          <span class="footer-divider">•</span>
-          <div class="footer-item">
-            🇬🇭 <span class="ghana-time-dash" id="ghanaTimeDashboard">11:30:57</span> GMT
-          </div>
-          <span class="footer-divider">•</span>
-          <div class="footer-item footer-copyright">
-            © <span id="infoCardYear">2026</span> AESRN. All rights reserved.
-          </div>
-        </div>
-      </div>
     </div>
-    
-    <!-- FORM CONTAINER -->
+
+    <!-- FORM IFRAME CONTAINER -->
     <div class="form-container" id="formContainer">
-      <div class="loading-overlay" id="loadingOverlay" style="display: none;">
-        <div class="loading-spinner"></div>
-        <div class="loading-text">Opening submission form...</div>
-      </div>
-      
-      <button class="back-to-dashboard" id="backToDashboardBtn">
-        ←  Dashboard
-      </button>
-      
-      <iframe 
-        src="https://tally.so/r/dWd6gA?transparentBackground=1&formEventsForwarding=1" 
-        width="100%" 
-        height="100%" 
-        frameborder="0" 
-        marginheight="0" 
-        marginwidth="0" 
-        title="AESRN Submission Form"
-        id="formIframe"
-        style="visibility: hidden; background: white;"
-        onload="handleIframeLoad()"
-      ></iframe>
-    </div>
-    
-    <!-- NOTIFICATIONS / MODALS -->
-    <div class="login-greeting-notification" id="loginGreeting">
-      <div class="greeting-icon" id="greetingIcon">👋</div>
-      <div class="greeting-content"><h4 id="greetingText">Greetings</h4><p id="userGreeting"></p></div>
-    </div>
-    
-    <!-- NICE LOGOUT CARD -->
-    <div class="logout-notification" id="logoutNotification">
-      <div class="logout-icon">👋🏾</div>
-      <div class="logout-message">Logged out</div>
-      <div class="logout-countdown">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
-    </div>
-    
-    <!-- INACTIVITY WARNING - Background overlay and dialog -->
-    <div class="inactivity-overlay" id="inactivityOverlay"></div>
-    <div class="inactivity-warning" id="inactivityWarning">
-      <h3>Session timeout</h3>
-      <div class="inactivity-timer" id="inactivityTimer">1:30</div>
-      <p class="inactivity-message">You've been inactive. Click continue to stay logged in.</p>
-      <button class="keep-active-button" id="keepActiveButton">Continue session</button>
-    </div>
-    
-    <!-- LOGOUT CONFIRMATION -->
-    <div class="confirmation-overlay" id="confirmationDialog">
-      <div class="confirmation-dialog">
-        <div class="confirmation-icon">🚪</div>
-        <div class="confirmation-title">Log out</div>
-        <div class="confirmation-message">End your session?</div>
-        <div class="confirmation-buttons">
-          <button class="confirm-button confirm-yes" id="confirmLogout">Yes, logout</button>
-          <button class="confirm-button confirm-no" id="cancelLogout">Cancel</button>
+        <div class="form-header">
+            <button class="back-to-dashboard" id="backToDashboardBtn"><i class="fas fa-arrow-left"></i> Dashboard</button>
+            <span style="font-weight:600;">Submission form</span>
         </div>
-      </div>
+        <div class="loading-overlay" id="iframeLoading" style="display:flex;">
+            <div class="loading-spinner"></div>
+            <div>Loading form...</div>
+        </div>
+        <iframe id="tallyIframe" allow="fullscreen" style="visibility:hidden;"></iframe>
+    </div>
+
+    <!-- LOGOUT NOTIFICATION -->
+    <div class="logout-notification" id="logoutNotification">
+        <div style="font-size:48px;">👋🏾</div>
+        <div style="font-size:22px; font-weight:700;">Logged out</div>
+        <div class="logout-countdown" style="font-weight:500;">Redirecting in <span id="logoutCountdown">5</span> seconds...</div>
+    </div>
+
+    <!-- INACTIVITY WARNING -->
+    <div class="inactivity-box" id="inactivityWarning">
+        <i class="fas fa-hourglass-half" style="font-size:44px; color:#E63946;"></i>
+        <h3 style="margin:12px 0 8px; font-weight:700;">Session timeout</h3>
+        <div class="inactivity-timer" id="inactivityTimer">1:30</div>
+        <p style="font-weight:500;">You've been inactive</p>
+        <button class="keep-btn" id="keepSessionBtn">Continue session</button>
+    </div>
+
+    <!-- LOGOUT CONFIRMATION MODAL -->
+    <div class="modal-overlay" id="logoutModal">
+        <div class="modal-card">
+            <i class="fas fa-door-open" style="font-size:48px; color:#2A5C82;"></i>
+            <h3 style="margin:16px 0 8px; font-weight:700;">End session?</h3>
+            <p style="color:#4f6f8f; font-weight:500;">You will be logged out</p>
+            <div class="modal-buttons">
+                <button class="modal-btn cancel-btn" id="cancelLogout">Stay</button>
+                <button class="modal-btn confirm-btn" id="confirmLogout">Logout</button>
+            </div>
+        </div>
     </div>
 
     <script>
-      // ---------- AUTO COPYRIGHT ----------
-      function updateAllCopyrightYears() {
-        const currentYear = new Date().getFullYear();
-        document.getElementById('dynamicYear') && (document.getElementById('dynamicYear').textContent = currentYear);
-        document.getElementById('infoCardYear') && (document.getElementById('infoCardYear').textContent = currentYear);
-      }
-
-      // ---------- USER CREDENTIALS (UPDATED FULL NAMES) ----------
-      const userMap = {
-        // Format: email (case-insensitive) : "Full Name"
-        "malikseidu4@gmail.com": "Abdul-Malik Seidu",
-        "Malikseidu4@gmail.com": "Abdul-Malik Seidu",
-       "Abdulrazakiddrisu1@gmail.com": "Iddrisu Abdul-Razak",
-        "abdulrazakiddrisu1@gmail.com": "Iddrisu Abdul-Razak",
-        "abdul0247080685@gmail.com": "Abdul Latif Abdul Rahman",
-        "Abdul0247080685@gmail.com": "Abdul Latif Abdul Rahman",
-        "ednadie93@gmail.com": "Edna Die",
-        "Ednadie93@gmail.com": "Edna Die",
-        "edna.die@tth.gov.gh": "Edna Die",
-        "Edna.die@tth.gov.gh": "Edna Die",
-        "issahaqalhassan26@gmail.com": "Alhassan Issahaq",
-        "Issahaqalhassan26@gmail.com": "Alhassan Issahaq",
-        "mohammed.mudasir@tth.gov.gh": "Mudasir Mohammed Ibrahim",
-        "Mohammed.mudasir@tth.gov.gh": "Mudasir Mohammed Ibrahim",
-        "mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim",
-        "Mudassiribrahim30@gmail.com": "Mudasir Mohammed Ibrahim"
-      };
-      
-      // ---------- PERSONALIZED CORRECTIONS LINK MAP (separate links per member) ----------
-      const correctionsLinkMap = {
-        // email (lowercase) : unique corrections URL
-        "malikseidu4@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgD9xiKlwu5uT4wIyCUtx8CEAWfmCIJEzoFXT694hE5Lswk?e=jZ7PEn",
-                "Malikseidu4@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgD9xiKlwu5uT4wIyCUtx8CEAWfmCIJEzoFXT694hE5Lswk?e=jZ7PEn",
-        "abdulrazakiddrisu1@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgCxO2xHXwtSSbptkWKxGGBwAdC4TDWfli4Tp1z7IE_PrTw?e=bWc5nR",
-                "Abdulrazakiddrisu1@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgCxO2xHXwtSSbptkWKxGGBwAdC4TDWfli4Tp1z7IE_PrTw?e=bWc5nR",
-        "abdul0247080685@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgChCoaEDswITaM13pAxNNpxAf63Gvalxk11ielEoDRlP4s?e=EFQrSN",
-                "Abdul0247080685@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgChCoaEDswITaM13pAxNNpxAf63Gvalxk11ielEoDRlP4s?e=EFQrSN",
-        "ednadie93@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
-                "Ednadie93@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
-        "Edna.die@tth.gov.gh": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
-                "edna.die@tth.gov.gh": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS",
-        "issahaqalhassan26@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgBP-ZvDfgz8R402lV3jNtpZAajXW_HKFwtuKAJAKuE4RZg?e=Ib5jfO",
-                "Issahaqalhassan26@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgBP-ZvDfgz8R402lV3jNtpZAajXW_HKFwtuKAJAKuE4RZg?e=Ib5jfO",
-        "mohammed.mudasir@tth.gov.gh": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=TD7Ls1",
-        "mudassiribrahim30@gmail.com": "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=TD7Ls1"
-      };
-      // Fallback if email not found
-      const DEFAULT_CORRECTIONS_LINK = "https://onedrive.live.com/?cid=1A2B3C4D5E6F7G8H&id=1A2B3C4D5E6F7G8H%21123&authkey=!ABCD1234EFGH5678";
-      
-      const correctPassword = "Scholar123";
-      
-      // ---------- GLOBALS ----------
-      let failedAttempts = 0;
-      const maxAttempts = 5;
-      let currentUserName = "", currentUserEmail = "";
-      let ghanaTimeInterval;
-      let isInDashboard = true;
-      
-      // Updated timings: 1 minute inactivity triggers warning with 1:30 countdown
-      const INACTIVITY_WARNING_TIME = 60 * 1000; // 60 seconds -> show warning
-      const WARNING_COUNTDOWN_SECONDS = 90; // 1:30 countdown
-      const SESSION_TIMEOUT = (60 + WARNING_COUNTDOWN_SECONDS) * 1000; // 2:30 total
-      
-      let inactivityTimer, warningTimer;
-      let countdownInterval = null;
-      let warningActive = false;
-      
-      const ACTIVE_SESSIONS_KEY = 'aesrn_active_sessions';
-      const CURRENT_SESSION_KEY = 'aesrn_current_session';
-      const USER_SESSION_KEY = 'aesrn_user_session';
-      const SHOWN_GREETING_KEY = 'aesrn_shown_greeting';
-      
-      let iframeEverLoaded = false;
-      
-      // ---------- SESSION FUNCTIONS ----------
-      function generateSessionId() { return 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9); }
-      function getCurrentSessionId() { return sessionStorage.getItem(CURRENT_SESSION_KEY); }
-      function setCurrentSessionId(sessionId) { sessionStorage.setItem(CURRENT_SESSION_KEY, sessionId); }
-      function getActiveSessions() { const s = localStorage.getItem(ACTIVE_SESSIONS_KEY); return s ? JSON.parse(s) : {}; }
-      function saveActiveSessions(sessions) { localStorage.setItem(ACTIVE_SESSIONS_KEY, JSON.stringify(sessions)); }
-      function hasGreetingBeenShown(sessionId) { const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}'); return g[sessionId] || false; }
-      function markGreetingAsShown(sessionId) { const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}'); g[sessionId] = true; localStorage.setItem(SHOWN_GREETING_KEY, JSON.stringify(g)); }
-      function clearGreetingStatus(sessionId) { const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}'); delete g[sessionId]; localStorage.setItem(SHOWN_GREETING_KEY, JSON.stringify(g)); }
-      
-      function isUserAlreadyLoggedIn(email) {
-        const sessions = getActiveSessions();
-        const userSession = sessions[email];
-        if (!userSession) return false;
-        if (Date.now() > userSession.expiry) { delete sessions[email]; saveActiveSessions(sessions); return false; }
-        const currentSessionId = getCurrentSessionId();
-        return !(userSession.sessionId === currentSessionId);
-      }
-      
-      function registerUserSession(email, name) {
-        const sessionId = generateSessionId();
-        const sessions = getActiveSessions();
-        if (sessions[email]) { clearGreetingStatus(sessions[email].sessionId); delete sessions[email]; }
-        sessions[email] = { sessionId, expiry: Date.now() + SESSION_TIMEOUT, name, loginTime: Date.now(), isFirstLogin: true };
-        saveActiveSessions(sessions);
-        setCurrentSessionId(sessionId);
-        const userSession = { email, name, sessionId, loginTime: Date.now(), expiry: Date.now() + SESSION_TIMEOUT, isFirstLogin: true };
-        localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession));
-        return sessionId;
-      }
-      
-      function removeUserSession(email) {
-        const sessions = getActiveSessions();
-        if (sessions[email]) { clearGreetingStatus(sessions[email].sessionId); delete sessions[email]; saveActiveSessions(sessions); }
-        localStorage.removeItem(USER_SESSION_KEY);
-        sessionStorage.removeItem(CURRENT_SESSION_KEY);
-      }
-      
-      // ---------- TIME ----------
-      function getGhanaTime() { 
-        const g = new Date(new Date().toLocaleString('en-US', { timeZone: 'Africa/Accra' }));
-        return `${g.getHours().toString().padStart(2,'0')}:${g.getMinutes().toString().padStart(2,'0')}:${g.getSeconds().toString().padStart(2,'0')}`;
-      }
-      function updateGhanaTimeDisplay() { 
-        const t = getGhanaTime();
-        const dash = document.getElementById('ghanaTimeDashboard');
-        if (dash) dash.textContent = t;
-      }
-      function startGhanaTimeUpdates() { updateGhanaTimeDisplay(); ghanaTimeInterval = setInterval(updateGhanaTimeDisplay, 1000); }
-      function stopGhanaTimeUpdates() { clearInterval(ghanaTimeInterval); }
-      
-      // ---------- LOGIN VALIDATION ----------
-      function validateLogin(email, password) {
-        const normEmail = email.trim(), normPass = password.trim();
-        const key = Object.keys(userMap).find(k => k.toLowerCase() === normEmail.toLowerCase());
-        if (key) { 
-          currentUserName = userMap[key]; // Full name as per updated map
-          currentUserEmail = key; 
-          return normPass === correctPassword; 
-        }
-        return false;
-      }
-      
-      function handleFailedLogin() {
-        failedAttempts++;
-        const err = document.getElementById('errorMessage'), warn = document.getElementById('attemptsWarning');
-        const email = document.getElementById('email'), pwd = document.getElementById('password'), btn = document.getElementById('loginButton');
-        err.style.display = 'block'; email.classList.add('error'); pwd.classList.add('error'); pwd.value = ''; email.focus();
-        if (failedAttempts >= 3) warn.style.display = 'block';
-        if (failedAttempts >= maxAttempts) {
-          btn.disabled = true; 
-          const btnText = btn.querySelector('.button-text');
-          if (btnText) btnText.textContent = 'Access Restricted';
-          setTimeout(() => { 
-            btn.disabled = false; 
-            if (btnText) btnText.textContent = 'Log In';
-            warn.style.display = 'none'; 
-            failedAttempts = 0; 
-          }, 30000);
-        }
-        setTimeout(() => { email.classList.remove('error'); pwd.classList.remove('error'); }, 2000);
-      }
-      
-      // ---------- DASHBOARD SHOW WITH ANIMATION ----------
-      function showDashboard() {
-        document.getElementById('dashboardUserName').textContent = currentUserName;
-        
-        // Hide login container (it has already vanished)
-        document.getElementById('loginContainer').style.display = 'none';
-        
-        // Make dashboard visible with animation class
-        const dash = document.getElementById('dashboardContainer');
-        dash.style.display = 'flex';
-        // force reflow
-        void dash.offsetWidth;
-        dash.classList.add('visible');
-        
-        document.getElementById('formContainer').style.display = 'none';
-        
-        startGhanaTimeUpdates();
-        registerUserSession(currentUserEmail, currentUserName);
-        showLoginGreeting();
-        
-        isInDashboard = true;
-        resetActivityTimers();
-        attachActivityListeners();
-      }
-      
-      // ---------- LOGIN WITH VANISH + GLOBAL CIRCLE LOADING ----------
-      function handleLogin(e) {
-        e.preventDefault();
-        const email = document.getElementById('email').value;
-        const pass = document.getElementById('password').value;
-        
-        document.getElementById('errorMessage').style.display = 'none';
-        document.getElementById('attemptsWarning').style.display = 'none';
-        
-        if (validateLogin(email, pass)) {
-          // 1. Check multiple login
-          if (isUserAlreadyLoggedIn(email)) {
-            showCustomAlert('Multiple Login Detected', 'This account is already logged in on another device.', 'warning');
-            return;
-          }
-          
-          // 2. Login card vanishes (opacity -> 0)
-          const loginBox = document.getElementById('loginBox');
-          loginBox.style.opacity = '0';
-          loginBox.style.transform = 'scale(0.9)';
-          
-          // 3. Show global circle loader
-          const circleLoader = document.getElementById('globalCircleLoader');
-          circleLoader.classList.add('active');
-          
-          // 4. after a brief moment, hide login container completely
-          setTimeout(() => {
-            document.getElementById('loginContainer').style.display = 'none';
-            // reset login box styles for next logout
-            loginBox.style.opacity = '1';
-            loginBox.style.transform = 'none';
-          }, 300);
-          
-          // 5. Simulate loading for default time (3 seconds) then show dashboard with animation
-          setTimeout(() => {
-            circleLoader.classList.remove('active');
-            failedAttempts = 0;
-            showDashboard(); // this sets dashboard visible with fade+scale
-          }, 3200); // default loading time
-          
-        } else {
-          handleFailedLogin();
-        }
-      }
-      
-      // ---------- IFRAME HANDLING ----------
-      function handleIframeLoad() {
-        iframeEverLoaded = true;
-        if (document.getElementById('formContainer').style.display === 'flex') {
-          hideLoading();
-        } else {
-          document.getElementById('loadingOverlay').style.display = 'none';
-        }
-      }
-      
-      function hideLoading() { 
-        const lo = document.getElementById('loadingOverlay');
-        if (lo) { 
-          lo.style.opacity = '0'; 
-          setTimeout(() => { lo.style.display = 'none'; }, 300); 
-        }
-        const ifr = document.getElementById('formIframe');
-        if (ifr) ifr.style.visibility = 'visible';
-      }
-      
-      function showLoading() { 
-        const lo = document.getElementById('loadingOverlay');
-        if (lo) { 
-          lo.style.display = 'flex'; 
-          lo.style.opacity = '1'; 
-        }
-      }
-      
-      function openSubmissionForm() {
-        if (warningActive) return;
-        
-        document.getElementById('dashboardContainer').style.display = 'none';
-        document.getElementById('formContainer').style.display = 'flex';
-        
-        isInDashboard = false;
-        clearInactivityTimers();
-        
-        const ifr = document.getElementById('formIframe');
-        if (ifr) {
-          if (iframeEverLoaded) {
-            ifr.style.visibility = 'visible';
-            document.getElementById('loadingOverlay').style.display = 'none';
-          } else {
-            ifr.style.visibility = 'hidden';
-            showLoading();
-          }
-        }
-      }
-      
-      function openReviewMaterials() {
-        if (warningActive) return;
-        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam';
-      }
-      
-      function openViewAssignment() {
-        if (warningActive) return;
-        window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF';
-      }
-      
-      function openViewCorrections() {
-        if (warningActive) return;
-        // Get personalized link based on currentUserEmail (which is stored in lowercase key)
-        const emailKey = currentUserEmail.toLowerCase();
-        const targetLink = correctionsLinkMap[emailKey] || DEFAULT_CORRECTIONS_LINK;
-        window.location.href = targetLink;
-      }
-      
-      function backToDashboard() {
-        document.getElementById('formContainer').style.display = 'none';
-        document.getElementById('dashboardContainer').style.display = 'flex';
-        
-        isInDashboard = true;
-        resetActivityTimers();
-        
-        const ifr = document.getElementById('formIframe');
-        if (ifr) ifr.style.visibility = 'hidden';
-        document.getElementById('loadingOverlay').style.display = 'none';
-      }
-      
-      // ---------- INACTIVITY TIMERS (Dashboard only) ----------
-      function clearInactivityTimers() {
-        clearTimeout(inactivityTimer);
-        clearTimeout(warningTimer);
-        if (countdownInterval) {
-          clearInterval(countdownInterval);
-          countdownInterval = null;
-        }
-        if (warningActive) {
-          hideInactivityWarning();
-        }
-      }
-      
-      function resetActivityTimers() {
-        if (!isInDashboard) return;
-        
-        clearInactivityTimers();
-        
-        updateSessionExpiry();
-        
-        warningTimer = setTimeout(() => {
-          if (isInDashboard && !warningActive) {
-            showInactivityWarning();
-          }
-        }, INACTIVITY_WARNING_TIME);
-        
-        inactivityTimer = setTimeout(() => {
-          if (isInDashboard && warningActive) {
-            logoutDueToInactivity();
-          }
-        }, SESSION_TIMEOUT + 2000);
-      }
-      
-      function showInactivityWarning() {
-        if (warningActive || !isInDashboard) return;
-        
-        warningActive = true;
-        document.getElementById('inactivityOverlay').style.display = 'block';
-        document.getElementById('inactivityWarning').style.display = 'block';
-        
-        detachActivityListeners();
-        
-        startInactivityCountdown(WARNING_COUNTDOWN_SECONDS);
-      }
-      
-      function hideInactivityWarning() {
-        warningActive = false;
-        document.getElementById('inactivityOverlay').style.display = 'none';
-        document.getElementById('inactivityWarning').style.display = 'none';
-        if (countdownInterval) {
-          clearInterval(countdownInterval);
-          countdownInterval = null;
-        }
-        
-        if (isInDashboard) {
-          attachActivityListeners();
-        }
-      }
-      
-      function startInactivityCountdown(seconds) {
-        const timerEl = document.getElementById('inactivityTimer');
-        if (countdownInterval) clearInterval(countdownInterval);
-        
-        function updateDisplay() {
-          const mins = Math.floor(seconds / 60);
-          const secs = seconds % 60;
-          timerEl.textContent = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-          if (seconds <= 0) {
-            clearInterval(countdownInterval);
-            if (isInDashboard) {
-              logoutDueToInactivity();
-            }
-          }
-        }
-        updateDisplay();
-        countdownInterval = setInterval(() => {
-          seconds--;
-          updateDisplay();
-        }, 1000);
-      }
-      
-      function logoutDueToInactivity() { 
-        clearInactivityTimers();
-        showCustomAlert('Session Expired', 'Session expired due to inactivity.', 'info'); 
-        logout(); 
-      }
-      
-      function continueSession() {
-        if (isInDashboard) {
-          hideInactivityWarning();
-          resetActivityTimers();
-          updateSessionExpiry();
-        }
-      }
-      
-      function updateSessionExpiry() {
-        if (currentUserEmail) {
-          const sessions = getActiveSessions();
-          if (sessions[currentUserEmail]) { 
-            sessions[currentUserEmail].expiry = Date.now() + SESSION_TIMEOUT; 
-            saveActiveSessions(sessions); 
-          }
-          const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
-          if (userSession.email) { 
-            userSession.expiry = Date.now() + SESSION_TIMEOUT; 
-            localStorage.setItem(USER_SESSION_KEY, JSON.stringify(userSession)); 
-          }
-        }
-      }
-      
-      function showCustomAlert(title, message, type) {
-        const icon = type==='info' ? 'ℹ️' : '⚠️';
-        const overlay = document.getElementById('confirmationDialog');
-        overlay.innerHTML = `<div class="confirmation-dialog"><div class="confirmation-icon">${icon}</div><div class="confirmation-title">${title}</div><div class="confirmation-message">${message}</div><div class="confirmation-buttons"><button class="confirm-button confirm-no" id="closeAlert">OK</button></div></div>`;
-        overlay.style.display = 'flex';
-        document.getElementById('closeAlert').addEventListener('click', function() { overlay.style.display = 'none'; });
-      }
-      
-      function trackUserActivity() { 
-        if (isInDashboard && !warningActive) {
-          resetActivityTimers();
-        }
-      }
-      
-      function attachActivityListeners() {
-        document.addEventListener('mousemove', trackUserActivity); 
-        document.addEventListener('keydown', trackUserActivity);
-        document.addEventListener('click', trackUserActivity); 
-        document.addEventListener('scroll', trackUserActivity);
-      }
-      
-      function detachActivityListeners() {
-        document.removeEventListener('mousemove', trackUserActivity); 
-        document.removeEventListener('keydown', trackUserActivity);
-        document.removeEventListener('click', trackUserActivity); 
-        document.removeEventListener('scroll', trackUserActivity);
-      }
-      
-      // ---------- GREETING (only first login per session) ----------
-      function getGreeting() { const h = new Date().getHours(); if (h<12) return "Good Morning"; if (h<17) return "Good Afternoon"; return "Good Evening"; }
-      function getGreetingIcon() { const h = new Date().getHours(); if (h<12) return "🌅"; if (h<17) return "☀️"; return "🌙"; }
-      function showLoginGreeting() {
-        const sessionId = getCurrentSessionId();
-        if (hasGreetingBeenShown(sessionId)) return;
-        
-        document.getElementById('greetingText').textContent = 'Greetings';
-        document.getElementById('greetingIcon').textContent = getGreetingIcon();
-        document.getElementById('userGreeting').textContent = `${getGreeting()}, ${currentUserName}!`;
-        document.getElementById('loginGreeting').style.display = 'flex';
-        markGreetingAsShown(sessionId);
-        
-        setTimeout(() => { 
-          document.getElementById('loginGreeting').style.animation = 'fadeOutUp 0.5s ease';
-          setTimeout(() => { 
-            document.getElementById('loginGreeting').style.display = 'none'; 
-            document.getElementById('loginGreeting').style.animation = 'slideInRight 0.5s ease'; 
-          }, 500);
-        }, 5000);
-      }
-      
-      // ---------- LOGOUT (with nice card) ----------
-      function logout() {
-        if (currentUserEmail) removeUserSession(currentUserEmail);
-        clearInactivityTimers();
-        stopGhanaTimeUpdates();
-        detachActivityListeners();
-        document.getElementById('confirmationDialog').style.display = 'none'; 
-        document.getElementById('loginGreeting').style.display = 'none';
-        document.getElementById('inactivityOverlay').style.display = 'none';
-        document.getElementById('inactivityWarning').style.display = 'none';
-        
-        document.getElementById('dashboardContainer').style.display = 'none';
-        document.getElementById('formContainer').style.display = 'none';
-        
-        const ifr = document.getElementById('formIframe');
-        if (ifr) ifr.style.visibility = 'hidden';
-        
-        document.getElementById('loadingOverlay').style.display = 'none';
-        document.getElementById('email').value = ''; document.getElementById('password').value = ''; 
-        document.getElementById('email').focus();
-        currentUserName = ''; currentUserEmail = ''; failedAttempts = 0; 
-        isInDashboard = true;
-        warningActive = false;
-        
-        showLogoutNotification();
-      }
-      
-      function showLogoutNotification() {
-        const n = document.getElementById('logoutNotification'), c = document.getElementById('logoutCountdown');
-        n.style.display = 'flex'; 
-        n.classList.add('show');
-        let count = 5; 
-        c.textContent = count;
-        const i = setInterval(() => { 
-          count--; 
-          c.textContent = count; 
-          if (count <= 0) { 
-            clearInterval(i); 
-            n.style.display = 'none'; 
-            n.classList.remove('show');
-            document.getElementById('loginContainer').style.display = 'flex';
-            // ensure login box is reset
-            const loginBox = document.getElementById('loginBox');
-            loginBox.style.opacity = '1';
-            loginBox.style.transform = 'none';
-          } 
-        }, 1000);
-      }
-      
-      // ---------- SESSION CHECK ----------
-      function checkExistingSession() {
-        const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
-        if (userSession.email && userSession.name && userSession.sessionId && Date.now() < userSession.expiry) {
-          const sessions = getActiveSessions();
-          const activeSession = sessions[userSession.email];
-          if (activeSession && activeSession.sessionId === userSession.sessionId) {
-            currentUserEmail = userSession.email; currentUserName = userSession.name; setCurrentSessionId(userSession.sessionId);
-            return true;
-          }
-        }
-        if (userSession.email) removeUserSession(userSession.email);
-        return false;
-      }
-
-      // ---------- PASSWORD TOGGLE (EYE ICON) ----------
-      function setupPasswordToggle() {
-        const toggleBtn = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const toggleIcon = document.getElementById('toggleIcon');
-
-        if (toggleBtn && passwordInput && toggleIcon) {
-          toggleBtn.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
+        (function() {
+            // ----- MEMBER DATA -----
+            // Using a Map to ensure unique entries by email
+            const memberDetails = new Map([
+                ["malikseidu4@gmail.com", { fullName:"Abdul-Malik Seidu", title:"Member", workplace:"Nurses' & Midwives' Training College, Tamale", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/malik.png" }],
+                ["abdulrazakiddrisu1@gmail.com", { fullName:"Iddrisu Abdul-Razak", title:"Member", workplace:"Tamale Teaching Hospital", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/razak.png" }],
+                ["abdul0247080685@gmail.com", { fullName:"Abdul Latif Abdul Rahman", title:"Member", workplace:"Le Mete Ghana, Tamale Urology Centre", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Latif.png" }],
+                ["ednadie93@gmail.com", { fullName:"Edna Die", title:"Member", workplace:"Tamale Teaching Hospital", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Edna.png" }],
+                // Removed duplicate edna.die@tth.gov.gh entry
+                ["issahaqalhassan26@gmail.com", { fullName:"Alhassan Issahaq", title:"Member", workplace:"Nurses' & Midwives' Training College, Tamale", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Alhassan.png" }],
+                ["mohammed.mudasir@tth.gov.gh", { fullName:"Mudasir Mohammed Ibrahim", title:"Founder & Network Coordinator", workplace:"Tamale Teaching Hospital", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/mudasir.png" }],
+                ["mudassiribrahim30@gmail.com", { fullName:"Mudasir Mohammed Ibrahim", title:"Founder & Network Coordinator", workplace:"Tamale Teaching Hospital", photo:"https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/mudasir.png" }]
+            ]);
             
-            if (type === 'text') {
-              toggleIcon.classList.remove('fa-eye');
-              toggleIcon.classList.add('fa-eye-slash');
-            } else {
-              toggleIcon.classList.remove('fa-eye-slash');
-              toggleIcon.classList.add('fa-eye');
-            }
-          });
-        }
-      }
-      
-      // ---------- INIT ----------
-      document.addEventListener('DOMContentLoaded', function() {
-        updateAllCopyrightYears();
-        
-        document.getElementById('formIframe').style.visibility = 'hidden';
-        document.getElementById('loadingOverlay').style.display = 'none';
-        document.getElementById('inactivityOverlay').style.display = 'none';
-        document.getElementById('inactivityWarning').style.display = 'none';
-        
-        setupPasswordToggle();
-        
-        setTimeout(function() {
-          const loader = document.getElementById('appLoader');
-          loader.style.opacity = '0';
-          setTimeout(function() {
-            loader.style.display = 'none';
+            // Corrections links for each member
+            const correctionsMap = new Map([
+                ["malikseidu4@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgD9xiKlwu5uT4wIyCUtx8CEAWfmCIJEzoFXT694hE5Lswk?e=jZ7PEn"],
+                                ["Malikseidu4@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgD9xiKlwu5uT4wIyCUtx8CEAWfmCIJEzoFXT694hE5Lswk?e=jZ7PEn"],
+                ["abdulrazakiddrisu1@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgCxO2xHXwtSSbptkWKxGGBwAdC4TDWfli4Tp1z7IE_PrTw?e=bWc5nR"],
+                                ["Abdulrazakiddrisu1@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgCxO2xHXwtSSbptkWKxGGBwAdC4TDWfli4Tp1z7IE_PrTw?e=bWc5nR"],
+                ["abdul0247080685@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgChCoaEDswITaM13pAxNNpxAf63Gvalxk11ielEoDRlP4s?e=EFQrSN"],
+                                ["Abdul0247080685@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgChCoaEDswITaM13pAxNNpxAf63Gvalxk11ielEoDRlP4s?e=EFQrSN"],
+                ["ednadie93@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS"],
+                                ["Ednadie93@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgANkmZo8kibRoFYyc8nJBPsAd7A28Ua96HsgxFZArCpurQ?e=8CWeaS"],
+                ["issahaqalhassan26@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgBP-ZvDfgz8R402lV3jNtpZAajXW_HKFwtuKAJAKuE4RZg?e=Ib5jfO"],
+                                ["Issahaqalhassan26@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgBP-ZvDfgz8R402lV3jNtpZAajXW_HKFwtuKAJAKuE4RZg?e=Ib5jfO"],
+                ["mohammed.mudasir@tth.gov.gh", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=TD7Ls1"],
+                ["mudassiribrahim30@gmail.com", "https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgA_Wlt3rN4TToHhLhObdU30AcaZzPZJbmlpAHBVGN1fCMc?e=TD7Ls1"]
+            ]);
             
-            if (checkExistingSession()) {
-              showDashboard();
-            } else {
-              document.getElementById('loginContainer').style.display = 'flex';
-              document.getElementById('email').focus();
-              if (!getCurrentSessionId()) setCurrentSessionId(generateSessionId());
+            const DEFAULT_CORR = "https://onedrive.live.com/";
+            const CORRECT_PASSWORD = "Scholar123";
+
+            // Founder/Coordinator emails (both)
+            const FOUNDER_EMAILS = ["mohammed.mudasir@tth.gov.gh", "mudassiribrahim30@gmail.com"];
+
+            // Session & cooldown vars
+            let currentUserEmail = null, currentUserData = null;
+            let originalFounderEmail = null; // Store the original founder email when viewing a member
+            let isViewingMember = false; // Flag to track if we're viewing a member as founder
+            let failedAttempts = 0, cooldownTimer = null, cooldownSeconds = 0;
+            let isDashboard = false, warningActive = false;
+            let inactivityTimer, warningTimer, countdownInterval;
+            
+            const SESSION_TIMEOUT = 150000; // 2.5 min
+            const WARNING_TIME = 60000; // 1 min
+            let iframeInitialized = false;
+
+            // session storage functions
+            function getActiveSessions() { return JSON.parse(localStorage.getItem('aesrn_active_sessions')||'{}'); }
+            function saveActiveSessions(s) { localStorage.setItem('aesrn_active_sessions', JSON.stringify(s)); }
+            function generateSessionId() { return 'sess_'+Date.now()+'_'+Math.random().toString(36).substring(2); }
+            
+            function isLoggedInElsewhere(email) {
+                let sessions = getActiveSessions();
+                let sess = sessions[email];
+                if (!sess) return false;
+                if (Date.now() > sess.expiry) { delete sessions[email]; saveActiveSessions(sessions); return false; }
+                let current = sessionStorage.getItem('aesrn_sid');
+                return sess.sessionId !== current;
             }
-          }, 500);
-        }, 1500);
-      });
-      
-      // ---------- EVENT LISTENERS ----------
-      document.getElementById('loginForm').addEventListener('submit', handleLogin);
-      
-      document.getElementById('viewAssignmentCard').addEventListener('click', openViewAssignment);
-      document.getElementById('makeSubmissionCard').addEventListener('click', openSubmissionForm);
-      document.getElementById('viewCorrectionsCard').addEventListener('click', openViewCorrections);
-      document.getElementById('reviewMaterialsCard').addEventListener('click', openReviewMaterials);
-      
-      document.getElementById('backToDashboardBtn').addEventListener('click', backToDashboard);
-      
-      document.getElementById('dashboardLogoutBtn').addEventListener('click', function() { 
-        document.getElementById('confirmationDialog').style.display = 'flex'; 
-      });
-      
-      document.getElementById('confirmLogout').addEventListener('click', logout);
-      document.getElementById('cancelLogout').addEventListener('click', function() { 
-        document.getElementById('confirmationDialog').style.display = 'none'; 
-      });
-      
-      document.getElementById('keepActiveButton').addEventListener('click', function() {
-        continueSession();
-      });
-      
-      document.getElementById('confirmationDialog').addEventListener('click', function(e) { 
-        if (e.target === this) this.style.display = 'none'; 
-      });
-      
-      // Session cross-check
-      setInterval(function() {
-        if (currentUserEmail) {
-          const userSession = JSON.parse(localStorage.getItem(USER_SESSION_KEY) || '{}');
-          const sessions = getActiveSessions(); 
-          const activeSession = sessions[currentUserEmail];
-          if (!activeSession || activeSession.sessionId !== userSession.sessionId) { 
-            showCustomAlert('Session Ended', 'You logged in from another device.', 'info'); 
-            logout(); 
-          }
-        }
-      }, 30000);
-      
-      function cleanOldGreetingRecords() {
-        const g = JSON.parse(localStorage.getItem(SHOWN_GREETING_KEY) || '{}');
-        const oneWeek = Date.now() - 7*24*60*60*1000;
-        Object.keys(g).forEach(sid => { const ts = parseInt(sid.split('_')[1]); if (ts && ts < oneWeek) delete g[sid]; });
-        localStorage.setItem(SHOWN_GREETING_KEY, JSON.stringify(g));
-      }
-      setInterval(cleanOldGreetingRecords, 24*60*60*1000); cleanOldGreetingRecords();
-      
-      setInterval(updateAllCopyrightYears, 24*60*60*1000);
+
+            function registerSession(email, name) {
+                let sid = generateSessionId();
+                let sessions = getActiveSessions();
+                sessions[email] = { sessionId: sid, expiry: Date.now() + SESSION_TIMEOUT, name };
+                saveActiveSessions(sessions);
+                sessionStorage.setItem('aesrn_sid', sid);
+                localStorage.setItem('aesrn_user_session', JSON.stringify({ email, name, sessionId: sid, expiry: Date.now()+SESSION_TIMEOUT }));
+                return sid;
+            }
+
+            function removeSession(email) {
+                let sessions = getActiveSessions();
+                if (sessions[email]) delete sessions[email];
+                saveActiveSessions(sessions);
+                localStorage.removeItem('aesrn_user_session');
+                sessionStorage.removeItem('aesrn_sid');
+            }
+
+            // inactivity timers
+            function clearTimers() {
+                clearTimeout(inactivityTimer); clearTimeout(warningTimer); 
+                if (countdownInterval) clearInterval(countdownInterval);
+                hideWarning();
+            }
+            function hideWarning() {
+                warningActive = false;
+                document.getElementById('inactivityWarning').style.display = 'none';
+            }
+            function resetTimers() {
+                if (!isDashboard) return;
+                clearTimers();
+                updateSessionExpiry();
+                warningTimer = setTimeout(() => { if (isDashboard && !warningActive) showWarning(); }, WARNING_TIME);
+                inactivityTimer = setTimeout(() => { if (isDashboard && warningActive) forceLogout(); }, SESSION_TIMEOUT+1000);
+            }
+            function showWarning() {
+                if (warningActive || !isDashboard) return;
+                warningActive = true;
+                document.getElementById('inactivityWarning').style.display = 'block';
+                detachListeners();
+                let seconds = 90;
+                let timerSpan = document.getElementById('inactivityTimer');
+                function tick() {
+                    let m = Math.floor(seconds/60), s = seconds%60;
+                    timerSpan.textContent = m+':'+(s<10?'0':'')+s;
+                    if (seconds<=0) { clearInterval(countdownInterval); if (isDashboard) forceLogout(); }
+                    seconds--;
+                }
+                tick();
+                countdownInterval = setInterval(tick,1000);
+            }
+            function continueSession() {
+                if (isDashboard) { hideWarning(); resetTimers(); updateSessionExpiry(); attachListeners(); }
+            }
+            function updateSessionExpiry() {
+                if (!currentUserEmail) return;
+                let sessions = getActiveSessions();
+                if (sessions[currentUserEmail]) {
+                    sessions[currentUserEmail].expiry = Date.now() + SESSION_TIMEOUT;
+                    saveActiveSessions(sessions);
+                }
+            }
+            function attachListeners() {
+                ['mousemove','keydown','click','scroll'].forEach(ev => document.addEventListener(ev, resetTimers));
+            }
+            function detachListeners() {
+                ['mousemove','keydown','click','scroll'].forEach(ev => document.removeEventListener(ev, resetTimers));
+            }
+            function forceLogout() { clearTimers(); performLogout(true); }
+
+            // cooldown after 5 failed attempts
+            function startCooldown() {
+                const btn = document.getElementById('loginBtn');
+                const warn = document.getElementById('attemptsWarning');
+                const counterSpan = document.getElementById('cooldownCounter');
+                btn.disabled = true;
+                warn.style.display = 'block';
+                cooldownSeconds = 60;
+                function tick() {
+                    counterSpan.textContent = cooldownSeconds;
+                    if (cooldownSeconds <= 0) {
+                        clearInterval(cooldownTimer);
+                        btn.disabled = false;
+                        warn.style.display = 'none';
+                        failedAttempts = 0;
+                    }
+                    cooldownSeconds--;
+                }
+                tick();
+                cooldownTimer = setInterval(tick,1000);
+            }
+
+            // Show dashboard loader with animation
+            function showDashboardLoader() {
+                document.getElementById('dashboardLoader').classList.add('active');
+            }
+            
+            function hideDashboardLoader() {
+                document.getElementById('dashboardLoader').classList.remove('active');
+            }
+
+            // render member cards for founder/coordinator (excluding founder themselves)
+            function renderMemberCards() {
+                const membersGrid = document.getElementById('membersGrid');
+                membersGrid.innerHTML = '';
+                
+                // Convert Map to array and render each unique member, excluding founder emails
+                Array.from(memberDetails.entries())
+                    .filter(([email]) => !FOUNDER_EMAILS.includes(email)) // Remove founder from cards
+                    .forEach(([email, data]) => {
+                    const card = document.createElement('div');
+                    card.className = 'member-card';
+                    card.setAttribute('data-email', email);
+                    
+                    card.innerHTML = `
+                        <img src="${data.photo}" alt="${data.fullName}" class="member-card-photo" onerror="this.src='https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png'">
+                        <div class="member-card-name">${data.fullName}</div>
+                        <div class="member-card-title">${data.title}</div>
+                        <div class="member-card-workplace"><i class="fas fa-university"></i> ${data.workplace}</div>
+                        <div class="member-card-email">${email}</div>
+                        <div class="view-indicator"><i class="fas fa-arrow-right"></i> view dashboard</div>
+                    `;
+                    
+                    card.addEventListener('click', () => {
+                        if (warningActive) return;
+                        // Show loader animation
+                        showDashboardLoader();
+                        // Small delay to show loader, then switch view
+                        setTimeout(() => {
+                            switchToMemberView(email);
+                            hideDashboardLoader();
+                        }, 400);
+                    });
+                    
+                    membersGrid.appendChild(card);
+                });
+            }
+            
+            // Switch to a member's view (for founder/coordinator) - NO SESSION CHANGE
+            function switchToMemberView(email) {
+                if (!memberDetails.has(email)) return;
+                
+                // Store the original founder email if this is the first time
+                if (!isViewingMember) {
+                    originalFounderEmail = currentUserEmail;
+                    isViewingMember = true;
+                    // Save to localStorage for persistence on reload
+                    localStorage.setItem('aesrn_viewing_member', email);
+                    localStorage.setItem('aesrn_original_founder', originalFounderEmail);
+                }
+                
+                // Just update the current view data - DON'T change the session
+                currentUserEmail = email;
+                currentUserData = memberDetails.get(email);
+                
+                // Update dashboard to show this member's info
+                renderDashboard();
+                
+                // Hide member section when viewing a member
+                document.getElementById('membersSection').style.display = 'none';
+                
+                // Show the return to admin button
+                document.getElementById('returnToAdminView').style.display = 'inline-flex';
+                
+                // Reset timers for new view
+                resetTimers();
+            }
+            
+            // Return to admin view (founder's original dashboard) - INSTANT
+            function returnToAdminView() {
+                if (originalFounderEmail && memberDetails.has(originalFounderEmail)) {
+                    // Show loader for smooth transition
+                    showDashboardLoader();
+                    
+                    setTimeout(() => {
+                        // Restore original founder as current user
+                        currentUserEmail = originalFounderEmail;
+                        currentUserData = memberDetails.get(originalFounderEmail);
+                        
+                        // Update dashboard
+                        renderDashboard();
+                        
+                        // Show member section again
+                        document.getElementById('membersSection').style.display = 'block';
+                        
+                        // Hide return button
+                        document.getElementById('returnToAdminView').style.display = 'none';
+                        
+                        // Clear viewing state
+                        isViewingMember = false;
+                        localStorage.removeItem('aesrn_viewing_member');
+                        localStorage.removeItem('aesrn_original_founder');
+                        originalFounderEmail = null;
+                        
+                        // Reset timers
+                        resetTimers();
+                        
+                        hideDashboardLoader();
+                    }, 300); // Small delay for smooth animation
+                }
+            }
+
+            // render dashboard with profile photo
+            function renderDashboard() {
+                if (!currentUserData) return;
+                document.getElementById('displayName').textContent = currentUserData.fullName.split(' ')[0];
+                document.getElementById('profileName').textContent = currentUserData.fullName;
+                document.getElementById('profileRole').textContent = currentUserData.title;
+                document.getElementById('profileWork').querySelector('span').textContent = currentUserData.workplace;
+                document.getElementById('memberPhoto').src = currentUserData.photo;
+                initCalendar();
+            }
+
+            let calendar = null;
+            function initCalendar() {
+                let calEl = document.getElementById('miniCalendar');
+                if (!calEl) return;
+                if (calendar) calendar.destroy();
+                calendar = new FullCalendar.Calendar(calEl, {
+                    initialView: 'dayGridMonth',
+                    height: 240,
+                    headerToolbar: { start:'', center:'title', end:'' },
+                    titleFormat: { year:'numeric', month:'short' },
+                    fixedWeekCount: false,
+                    showNonCurrentDates: false
+                });
+                calendar.render();
+            }
+
+            // Initialize iframe
+            function initSubmissionIframe() {
+                if (iframeInitialized) return;
+                const iframe = document.getElementById('tallyIframe');
+                iframe.src = "https://tally.so/r/dWd6gA?transparentBackground=1";
+                iframeInitialized = true;
+
+                document.getElementById('iframeLoading').style.display = 'flex';
+                iframe.style.visibility = 'hidden';
+
+                iframe.addEventListener('load', function onLoad() {
+                    document.getElementById('iframeLoading').style.display = 'none';
+                    iframe.style.visibility = 'visible';
+                    iframe.removeEventListener('load', onLoad);
+                });
+            }
+
+            // Check if user is founder/coordinator
+            function isFounder(email) {
+                return FOUNDER_EMAILS.includes(email);
+            }
+
+            // login flow
+            function handleLogin(e) {
+                e.preventDefault();
+                if (document.getElementById('loginBtn').disabled) return;
+
+                let email = document.getElementById('email').value;
+                let pass = document.getElementById('password').value;
+                document.getElementById('errorMessage').style.display = 'none';
+
+                // Find matching email (case insensitive)
+                let matchedKey = null;
+                for (let key of memberDetails.keys()) {
+                    if (key.toLowerCase() === email.trim().toLowerCase()) {
+                        matchedKey = key;
+                        break;
+                    }
+                }
+                
+                if (!matchedKey || pass !== CORRECT_PASSWORD) {
+                    failedAttempts++;
+                    document.getElementById('errorMessage').style.display = 'block';
+                    if (failedAttempts >= 5) startCooldown();
+                    return;
+                }
+
+                if (isLoggedInElsewhere(matchedKey)) {
+                    alert('Already logged in from another device.');
+                    return;
+                }
+
+                currentUserEmail = matchedKey;
+                currentUserData = memberDetails.get(matchedKey);
+
+                document.getElementById('loginCard').style.opacity = '0';
+                document.getElementById('loginCard').style.transform = 'scale(0.9)';
+                document.getElementById('globalCircleLoader').classList.add('active');
+
+                setTimeout(() => {
+                    document.getElementById('loginContainer').style.display = 'none';
+                    document.getElementById('loginCard').style.opacity = '1';
+                    document.getElementById('loginCard').style.transform = '';
+                }, 300);
+
+                setTimeout(() => {
+                    document.getElementById('globalCircleLoader').classList.remove('active');
+                    registerSession(currentUserEmail, currentUserData.fullName);
+                    document.getElementById('dashboardContainer').style.display = 'block';
+                    
+                    // Render dashboard with current user
+                    renderDashboard();
+                    
+                    // Show member cards if user is founder
+                    if (isFounder(currentUserEmail)) {
+                        document.getElementById('membersSection').style.display = 'block';
+                        renderMemberCards();
+                    } else {
+                        document.getElementById('membersSection').style.display = 'none';
+                    }
+                    
+                    // Check if we were viewing a member before reload
+                    const savedViewingMember = localStorage.getItem('aesrn_viewing_member');
+                    const savedOriginalFounder = localStorage.getItem('aesrn_original_founder');
+                    
+                    if (savedViewingMember && savedOriginalFounder && isFounder(currentUserEmail)) {
+                        // Restore the member view state
+                        originalFounderEmail = savedOriginalFounder;
+                        isViewingMember = true;
+                        switchToMemberView(savedViewingMember);
+                    } else {
+                        // Hide return button initially
+                        document.getElementById('returnToAdminView').style.display = 'none';
+                        isViewingMember = false;
+                        originalFounderEmail = null;
+                    }
+                    
+                    isDashboard = true;
+                    resetTimers();
+                    attachListeners();
+                    initSubmissionIframe();
+                }, 3200);
+            }
+
+            // logout
+            function performLogout(redirect = true) {
+                if (currentUserEmail) removeSession(currentUserEmail);
+                isDashboard = false; 
+                clearTimers(); 
+                detachListeners();
+                document.getElementById('dashboardContainer').style.display = 'none';
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('logoutModal').style.display = 'none';
+                hideWarning();
+                currentUserEmail = null; currentUserData = null;
+                isViewingMember = false;
+                originalFounderEmail = null;
+                localStorage.removeItem('aesrn_viewing_member');
+                localStorage.removeItem('aesrn_original_founder');
+
+                let notif = document.getElementById('logoutNotification');
+                let countSpan = document.getElementById('logoutCountdown');
+                notif.style.display = 'flex';
+                notif.classList.add('show');
+                let sec = 5;
+                countSpan.textContent = sec;
+                let interval = setInterval(() => {
+                    sec--;
+                    countSpan.textContent = sec;
+                    if (sec <= 0) {
+                        clearInterval(interval);
+                        notif.style.display = 'none';
+                        notif.classList.remove('show');
+                        document.getElementById('loginContainer').style.display = 'flex';
+                        document.getElementById('loginForm').reset();
+                    }
+                }, 1000);
+            }
+
+            // open forms
+            function openSubmissionForm() {
+                if (warningActive) return;
+                document.getElementById('dashboardContainer').style.display = 'none';
+                document.getElementById('formContainer').style.display = 'flex';
+            }
+            function closeForm() {
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('dashboardContainer').style.display = 'block';
+            }
+
+            function openAssignment() { if(!warningActive) window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgAIsMG6e8n2QouivuzCfkg8Ac6Tv18kYWZP7inlnNq07hI?e=gGnKAF'; }
+            function openCorrections() { 
+                if(!warningActive && currentUserEmail) { 
+                    let link = correctionsMap.get(currentUserEmail) || DEFAULT_CORR; 
+                    window.location.href = link; 
+                } 
+            }
+            function openResources() { if(!warningActive) window.location.href = 'https://swpgh-my.sharepoint.com/:f:/g/personal/mohammed_mudasir_tth_gov_gh/IgDopS4nZaKiS4WhTxSeRb6FAbaOLyIXT4b1TMfT6GT26nM?e=G6Fqam'; }
+
+            // check existing session
+            function checkExistingSession() {
+                let stored = JSON.parse(localStorage.getItem('aesrn_user_session')||'{}');
+                if (stored.email && stored.sessionId && Date.now() < stored.expiry) {
+                    let sessions = getActiveSessions();
+                    if (sessions[stored.email] && sessions[stored.email].sessionId === stored.sessionId) {
+                        currentUserEmail = stored.email;
+                        currentUserData = memberDetails.get(stored.email);
+                        return true;
+                    }
+                }
+                return false;
+            }
+
+            // ---------- EVENT LISTENERS ----------
+            document.getElementById('loginForm').addEventListener('submit', handleLogin);
+            document.getElementById('togglePassword').addEventListener('click', function() {
+                let pwd = document.getElementById('password');
+                let icon = this.querySelector('i');
+                if (pwd.type === 'password') { pwd.type = 'text'; icon.classList.replace('fa-eye','fa-eye-slash'); }
+                else { pwd.type = 'password'; icon.classList.replace('fa-eye-slash','fa-eye'); }
+            });
+
+            document.getElementById('viewAssignment').addEventListener('click', openAssignment);
+            document.getElementById('makeSubmission').addEventListener('click', openSubmissionForm);
+            document.getElementById('viewCorrections').addEventListener('click', openCorrections);
+            document.getElementById('reviewMaterials').addEventListener('click', openResources);
+            document.getElementById('backToDashboardBtn').addEventListener('click', closeForm);
+            document.getElementById('returnToAdminView').addEventListener('click', returnToAdminView);
+
+            document.getElementById('logoutBtn').addEventListener('click', () => document.getElementById('logoutModal').style.display = 'flex');
+            document.getElementById('cancelLogout').addEventListener('click', () => document.getElementById('logoutModal').style.display = 'none');
+            document.getElementById('confirmLogout').addEventListener('click', () => { performLogout(true); document.getElementById('logoutModal').style.display = 'none'; });
+            document.querySelector('.modal-overlay').addEventListener('click', (e) => { if(e.target.classList.contains('modal-overlay')) e.target.style.display = 'none'; });
+
+            document.getElementById('keepSessionBtn').addEventListener('click', continueSession);
+
+            setInterval(() => {
+                if (currentUserEmail && !isViewingMember) { // Only check session if not viewing a member
+                    let s = getActiveSessions();
+                    if (!s[currentUserEmail] || s[currentUserEmail].sessionId !== sessionStorage.getItem('aesrn_sid')) {
+                        alert('Session ended (another login)');
+                        performLogout(false);
+                    }
+                }
+            }, 30000);
+
+            // initial load
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.getElementById('appLoader').style.opacity = '0';
+                    setTimeout(() => {
+                        document.getElementById('appLoader').style.display = 'none';
+                        if (checkExistingSession()) {
+                            document.getElementById('loginContainer').style.display = 'none';
+                            document.getElementById('dashboardContainer').style.display = 'block';
+                            
+                            renderDashboard();
+                            
+                            // Show member cards if founder
+                            if (isFounder(currentUserEmail)) {
+                                document.getElementById('membersSection').style.display = 'block';
+                                renderMemberCards();
+                                
+                                // Check if we were viewing a member before reload
+                                const savedViewingMember = localStorage.getItem('aesrn_viewing_member');
+                                const savedOriginalFounder = localStorage.getItem('aesrn_original_founder');
+                                
+                                if (savedViewingMember && savedOriginalFounder) {
+                                    // Restore the member view state
+                                    originalFounderEmail = savedOriginalFounder;
+                                    isViewingMember = true;
+                                    switchToMemberView(savedViewingMember);
+                                }
+                            } else {
+                                document.getElementById('membersSection').style.display = 'none';
+                            }
+                            
+                            isDashboard = true;
+                            resetTimers();
+                            attachListeners();
+                            initSubmissionIframe();
+                        } else {
+                            document.getElementById('loginContainer').style.display = 'flex';
+                        }
+                    }, 400);
+                }, 1500);
+            });
+
+            document.getElementById('footerYear').textContent = new Date().getFullYear();
+        })();
     </script>
-  </body>
+</body>
 </html>
