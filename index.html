@@ -137,35 +137,52 @@
             transition: background 0.2s;
         }
         
-        /* LOGIN (square edges, smaller card) */
-        .login-container { 
-            display:flex; 
-            justify-content:center; 
-            align-items:center; 
-            min-height:100vh; 
-            background:#f0f2f5; 
-            padding:16px; 
-            transition: background 0.3s;
-            position: relative;
-        }
-        body.dark-theme .login-container { background:#121212; }
-        .login-card { 
-            background:white; 
-            border-radius:24px !important; 
-            padding:32px; 
-            width:100%; 
-            max-width:420px; 
-            box-shadow:0 20px 40px rgba(0,0,0,0.08); 
-            transition:opacity 0.3s, transform 0.3s; 
-            border:1px solid rgba(0,0,0,0.03); 
-        }
+/* LOGIN PAGE - Studio background with box pattern (consistent with AESRN main site) */
+.login-container { 
+    display:flex; 
+    justify-content:center; 
+    align-items:center; 
+    min-height:100vh; 
+    background-color: #fafafa;  /* Same as main site --bg variable */
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;  /* Same 40px grid as main site */
+    padding:16px; 
+    transition: background 0.3s;
+    position: relative;
+}
+
+/* Dark theme studio background with box pattern */
+body.dark-theme .login-container { 
+    background-color: #0a0a0a;  /* Same as main site dark --bg */
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+/* LOGIN CARD - Compact size */
+.login-card { 
+    background:white; 
+    border-radius:24px !important; 
+    padding:24px;  
+    width:100%; 
+    max-width:340px;  
+    box-shadow:0 30px 60px -15px rgba(0,0,0,0.2);
+    transition:opacity 0.3s, transform 0.3s; 
+    border: 2px solid transparent;
+    background-image: linear-gradient(white, white), linear-gradient(135deg, #000000, #000000);
+    background-origin: border-box;
+    background-clip: padding-box, border-box;
+}
+
         .login-logo { text-align:center; margin-bottom:16px; }
         .login-logo img { 
-            width:140px;
-            height:140px; 
+            width:160px;
+            height:160px; 
             object-fit:contain; 
         }
-        .login-title { font-size:22px; font-weight:700; color:#1e3c5c; text-align:center; margin-bottom:20px; letter-spacing:-0.3px; }
+        .login-title { font-size:18px; font-weight:700; color:#1e3c5c; text-align:center; margin-bottom:20px; letter-spacing:-0.3px; }
         .form-group { margin-bottom:16px; }
         .form-label { font-weight:600; font-size:13px; color:#1e2e44; margin-bottom:4px; display:block; }
         .required-asterisk { color:#E63946; margin-left:4px; font-weight:700; }
@@ -173,46 +190,192 @@
         .form-input:focus { outline:none; border-color:#2A5C82; box-shadow:0 0 0 3px rgba(42,92,130,0.15); }
         .password-wrapper { position:relative; }
         .toggle-password { position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; color:#7c8b9c; }
-        .login-btn { width:100%; background:#2A5C82; color:white; border:none; padding:12px; border-radius:8px; font-weight:700; font-size:15px; cursor:pointer; transition:0.2s; box-shadow:0 8px 18px rgba(42,92,130,0.2); }
-        .login-btn:disabled { opacity:0.5; pointer-events:none; background:#a0b8cc; }
-        .login-btn { 
-            width: 100%; 
-            background: #2A5C82; 
-            color: white; 
-            border: none; 
-            padding: 12px; 
-            border-radius: 8px; 
-            font-weight: 700; 
-            font-size: 15px; 
-            cursor: pointer; 
-            box-shadow: 0 8px 18px rgba(42,92,130,0.2); 
-            transition: none;
-            transform: none !important;
-            backface-visibility: hidden;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            -webkit-transform: translateZ(0);
-            -moz-transform: translateZ(0);
-            -ms-transform: translateZ(0);
-            -o-transform: translateZ(0);
-            transform: translateZ(0);
-            -webkit-perspective: 1000;
-            -moz-perspective: 1000;
-            -ms-perspective: 1000;
-            perspective: 1000;
-        }
+  /* ===== FORCE STABLE LOGIN BUTTON - NO FLICKER ===== */
+.login-btn {
+    width: 100%;
+    background: #2A5C82 !important;
+    color: white !important;
+    border: none !important;
+    padding: 12px !important;
+    border-radius: 8px !important;
+    font-weight: 700 !important;
+    font-size: 15px !important;
+    cursor: pointer !important;
+    box-shadow: 0 8px 18px rgba(42,92,130,0.2) !important;
+    
+    /* Force stable rendering */
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    filter: none !important;
+    will-change: auto !important;
+    
+    /* Hardware acceleration OFF */
+    -webkit-transform: none !important;
+    -moz-transform: none !important;
+    -ms-transform: none !important;
+    -o-transform: none !important;
+    
+    /* Force single layer */
+    position: relative;
+    z-index: 1;
+}
 
-        .login-btn:disabled { 
-            opacity: 0.5; 
-            pointer-events: none; 
-            background: #a0b8cc; 
-        }
+.login-btn:hover:not(:disabled) {
+    background: #1e4a6e !important;
+    box-shadow: 0 12px 22px rgba(42,92,130,0.3) !important;
+    
+    /* No transitions on hover either */
+    transition: none !important;
+    transform: none !important;
+}
 
-        .login-btn:hover:not(:disabled) { 
-            background: #1e4a6e; 
-            box-shadow: 0 15px 25px rgba(42,92,130,0.3); 
-            transition: none;
-        }
+.login-btn:active:not(:disabled) {
+    transform: scale(0.98) !important;  /* Only scale on click, not hover */
+    transition: transform 0.1s ease !important;  /* Quick click feedback only */
+}
+
+.login-btn:disabled {
+    opacity: 0.5 !important;
+    cursor: not-allowed !important;
+    background: #a0b8cc !important;
+    box-shadow: none !important;
+    pointer-events: none !important;
+    transform: none !important;
+}
+
+/* Remove any pseudo-element effects that might cause flickering */
+.login-btn::before,
+.login-btn::after {
+    display: none !important;
+}
+
+/* ===== DARK MODE MEMBER CARDS - CRISP WHITE TEXT ===== */
+body.dark-theme .member-card {
+    background: #1e1e1e;
+    border-color: #333;
+}
+
+body.dark-theme .member-card-name {
+    color: #ffffff !important;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
+body.dark-theme .member-card-title {
+    color: #e0e0e0 !important;
+    background: rgba(255,255,255,0.1);
+}
+
+body.dark-theme .member-card-workplace {
+    color: #dddddd !important;
+}
+
+body.dark-theme .member-card-workplace i {
+    color: #8bb9e0 !important;
+}
+
+body.dark-theme .member-card-email {
+    color: #ffffff !important;
+    background: rgba(255,255,255,0.15);
+    border-color: rgba(255,255,255,0.2);
+}
+
+body.dark-theme .view-indicator {
+    color: #8bb9e0 !important;
+    opacity: 0.9;
+}
+
+body.dark-theme .member-card:hover .view-indicator {
+    opacity: 1;
+    color: #aaccff !important;
+}
+
+/* Profile card text in dark mode */
+body.dark-theme .profile-info h2 {
+    color: #ffffff !important;
+    background: none;
+    -webkit-text-fill-color: white;
+}
+
+body.dark-theme .profile-info .member-title {
+    color: #e0e0e0 !important;
+}
+
+body.dark-theme .profile-info .workplace {
+    color: #cccccc !important;
+}
+
+/* Login page copyright - at background bottom, with powered by at right */
+.login-page-copyright {
+    position: absolute;
+    bottom: 20px;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 30px;
+    font-size: 13px;
+    color: #1a4b73 !important; /* Deep, clear blue */
+    font-weight: 500;
+    z-index: 10;
+    pointer-events: none; /* So it doesn't interfere with clicks */
+    width: 100%;
+}
+
+.powered-by {
+    font-weight: 600;
+    color: #1a4b73 !important;
+    letter-spacing: 0.3px;
+}
+
+/* Dark theme for login copyright - bright clear blue */
+body.dark-theme .login-page-copyright,
+body.dark-theme .powered-by {
+    color: #4d9fff !important; /* Bright, clear blue for dark mode */
+    font-weight: 600;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    opacity: 1; /* Full opacity */
+}
+
+/* Ensure login container has relative positioning for absolute copyright */
+.login-container {
+    position: relative !important;
+}
+
+/* Responsive adjustment for mobile */
+@media (max-width: 700px) {
+    .login-page-copyright {
+        flex-direction: column;
+        gap: 5px;
+        text-align: center;
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+}
+
+/* Section titles in dark mode */
+body.dark-theme .section-title {
+    color: #ffffff !important;
+    background: none;
+    -webkit-text-fill-color: white;
+}
+
+body.dark-theme .section-title i {
+    color: #8bb9e0 !important;
+}
+
+/* Force stable parent containers */
+.login-card, .login-container, .login-btn-wrapper {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+}
         .error-msg { color:#c62828; background:#ffebee; padding:10px; border-radius:8px; font-size:13px; font-weight:600; margin-top:14px; display:none; text-align:center; }
         .attempts-warning { color:#b85a00; background:#fff1e0; padding:8px; border-radius:8px; font-size:12px; font-weight:600; margin-top:10px; display:none; text-align:center; }
         .go-to-aesrn { display:flex; align-items:center; justify-content:center; gap:8px; margin-top:16px; padding-top:14px; border-top:1px solid #e0e8f0; color:#2A5C82; text-decoration:none; font-weight:600; font-size:14px; }
@@ -328,8 +491,17 @@
             transform: none;
         }
         .user-welcome { display:flex; align-items:center; gap:12px; font-size:18px; font-weight:600; color:#1a2e44; }
-        /* Removed user icon and name - only "dashboard" remains */
-        .user-welcome span { background:linear-gradient(145deg, #2A5C82, #1A9AA0); color:white; padding:6px 22px; border-radius:40px; font-size:16px; font-weight:600; box-shadow:0 4px 10px rgba(42,92,130,0.2); }
+.user-welcome span { 
+    background: linear-gradient(135deg, #1e2f4a 0%, #0f2b3d 100%);
+    color: white; 
+    padding: 6px 22px; 
+    border-radius: 40px; 
+    font-size: 16px; 
+    font-weight: 600; 
+    box-shadow: 0 4px 12px rgba(0,20,40,0.25);
+    letter-spacing: 0.3px;
+    border: 1px solid rgba(255,255,255,0.08);
+}
         .logout-btn { 
             background:#E63946; color:white; border:none; padding:10px 26px; border-radius:40px; 
             font-weight:700; cursor:pointer; font-size:15px; box-shadow:0 6px 14px rgba(230,57,70,0.2);
@@ -557,7 +729,7 @@
             box-shadow: 0 30px 60px -20px rgba(0, 30, 60, 0.3);
             border: 1px solid rgba(255,255,255,0.5);
             backdrop-filter: blur(2px);
-            border-radius: 0;
+            border-radius: 28px; /* adjusted to match new softer style */
         }
 
         .login-title {
@@ -586,28 +758,295 @@
             box-shadow: 0 10px 20px -5px rgba(42,92,130,0.4);
         }
 
-        /* ---------- DASHBOARD CARDS - highlight only ---------- */
-        .dashboard-header, 
-        .profile-card, 
-        .calendar-card, 
-        .action-tile, 
-        .dashboard-footer {
-            background: white;
-            border-radius: 28px;
-            box-shadow: 0 10px 30px -15px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.02);
-            transition: box-shadow 0.2s ease, border-color 0.2s ease;
-        }
+/* ---------- PROFESSIONAL BORDERS FOR ALL DASHBOARD CARDS ---------- */
+.dashboard-header, 
+.profile-card, 
+.calendar-card, 
+.action-tile, 
+.member-card,
+.dashboard-footer {
+    background: white;
+    border-radius: 24px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    border: 1px solid #e2e8f0;  /* Visible light gray border */
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
 
-        .dashboard-header:hover,
-        .profile-card:hover,
-        .calendar-card:hover,
-        .action-tile:hover {
-            box-shadow: 0 15px 30px -10px rgba(42,92,130,0.2);
-            border-color: rgba(42,92,130,0.2);
-            transform: none;
-        }
+/* Specific padding adjustments */
+.dashboard-header { padding: 16px 28px; }
+.profile-card { padding: 24px; }
+.calendar-card { padding: 20px; }
+.action-tile { padding: 28px 20px; }
+.member-card { padding: 28px 20px 24px; }
+.dashboard-footer { padding: 18px 32px; }
 
+/* Hover states with stronger borders */
+.dashboard-header:hover,
+.profile-card:hover,
+.calendar-card:hover,
+.action-tile:hover,
+.member-card:hover {
+    border-color: #cbd5e0;  /* Darker border on hover */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+}
+
+/* ===== STEP 1: PREMIUM CARD ENHANCEMENTS ===== */
+.dashboard-header, 
+.profile-card, 
+.calendar-card, 
+.action-tile, 
+.member-card,
+.dashboard-footer {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Subtle inner glow on hover */
+.dashboard-header:hover, 
+.profile-card:hover, 
+.calendar-card:hover, 
+.action-tile:hover, 
+.member-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 30px -10px rgba(0,0,0,0.15), 0 0 0 1px rgba(42,92,130,0.2) inset;
+}
+
+/* ===== STEP 2: GRADIENT TEXT ===== */
+.section-title {
+    background: linear-gradient(135deg, #1e2f4a, #2A5C82);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+}
+
+.profile-info h2 {
+    background: linear-gradient(135deg, #1a2e44, #2A5C82);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ===== STEP 3: ANIMATED ACTION ICONS ===== */
+.action-tile {
+    position: relative;
+    overflow: hidden;
+}
+
+.action-tile::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 30% 30%, rgba(42,92,130,0.1), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.action-tile:hover::before {
+    opacity: 1;
+}
+
+.tile-icon {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.action-tile:hover .tile-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+/* ===== STEP 4: GLASSMORPHISM CALENDAR ===== */
+.calendar-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.calendar-card::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 70% 30%, rgba(42,92,130,0.05), transparent 70%);
+    pointer-events: none;
+}
+
+#miniCalendar {
+    --fc-event-bg-color: #2A5C82;
+    --fc-event-border-color: #2A5C82;
+    --fc-today-bg: rgba(42,92,130,0.05);
+}
+
+/* ===== STEP 5: MEMBER CARDS WITH DEPTH ===== */
+.member-card {
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.member-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    width: 90%;
+    height: 10px;
+    background: rgba(0,0,0,0.1);
+    filter: blur(8px);
+    border-radius: 50%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.member-card:hover::after {
+    opacity: 1;
+}
+
+.member-card-photo {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.member-card:hover .member-card-photo {
+    transform: scale(1.05);
+    border-color: #1A9AA0;
+}
+
+/* ===== STEP 6: BEAUTIFUL FOOTER ===== */
+.dashboard-footer {
+    background: linear-gradient(145deg, #ffffff, #f8fafc);
+    border-top: 3px solid #2A5C82;
+    position: relative;
+}
+
+.footer-links a {
+    position: relative;
+    padding: 4px 0;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #2A5C82, #1A9AA0);
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+.normal-time {
+    background: linear-gradient(145deg, rgba(42,92,130,0.1), rgba(26,154,160,0.1));
+    border: 1px solid rgba(42,92,130,0.2);
+}
+
+/* ===== STEP 7: SMOOTH TRANSITIONS ===== */
+button, a, .action-tile, .member-card, .profile-card, .calendar-card {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Pulse animation for logout button */
+.logout-btn {
+    animation: subtle-pulse 3s infinite;
+}
+
+@keyframes subtle-pulse {
+    0%, 100% { box-shadow: 0 6px 14px rgba(230,57,70,0.2); }
+    50% { box-shadow: 0 8px 20px rgba(230,57,70,0.3); }
+}
+/* ===== STEP 9: BEAUTIFUL SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #2A5C82, #1A9AA0);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #1e4a6e, #13808a);
+}
+
+body.dark-theme ::-webkit-scrollbar-track {
+    background: #2a2a2a;
+}
+
+body.dark-theme ::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3a6d9a, #2a8a94);
+}
+
+/* ===== STEP 11: FLOATING ANIMATION ===== */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+.profile-card, .calendar-card {
+    animation: float 6s ease-in-out infinite;
+}
+
+.calendar-card {
+    animation-delay: 1s;
+}
+
+/* Different float speeds for variety */
+.action-tile:nth-child(1) { animation: float 7s ease-in-out infinite; }
+.action-tile:nth-child(2) { animation: float 8s ease-in-out infinite; animation-delay: 0.5s; }
+.action-tile:nth-child(3) { animation: float 6.5s ease-in-out infinite; animation-delay: 1s; }
+.action-tile:nth-child(4) { animation: float 7.5s ease-in-out infinite; animation-delay: 1.5s; }
+
+/* ===== STEP 15: TYPING EFFECT ===== */
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink {
+    50% { border-color: transparent; }
+}
+
+.user-welcome span {
+    position: relative;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid white;
+    animation: typing 2s steps(20, end), blink 0.75s step-end infinite;
+    max-width: fit-content;
+}
+
+/* Dark theme adjustments */
+body.dark-theme .dashboard-header,
+body.dark-theme .profile-card,
+body.dark-theme .calendar-card,
+body.dark-theme .action-tile,
+body.dark-theme .member-card,
+body.dark-theme .dashboard-footer {
+    background: #1e1e1e;
+    border: 1px solid #3a3a3a;  /* Visible dark border */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+body.dark-theme .dashboard-header:hover,
+body.dark-theme .profile-card:hover,
+body.dark-theme .calendar-card:hover,
+body.dark-theme .action-tile:hover,
+body.dark-theme .member-card:hover {
+    border-color: #555555;  /* Lighter border on hover in dark mode */
+}
         .action-tile:hover .tile-icon {
             color: #1A9AA0;
         }
@@ -837,35 +1276,41 @@
         <div class="text">Loading Content...</div>
     </div>
 
-    <!-- LOGIN PAGE with theme toggle OUTSIDE card at top right -->
-    <div class="login-container" id="loginContainer" style="display: none;">
-        <div class="login-page-header">
-            <button class="theme-toggle" id="loginThemeToggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
-        </div>
-        <div class="login-card" id="loginCard">
-            <div class="login-logo">
-                <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN">
-            </div>
-            <div class="login-title">Welcome back!</div>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label class="form-label">Email<span class="required-asterisk">*</span></label>
-                    <input type="email" id="email" class="form-input" placeholder="" required>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Password <span class="required-asterisk">*</span></label>
-                    <div class="password-wrapper">
-                        <input type="password" id="password" class="form-input" placeholder="" required>
-                        <button type="button" class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></button>
-                    </div>
-                </div>
-                <button type="submit" class="login-btn" id="loginBtn">Sign in</button>
-                <div class="error-msg" id="errorMessage">Invalid email or password</div>
-                <div class="attempts-warning" id="attemptsWarning">Too many attempts. Wait <span id="cooldownCounter">60</span>s</div>
-                <a href="https://www.aesrn.net/#home" class="go-to-aesrn"><i class="fas fa-arrow-left"></i> Go to AESRN</a>
-            </form>
-        </div>
+<!-- LOGIN PAGE with theme toggle OUTSIDE card at top right -->
+<div class="login-container" id="loginContainer" style="display: none;">
+    <div class="login-page-header">
+        <button class="theme-toggle" id="loginThemeToggle" title="Toggle dark mode"><i class="fas fa-moon"></i></button>
     </div>
+    <div class="login-card" id="loginCard">
+        <div class="login-logo">
+            <img src="https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Networknewlogo.png" alt="AESRN">
+        </div>
+        <div class="login-title">Member Login</div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label class="form-label">Email<span class="required-asterisk">*</span></label>
+                <input type="email" id="email" class="form-input" placeholder="" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">Password <span class="required-asterisk">*</span></label>
+                <div class="password-wrapper">
+                    <input type="password" id="password" class="form-input" placeholder="" required>
+                    <button type="button" class="toggle-password" id="togglePassword"><i class="far fa-eye"></i></button>
+                </div>
+            </div>
+            <button type="submit" class="login-btn" id="loginBtn">Sign in</button>
+            <div class="error-msg" id="errorMessage">Invalid email or password</div>
+            <div class="attempts-warning" id="attemptsWarning">Too many attempts. Wait <span id="cooldownCounter">60</span>s</div>
+            <a href="https://www.aesrn.net/#home" class="go-to-aesrn"><i class="fas fa-arrow-left"></i> Go to AESRN</a>
+        </form>
+    </div>
+    
+    <!-- COPYRIGHT AT BACKGROUND BOTTOM - WITH POWERED BY AT RIGHT -->
+    <div class="login-page-copyright">
+        <span>Copyright © <span id="loginYear"></span> African Emerging Scholars Research Network (AESRN)</span>
+        <span class="powered-by">Powered by AESRN</span>
+    </div>
+</div>
 
     <!-- DASHBOARD -->
     <div class="dashboard" id="dashboardContainer" style="display: none;">
@@ -873,7 +1318,7 @@
             <div class="dashboard-header">
                 <div class="user-welcome">
                     <!-- Removed user icon and name - only "dashboard" remains -->
-                    <span>Dashboard</span>
+                    <span>Welcome Back!</span>
                     <!-- Return to Admin View button (only visible when viewing a member as founder) -->
                     <button class="admin-return-btn" id="returnToAdminView" style="display: none;">
                         <i class="fas fa-arrow-left"></i> Back to Admin View
@@ -935,7 +1380,7 @@
             <!-- FOOTER with copyright at right corner (year auto-updates) -->
             <div class="dashboard-footer">
                 <div class="footer-links">
-                    <a href="mailto:research.aesrn@yahoo.com"><i class="fas fa-envelope"></i> research.aesrn@yahoo.com</a>
+                    <a href="mailto:research.aesrn@yahoo.com"> For any problems encountered, please contact: <i class="fas fa-envelope"></i> research.aesrn@yahoo.com</a>
                     <span>•</span>
                     <div class="normal-time" id="liveClock"><i class="far fa-clock"></i> <span id="timeText"></span></div>
                 </div>
@@ -1487,10 +1932,13 @@
                 });
             }
             
-            function closeForm() {
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('dashboardContainer').style.display = 'block';
-            }
+function closeForm() {
+    // Show page transition loader when returning to dashboard
+    showPageTransitionLoader(() => {
+        document.getElementById('formContainer').style.display = 'none';
+        document.getElementById('dashboardContainer').style.display = 'block';
+    });
+}
 
             function openAssignment() { 
                 if(!warningActive) {
@@ -1615,8 +2063,9 @@
                 }, 1500);
             });
 
-            // Auto-update copyright year
-            document.getElementById('footerYear').textContent = new Date().getFullYear();
+// Auto-update copyright year for both footer and login
+document.getElementById('footerYear').textContent = new Date().getFullYear();
+document.getElementById('loginYear').textContent = new Date().getFullYear();
         })();
     </script>
 </body>
