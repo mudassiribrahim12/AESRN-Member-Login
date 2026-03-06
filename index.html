@@ -704,9 +704,9 @@ body.dark-theme .action-tile:hover {
     border: 1px solid rgba(255,255,255,0.08);
 }
         .logout-btn { 
-            background:#E63946; color:white; border:none; padding:10px 26px; border-radius:40px; 
-            font-weight:700; cursor:pointer; font-size:15px; box-shadow:0 6px 14px rgba(230,57,70,0.2);
-            transition: all 0.2s;
+            background:#E63946; color:white; border:none; padding:8px 18px; border-radius:40px; 
+            font-weight:600; cursor:pointer; font-size:14px; box-shadow:0 6px 14px rgba(230,57,70,0.2);
+            transition: all 0.2s; white-space:nowrap;
         }
         .logout-btn:hover { background:#b71c1c; box-shadow:0 12px 24px rgba(230,57,70,0.3); transform: scale(1.02); } /* kept slight scale for button */
         
@@ -1253,10 +1253,11 @@ body.dark-theme .member-card:hover {
         .logout-btn {
             background: #E63946;
             border-radius: 40px;
-            padding: 10px 28px;
+            padding: 8px 18px;  /* Reduced size */
             font-weight: 600;
             box-shadow: 0 8px 16px -5px rgba(230,57,70,0.3);
             transition: all 0.2s;
+            white-space: nowrap;  /* Prevent wrapping */
         }
 
         .logout-btn:hover {
@@ -1372,22 +1373,99 @@ body.dark-theme .member-card:hover {
             box-shadow: 0 8px 16px -5px rgba(230,57,70,0.3);
         }
 
-        /* Responsive */
+        /* ===== RESPONSIVE FIXES FOR MOBILE ===== */
         @media (max-width: 700px) {
-            .dashboard-header, .profile-card, .calendar-card {
-                border-radius: 24px;
+            /* Make dashboard padding smaller */
+            .dashboard { padding: 12px; }
+            
+            /* Stack header elements properly */
+            .dashboard-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 12px;
+                padding: 16px;
             }
+            
+            .dashboard-header > div:last-child {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            
+            /* Smaller logout button that fits */
+            .logout-btn {
+                padding: 8px 14px;
+                font-size: 13px;
+                white-space: nowrap;
+            }
+            
+            /* Profile card: stack vertically with photo on top */
+            .profile-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 16px;
+                padding: 20px;
+            }
+            
+            .member-pic-large {
+                width: 110px;
+                height: 110px;
+                margin: 0 auto;
+                border-radius: 50% !important; /* Force circle */
+            }
+            
+            .profile-info {
+                width: 100%;
+            }
+            
+            .profile-info h2 {
+                font-size: 22px;
+            }
+            
+            /* Calendar adjustments */
+            .calendar-card {
+                padding: 16px;
+            }
+            
+            /* Action grid spacing */
             .action-grid {
                 gap: 16px;
             }
+            
+            .action-tile {
+                padding: 20px 15px;
+            }
+            
+            .tile-icon {
+                font-size: 42px;
+            }
+            
+            /* Footer stacking */
             .dashboard-footer {
                 flex-direction: column;
                 align-items: flex-start;
                 gap: 12px;
+                padding: 16px 20px;
             }
-            .login-page-header {
-                top: 10px;
-                right: 15px;
+            
+            .footer-links {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            .footer-links span {
+                display: none; /* hide bullet on mobile */
+            }
+            
+            .normal-time {
+                align-self: flex-start;
+            }
+            
+            /* Member grid cards */
+            .members-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1455,7 +1533,7 @@ body.dark-theme .member-card:hover {
         }
         .logout-btn {
             border-radius: 40px !important;
-            min-width: 100px; /* give it a stable width */
+            min-width: auto; /* allow auto width */
         }
         .dashboard-header .user-welcome,
         .dashboard-header > div:last-child {
@@ -1748,9 +1826,9 @@ body.dark-theme .member-card:hover {
             let isDashboard = false, warningActive = false;
             let inactivityTimer, warningTimer, countdownInterval;
             
-            // Updated timeout: 1 minute 30 seconds = 90000 ms
-            const SESSION_TIMEOUT = 90000; // 1.5 min
-            const WARNING_TIME = 60000; // show warning after 60s (30s remaining)
+            // Updated timeout: 1 minute = 60000 ms (changed from 90s to 60s)
+            const SESSION_TIMEOUT = 60000; // 1 min exact
+            const WARNING_TIME = 30000; // show warning after 30s (30s remaining)
             let iframeInitialized = false;
 
             // Dark mode state
@@ -1819,7 +1897,7 @@ body.dark-theme .member-card:hover {
                 sessionStorage.removeItem('aesrn_sid');
             }
 
-            // inactivity timers (adjusted for 90s)
+            // inactivity timers (adjusted for 60s)
             function clearTimers() {
                 clearTimeout(inactivityTimer); clearTimeout(warningTimer); 
                 if (countdownInterval) clearInterval(countdownInterval);
@@ -1869,10 +1947,11 @@ body.dark-theme .member-card:hover {
                 }
             }
             function attachListeners() {
-                ['mousemove','keydown','click','scroll'].forEach(ev => document.addEventListener(ev, resetTimers));
+                // Timer is based on time passing, not mouse events - we just reset on activity
+                ['mousemove','keydown','click','scroll','touchstart'].forEach(ev => document.addEventListener(ev, resetTimers));
             }
             function detachListeners() {
-                ['mousemove','keydown','click','scroll'].forEach(ev => document.removeEventListener(ev, resetTimers));
+                ['mousemove','keydown','click','scroll','touchstart'].forEach(ev => document.removeEventListener(ev, resetTimers));
             }
             function forceLogout() { clearTimers(); performLogout(true); }
 
