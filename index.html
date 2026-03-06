@@ -484,6 +484,207 @@ body.dark-theme .section-title i {
             transition: box-shadow 0.2s ease, border-color 0.2s ease; /* removed translateY hover */
         }
         
+        /* ===== OTHER ELEMENTS - STATIC WITH POINTER INDICATION ONLY ===== */
+.dashboard-header {
+    cursor: default; /* Not clickable */
+}
+
+.dashboard-header:hover {
+    box-shadow: 0 10px 30px -10px rgba(0,0,0,0.08) !important;
+    border-color: rgba(0,0,0,0.02) !important;
+    transform: none !important;
+}
+
+.profile-card {
+    cursor: default; /* Not clickable */
+}
+
+.profile-card:hover {
+    box-shadow: 0 15px 35px -12px rgba(0,0,0,0.1) !important;
+    border-color: rgba(0,0,0,0.02) !important;
+    transform: none !important;
+}
+
+.profile-card:hover .member-pic-large {
+    box-shadow: 0 10px 20px -5px rgba(42,92,130,0.3) !important;
+}
+
+.calendar-card {
+    cursor: default; /* Not clickable */
+}
+
+.calendar-card:hover {
+    box-shadow: 0 15px 35px -12px rgba(0,0,0,0.1) !important;
+    border-color: rgba(0,0,0,0.02) !important;
+    transform: none !important;
+}
+
+/* Member cards - clickable but only show border highlight on hover */
+.member-card {
+    cursor: pointer;
+    position: relative;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease !important;
+}
+
+.member-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #2A5C82, #1A9AA0);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.member-card:hover::before {
+    opacity: 1;
+}
+
+.member-card:hover {
+    box-shadow: 0 20px 35px -15px rgba(0,0,0,0.1) !important;
+    border-color: rgba(42,92,130,0.2) !important;
+    transform: none !important;
+}
+
+.member-card:hover .member-card-photo {
+    box-shadow: 0 10px 25px -5px rgba(42,92,130,0.3) !important;
+    transform: none !important;
+}
+
+.member-card-photo {
+    transition: box-shadow 0.2s ease !important;
+}
+
+.member-card:hover .view-indicator {
+    opacity: 1;
+}
+
+.view-indicator {
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+}
+
+/* Dashboard footer - static */
+.dashboard-footer {
+    cursor: default;
+}
+
+.dashboard-footer:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.03) !important;
+    border-color: #e2e8f0 !important;
+    transform: none !important;
+}
+
+/* Logout button - keep its hover effect */
+.logout-btn {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.logout-btn:hover {
+    background: #b71c1c;
+    box-shadow: 0 12px 24px rgba(230,57,70,0.3);
+    transform: scale(1.02);
+}
+
+/* Back to dashboard button - keep its hover effect */
+.back-to-dashboard {
+    cursor: pointer;
+}
+
+.back-to-dashboard:hover {
+    background: #1e4a6e;
+    box-shadow: 0 8px 20px rgba(42,92,130,0.4);
+    transform: scale(1.02);
+}
+
+/* Admin return button - keep its hover effect */
+.admin-return-btn {
+    cursor: pointer;
+}
+
+.admin-return-btn:hover {
+    background: #1e4a6e;
+    box-shadow: 0 12px 25px -5px rgba(42,92,130,0.4);
+    transform: scale(1.02);
+}
+
+/* Theme toggle - keep its hover effect */
+.theme-toggle {
+    cursor: pointer;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.15);
+    color: #2A5C82;
+}
+
+/* Footer links - keep their hover effect */
+.footer-links a {
+    cursor: pointer;
+    position: relative;
+    padding: 4px 0;
+}
+
+.footer-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #2A5C82, #1A9AA0);
+    transition: width 0.3s ease;
+}
+
+.footer-links a:hover::after {
+    width: 100%;
+}
+
+/* Remove any floating animations from non-quick action elements */
+.profile-card, 
+.calendar-card,
+.action-tile:nth-child(1),
+.action-tile:nth-child(2),
+.action-tile:nth-child(3),
+.action-tile:nth-child(4) {
+    animation: none !important;
+}
+
+/* Keep only Quick Actions with float animation */
+.action-tile {
+    animation: float 7s ease-in-out infinite;
+}
+
+.action-tile:nth-child(2) { animation: float 8s ease-in-out infinite; animation-delay: 0.5s; }
+.action-tile:nth-child(3) { animation: float 6.5s ease-in-out infinite; animation-delay: 1s; }
+.action-tile:nth-child(4) { animation: float 7.5s ease-in-out infinite; animation-delay: 1.5s; }
+
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Dark theme adjustments - keep hover states minimal for non-quick actions */
+body.dark-theme .dashboard-header:hover,
+body.dark-theme .profile-card:hover,
+body.dark-theme .calendar-card:hover,
+body.dark-theme .dashboard-footer:hover {
+    border-color: #3a3a3a !important;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+body.dark-theme .member-card:hover {
+    border-color: #555 !important;
+}
+
+body.dark-theme .action-tile:hover {
+    border-color: #2A5C8244 !important;
+}
+        
         /* REPLACED hover effects with highlight */
         .dashboard-header:hover { 
             box-shadow:0 15px 30px -8px rgba(42,92,130,0.2); 
@@ -758,19 +959,16 @@ body.dark-theme .section-title i {
             box-shadow: 0 10px 20px -5px rgba(42,92,130,0.4);
         }
 
-/* ---------- PROFESSIONAL BORDERS FOR ALL DASHBOARD CARDS ---------- */
+/* ===== STEP 1: PREMIUM CARD ENHANCEMENTS ===== */
 .dashboard-header, 
 .profile-card, 
 .calendar-card, 
 .action-tile, 
 .member-card,
 .dashboard-footer {
-    background: white;
-    border-radius: 24px;
-    padding: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.03);
-    border: 1px solid #e2e8f0;  /* Visible light gray border */
-    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 /* Specific padding adjustments */
