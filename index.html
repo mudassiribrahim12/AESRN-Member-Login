@@ -1560,6 +1560,53 @@ body.dark-theme .login-card {
             font-size: 13px; color: var(--text-faint);
             font-family: var(--font-mono);
         }
+        
+                /* ============================================
+           FIX: FORCE PROFILE IMAGES TO LOAD
+           Ensures Abdul Latif and all member photos display correctly
+        ============================================ */
+        
+        /* Force all profile images to load and display properly */
+        .sidebar-photo,
+        .member-card-photo {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            background-color: #f0f0f0 !important;
+            object-fit: cover !important;
+        }
+        
+        /* Fix for broken images - show fallback styling */
+        .sidebar-photo:error,
+        .member-card-photo:error {
+            background: linear-gradient(135deg, #0B1F3A, #1A4470) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+        }
+        
+        /* Ensure images load with proper cache bypass */
+        .sidebar-photo {
+            min-width: 80px !important;
+            min-height: 80px !important;
+        }
+        
+        .member-card-photo {
+            min-width: 70px !important;
+            min-height: 70px !important;
+        }
+        
+        /* Force image loading with higher priority */
+        img[src*="Latif.png"],
+        img[src*="malik.png"],
+        img[src*="razak.png"],
+        img[src*="Edna.png"],
+        img[src*="Alhassan.png"],
+        img[src*="mudasir.png"] {
+            display: block !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+        }
 
         /* ═══════════════════════════════════════════════
            SIDEBAR MOBILE RESPONSIVE
@@ -1944,6 +1991,39 @@ body.dark-theme .login-card {
     let iframeInitialized = false;
     const SESSION_TIMEOUT = 60000;
     const WARNING_TIME = 30000;
+    
+            // FIX: Force reload images with cache busting
+        function fixProfileImages() {
+            setTimeout(function() {
+                // Fix sidebar photo
+                const sidebarPhoto = document.getElementById('memberPhoto');
+                if (sidebarPhoto && sidebarPhoto.src) {
+                    const currentSrc = sidebarPhoto.src;
+                    if (!sidebarPhoto.complete || sidebarPhoto.naturalWidth === 0) {
+                        // Add cache buster
+                        sidebarPhoto.src = currentSrc.split('?')[0] + '?t=' + Date.now();
+                    }
+                }
+                
+                // Fix all member card photos
+                const memberPhotos = document.querySelectorAll('.member-card-photo');
+                memberPhotos.forEach(function(img) {
+                    if (!img.complete || img.naturalWidth === 0) {
+                        const currentSrc = img.src;
+                        if (currentSrc && !currentSrc.includes('Networknewlogo')) {
+                            img.src = currentSrc.split('?')[0] + '?t=' + Date.now();
+                        }
+                    }
+                });
+            }, 100);
+        }
+        
+        // Call this after rendering dashboard
+        const originalRenderDashboard = renderDashboard;
+        renderDashboard = function() {
+            originalRenderDashboard();
+            fixProfileImages();
+        };
 
     // ─── THEME ─────────────────────────────────────────────────────────
     function initTheme() {
