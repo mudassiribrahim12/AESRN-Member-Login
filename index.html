@@ -158,7 +158,7 @@
         ::-webkit-scrollbar-thumb:hover { background: var(--teal); }
 
         /* ═══════════════════════════════════════════════
-           APP LOADER - FIX 4: LOGO NOW SHOWING
+           APP LOADER - FIX 4: LOGO REMOVED (never show it)
         ═══════════════════════════════════════════════ */
         .app-loader {
             position: fixed; inset: 0;
@@ -168,17 +168,16 @@
             z-index: 10000;
             transition: opacity 0.5s ease;
         }
+        /* LOGO COMPLETELY REMOVED - never show it */
         .app-loader img {
-            width: 90px; height: 90px; object-fit: contain;
-            margin-bottom: 24px;
-            filter: brightness(0) invert(1);
-            animation: loader-pulse 1.8s ease-in-out infinite;
+            display: none;
         }
         .app-loader-bar {
             width: 220px; height: 3px;
             background: rgba(255,255,255,0.2);
             border-radius: 99px;
             overflow: hidden;
+            margin-top: 0;
         }
         .app-loader-fill {
             height: 100%;
@@ -416,9 +415,11 @@ body.dark-theme .login-container::before {
         linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
 }
 
-/* Keep blue brand panel */
+/* Keep blue brand panel with BACKGROUND IMAGE from official website */
 .login-brand {
-    background: linear-gradient(135deg, #0A2342 0%, #2A5C82 100%) !important;
+    background: linear-gradient(135deg, rgba(10,35,66,0.85) 0%, rgba(42,92,130,0.85) 100%), url('https://raw.githubusercontent.com/mudassiribrahim12/AESRN-website/main/Homeheropic2.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
     position: relative;
     z-index: 2;
 }
@@ -550,7 +551,7 @@ body.dark-theme .login-card {
             z-index: 1;
         }
 
-        /* Left brand panel - KEPT ORIGINAL STYLING */
+        /* Left brand panel - UPDATED BACKGROUND IMAGE */
         .login-brand {
             flex: 1;
             display: flex;
@@ -1656,7 +1657,7 @@ body.dark-theme .login-card {
 ══════════════════════════════════════ -->
 <div class="login-container" id="loginContainer">
     <div class="login-layout">
-        <!-- Brand panel - UNCHANGED -->
+        <!-- Brand panel - UPDATED BACKGROUND WITH OFFICIAL WEBSITE IMAGE -->
         <div class="login-brand">
             <div class="login-brand-eyebrow">Member Portal — Restricted Access</div>
             <div class="login-brand-title">African Emerging Scholars Research Network</div>
@@ -1989,8 +1990,8 @@ body.dark-theme .login-card {
     let isDashboard = false, warningActive = false;
     let inactivityTimer, warningTimer, countdownInterval;
     let iframeInitialized = false;
-    const SESSION_TIMEOUT = 60000;
-    const WARNING_TIME = 30000;
+    const SESSION_TIMEOUT = 60000;  // UPDATED: 1 minute idle timeout (60,000ms)
+    const WARNING_TIME = 30000;     // 30 seconds warning before timeout
     
             // FIX: Force reload images with cache busting
         function fixProfileImages() {
